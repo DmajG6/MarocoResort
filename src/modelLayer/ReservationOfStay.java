@@ -1,4 +1,4 @@
-package ModelLayer;
+package modelLayer;
 
 import java.sql.Date;
 

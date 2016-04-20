@@ -1,4 +1,4 @@
-package ModelLayer;
+package modelLayer;
 
 public class Apartment {
 
