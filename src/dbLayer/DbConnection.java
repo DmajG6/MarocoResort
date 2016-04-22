@@ -5,6 +5,10 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 
 public class DbConnection {
+	
+	//comment
+	//comment
+	
 
 	private static final String driver = "jdbc:sqlserver://kraka.ucn.dk:1433";
 	private static final String databaseName = ";databaseName=dmaj0915_2Sem_6";
