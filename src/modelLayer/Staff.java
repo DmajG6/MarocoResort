@@ -10,7 +10,7 @@ public class Staff {
 	private int workPhoneNumber;
 	private int personalPhoneNumber;
 	
-	public Staff (String name, int sfaffID, String staffType, String password, String email, int workPhoneNumber, int personalPhoneNumber){
+	public Staff (String name, int staffID, String staffType, String password, String email, int workPhoneNumber, int personalPhoneNumber){
 		
 		this.name = name;
 		this.staffID = staffID;
