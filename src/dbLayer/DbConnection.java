@@ -8,6 +8,7 @@ public class DbConnection {
 	
 	//comment
 	//comment
+	//comment
 	
 
 	private static final String driver = "jdbc:sqlserver://kraka.ucn.dk:1433";
