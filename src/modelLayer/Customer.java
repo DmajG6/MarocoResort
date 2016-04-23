@@ -15,6 +15,10 @@ public class Customer {
 	private int roomID;
 	private String active;
 	
+	public Customer(int ID){
+		this.customerID = ID;
+	}
+	
 	public Customer(int customerID, String password, String name, String country, String address, int phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
 		
 		this.customerID = customerID;
@@ -33,6 +37,10 @@ public class Customer {
 	}
 	
 	
+	public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getCustomerID() {
 		return customerID;
 	}

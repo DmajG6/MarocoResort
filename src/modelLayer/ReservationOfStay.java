@@ -1,6 +1,8 @@
 package modelLayer;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ReservationOfStay {
 	
@@ -16,8 +18,9 @@ public class ReservationOfStay {
 	private double price;
 	private Staff staff;
 	private Agency agency;
+	private LinkedList<Customer> customers;
 	
-	
+
 	public ReservationOfStay(int reservationID, int durationOfStay, Customer customer, Date arrivalDate,
 			Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount,
 			double price, Staff staff, Agency agency) {
@@ -36,6 +39,12 @@ public class ReservationOfStay {
 		this.agency = agency;
 	
 	}
+
+
+	public ReservationOfStay(int int1) {
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 	public int getReservationID() {
@@ -155,6 +164,18 @@ public class ReservationOfStay {
 
 	public void setAgency(Agency agency) {
 		this.agency = agency;
+	}
+	
+	public LinkedList<Customer> getCustomers() {
+		return customers;
+	}
+	
+	public void setCustomers(LinkedList<Customer> customerss) {
+		this.customers = customers;
+	}
+	
+	public void setListOfItems(LinkedList<Customer> customers) {
+		this.customers = customers;
 	}
 		
 	

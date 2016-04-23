@@ -2,6 +2,7 @@ package dbLayer;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.sql.*;
 import modelLayer.*;
 
@@ -195,6 +196,53 @@ public class DbCustomer {
 				System.out.println("Error in building the customer object");
 			}
 			return customerObj;
+		}
+		
+		public LinkedList<Customer> getCustomers(int reservationID){
+			int rc = -1;
+			LinkedList<Customer> customers = new LinkedList<Customer>();
+			
+			String query = "";
+			
+			query = "SELECT o.reservationID, o.durationOfStay, o.arrivalDate, o.departureDate, o.paymentInfo, o.paymentConfirmation, o.dateOfReservation, o.discount, o.price, c.customerID, c.password, c.name, c.country, c.address, c.phoneNo, c.email, c.idType, c.idNumber, c.specialService, c.active, c.reservationID, c.roomID "
+					+ "FROM ReservationOfStay o, Customer c "
+					+ "WHERE reservationOfStayID = " + reservationID + " AND "
+							+ " o.customerID = c.reservationID";
+			System.out.println("insert : " + query);
+			try {
+				ResultSet results;
+				Statement stmt = con.createStatement();
+				stmt.setQueryTimeout(5);
+				
+				
+				results = stmt.executeQuery(query);
+				
+				if (results.next()) {
+					Customer customer = new Customer();
+					customer.setCustomerID(results.getInt("customerID"));
+					customer.setPassword(results.getString("password"));
+					customer.setName(results.getString("name"));
+					customer.setCountry(results.getString("country"));
+					customer.setAddress(results.getString("address"));
+					customer.setPhoneNumber(results.getInt("phoneNumber"));
+					customer.setEmail(results.getString("email"));
+					customer.setIdType(results.getString("idType"));
+					customer.setIdNumber(results.getInt("idNumber"));
+					customer.setSpecialService(results.getString("specialService"));
+					customer.setRoomID(results.getInt("roomID"));
+					customer.setActive(results.getString("active"));
+					
+					customers.add(customer);
+					
+				}
+				
+				
+					stmt.close();
+			} catch (SQLException ex) {
+				System.out.println("ID not found "+rc+" "+ex.getMessage());
+				
+			}
+			return customers;
 		}
 
 }
