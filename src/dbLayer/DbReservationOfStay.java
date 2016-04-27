@@ -66,7 +66,7 @@ public class DbReservationOfStay {
 		ReservationOfStay reservationOfStay = new ReservationOfStay(reservationID);
 		
 		String query = "";
-		query = "SELECT * "+ "FROM [OrderTable]"
+		query = "SELECT * "+ "FROM [ReservationOfStay]"
 				+ "WHERE reservationID = " + reservationID;
 		System.out.println("insert : " + query);
 		
@@ -135,6 +135,33 @@ public class DbReservationOfStay {
 		return rc;
 		
 	}	
+	
+	public int getNewID(){
+		int rc = -1;
+		String query = "";
+		query = "SELECT MAX(reservationID) "
+				+ "FROM ReservaionOfStay";
+		System.out.println("insert : " + query);
+		try {
+			ResultSet results;
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			
+			results = stmt.executeQuery(query);
+			
+			if (results.next()) {
+				rc = results.getInt("reservationID");
+			}
+				stmt.close();
+			
+		} catch (SQLException ex) {
+			System.out.println("ID not found"+ex.getMessage());
+			
+		}
+		
+		return rc;
+		
+	}
 		
 }
 

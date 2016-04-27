@@ -44,9 +44,15 @@ public class DbCustomer {
 		
 	}
 	
-	public int insertCustomer(Customer customer){
+	public int insertCustomer(LinkedList<Customer> customer, int cusotmerID){
 		int rc = -1;
 		String query = "";
+		
+		for(int i = 0 ; i < customer.size() ; i++){
+			Customer customers = customer.get(i);
+			int customerID = getCustomerID(customer);
+		}
+		
 		query = "INSERT INTO [Customer Table] (customerID, password, name, country, address, phoneNumber, email, idType, idNumber, specialService, roomID, active) VALUES (" 
 		+ customer.getCustomerID() + ",'"
 		+ customer.getPassword() + ","
@@ -77,6 +83,50 @@ public class DbCustomer {
 		
 	}
 	
+	private int getCustomerID(Customer customer) {
+		
+		int rc = -1;
+		
+		String query = "";
+		
+		query = "SELECT CustomerID"
+				+ "FROM Customer"
+				+ "WHERE Name = '" + customer.getName()+"'"
+				+ " CustomerID = " + customer.getCustomerID()
+				+ " Password = " + customer.getPassword()
+				+ " Country = " + customer.getCountry()
+				+ " PhoneNumber = " + customer.getPhoneNumber()
+				+ " Email = " + customer.getEmail()
+				+ " IdType = " + customer.getIdType()
+				+ " IdNumber = " + customer.getIdNumber()
+				+ " SpecialService = " + customer.getSpecialService()
+				+ " RoomID = " + customer.getRoomID()
+				+ " Active = " + customer.getActive()
+				+ " Address = '" + customer.getAddress()+"'";
+		
+		System.out.println("insert : " + query);
+		try {
+			ResultSet results;
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.close();
+			
+			results = stmt.executeQuery(query);
+			
+			if (results.next()) {
+				rc = results.getInt("CustomerID");
+			}
+				stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("ID not found "+ex.getSQLState());
+			
+		}
+		
+		return rc;
+	}
+
 	public ArrayList<Customer> getAllCustomers() {
 		return miscWhere(""); 
 	}
