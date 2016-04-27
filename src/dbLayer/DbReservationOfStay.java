@@ -136,7 +136,7 @@ public class DbReservationOfStay {
 		
 	}	
 	
-	public int getNewID(){
+	public static int getNewID(){
 		int rc = -1;
 		String query = "";
 		query = "SELECT MAX(reservationID) "

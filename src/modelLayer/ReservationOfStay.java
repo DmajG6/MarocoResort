@@ -23,7 +23,7 @@ public class ReservationOfStay {
 
 	public ReservationOfStay(int reservationID, int durationOfStay, Customer customer, Date arrivalDate,
 			Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount,
-			double price, Staff staff, Agency agency) {
+			double price, Staff staff, Agency agency, LinkedList<Customer> customers) {
 		
 		this.reservationID = reservationID;
 		this.durationOfStay = durationOfStay;
@@ -39,13 +39,18 @@ public class ReservationOfStay {
 		this.agency = agency;
 	
 	}
+	
+
+
+	public ReservationOfStay(Customer customer2, int durationOfStay2, Date arrivalDate2, Date departureDate2, String paymentInfo2, String paymentConfirmation2, Date dateOfReservation2, double discount2, double price2, LinkedList<Customer> customers2) {
+		super();
+	}
+
 
 
 	public ReservationOfStay(int int1) {
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public int getReservationID() {
 		return reservationID;
@@ -176,6 +181,11 @@ public class ReservationOfStay {
 	
 	public void setListOfItems(LinkedList<Customer> customers) {
 		this.customers = customers;
+	}
+
+
+	public LinkedList<Customer> getListOfItems() {
+		return customers;
 	}
 		
 	
