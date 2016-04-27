@@ -10,10 +10,11 @@ public class Agency {
 	private String email;
 	private int phoneNumber;
 	private String extraInfo;
+	private ReservationOfStay reservationOfStay;
 	private double discount;
 
 	
-	public Agency(int agencyID, String name, String address, int cvrNumber, String country, String email, int phoneNumber, String extraInfo, double discount){
+	public Agency(int agencyID, String name, String address, int cvrNumber, String country, String email, int phoneNumber, String extraInfo, ReservationOfStay reservationOfStay, double discount){
 		
 		this.agencyID = agencyID;
 		this.name = name;
@@ -23,6 +24,7 @@ public class Agency {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.extraInfo = extraInfo;
+		this.reservationOfStay = reservationOfStay;
 		this.discount = discount;
 	}
 
@@ -104,6 +106,16 @@ public class Agency {
 
 	public void setExtraInfo(String extraInfo) {
 		this.extraInfo = extraInfo;
+	}
+
+
+	public ReservationOfStay getReservationOfStay() {
+		return reservationOfStay;
+	}
+
+
+	public void setReservationOfStay(ReservationOfStay reservationOfStay) {
+		this.reservationOfStay = reservationOfStay;
 	}
 
 
