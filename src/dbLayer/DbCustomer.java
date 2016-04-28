@@ -137,7 +137,7 @@ public class DbCustomer {
 	}
 	
 	public Customer findCustomerByCustomerID(int customerID) {
-		String wClause = "  cutomerID = '" + customerID + "'";
+		String wClause = "  customerID = '" + customerID + "'";
 		return singleWhere(wClause);
 	}
 	
