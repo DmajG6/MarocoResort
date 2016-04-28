@@ -75,7 +75,7 @@ public class DbStaff {
 		return miscWhere(""); 
 	}
 	
-	public Staff findStaff(String name) {
+	public Staff findStaffByName(String name) {
 		String wClause = "  name = '" + name + "'";
 		return singleWhere(wClause);
 	}
