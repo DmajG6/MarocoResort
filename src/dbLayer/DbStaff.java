@@ -80,7 +80,7 @@ public class DbStaff {
 		return singleWhere(wClause);
 	}
 	
-	public Staff findStaffByStaffID(int staffID) {
+	public Staff findStaffByID(int staffID) {
 		String wClause = "  staffID = '" + staffID + "'";
 		return singleWhere(wClause);
 	}
