@@ -1,0 +1,188 @@
+package dbLayer;
+
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.sql.*;
+import modelLayer.*;
+
+public class DbStaff {
+	
+	private Connection con;
+	
+	public DbStaff() {
+		con = DbConnection.getInstance().getDBcon();
+	}
+	
+	public int getNewID(){
+		int rc = -1;
+		String query = "";
+		query = "SELECT MAX(staffID)"
+				+ "FROM [Staff Table]";
+		System.out.println("insert : " + query);
+		try {
+			ResultSet results;
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.close();
+			
+			results = stmt.executeQuery(query);
+			
+			if (results.next()) {
+				rc = results.getInt("StaffID");
+			}
+				stmt.close();
+			
+		} catch (SQLException ex) {
+			System.out.println("ID not found");
+			
+		}
+		
+		return rc;
+		
+	}
+	
+	public int insertStaff(Staff staff){
+		int rc = -1;
+		String query = "";
+		query = "INSERT INTO [Staff Table] (staffID, name, password, workPhoneNumber, personalPhoneNumber, staffType, email) VALUES (" 
+		+ staff.getStaffID() + ",'"
+		+ staff.getName() + ","
+		+ staff.getPassword() + ","
+		+ staff.getWorkPhoneNumber() + ","
+		+ staff.getPersonalPhoneNumber() + ","
+		+ staff.getStaffType() + ","
+		+ staff.getEmail() + ",";
+	
+			
+		
+		System.out.println("insert : " + query);
+		try {
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("Staff not inserted");
+		}
+		
+		return rc;
+		
+	}
+	
+	public ArrayList<Staff> getAllStaffs() {
+		return miscWhere(""); 
+	}
+	
+	public Staff findStaff(String name) {
+		String wClause = "  name = '" + name + "'";
+		return singleWhere(wClause);
+	}
+	
+	public Staff findStaffByStaffID(int staffID) {
+		String wClause = "  staffID = '" + staffID + "'";
+		return singleWhere(wClause);
+	}
+	
+	public int updateStaff(String name, Staff staff) {
+		String q = "update [Staff Table] set staffID = ?, name = ?, password = ?, workPhoneNumber = ?, personalPhoneNumber = ?, staffType = ?, email = ? where name='" + staff.getName()+"'";
+		int res = 0;
+		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
+				.prepareStatement(q)) {
+			s.setInt(1, staff.getStaffID());
+			s.setString(2, staff.getName());
+			s.setString(3, staff.getPassword());
+			s.setInt(4, staff.getWorkPhoneNumber());
+			s.setInt(5, staff.getPersonalPhoneNumber());
+			s.setString(6, staff.getStaffType());
+			s.setString(7, staff.getEmail());
+	
+			
+			res = s.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NullPointerException npe) {
+
+		}
+		return res;
+	}
+	
+    // misc where
+	private ArrayList<Staff> miscWhere(String wClause) {
+		ResultSet results;
+		ArrayList<Staff> list = new ArrayList<Staff>();
+		String query = buildQuery(wClause);
+		try {
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			results = stmt.executeQuery(query);
+
+			while (results.next()) {
+				Staff staffObj = new Staff();
+				staffObj = buildStaff(results);
+				list.add(staffObj);
+			}
+			stmt.close();
+		}
+		catch (Exception e) {
+			System.out.println("Query exception - select: " + e);
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+
+		private Staff singleWhere(String wClause) {
+			ResultSet results;
+			Staff staffObj = new Staff();
+			String query = buildQuery(wClause);
+			System.out.println(query);
+			try {
+				Statement stmt = con.createStatement();
+				stmt.setQueryTimeout(5);
+				results = stmt.executeQuery(query);
+				if (results.next()) {
+					staffObj = buildStaff(results);
+					stmt.close();
+				} else {
+					staffObj = null;
+				}
+			}
+			catch (Exception e) {
+				System.out.println("Query exception: " + e);
+			}
+			return staffObj;
+		}
+		
+		private String buildQuery(String wClause) {
+			String query = "SELECT *  FROM [Staff Table]";
+
+			if (wClause.length() > 0)
+				query = query + " WHERE " + wClause;
+
+			return query;
+		}
+		
+		
+		private Staff buildStaff(ResultSet results) {
+			Staff staffObj = new Staff();
+			try {
+				staffObj.setStaffID(results.getInt("staffID"));
+				staffObj.setPassword(results.getString("password"));
+				staffObj.setName(results.getString("name"));
+				staffObj.setWorkPhoneNumber(results.getInt("workPhoneNumber"));
+				staffObj.setPersonalPhoneNumber(results.getInt("personalPhoneNumber"));
+				staffObj.setEmail(results.getString("email"));
+				staffObj.setStaffType(results.getString("staffType"));
+				
+
+			} catch (Exception e) {
+				System.out.println("Error in building the staff object");
+			}
+			return staffObj;
+		}
+		
+
+}
