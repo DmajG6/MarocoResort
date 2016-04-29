@@ -67,14 +67,14 @@ public class CustomerMenu extends JFrame {
 		contentPane.add(txtf_ID);
 		txtf_ID.setColumns(10);
 		
-		JButton btnFind = new JButton("Find");
-		btnFind.addActionListener(new ActionListener() {
+		JButton btnFindByName = new JButton("Find");
+		btnFindByName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				findCustomer();
+				findCustomerByName();
 			}
 		});
-		btnFind.setBounds(265, 125, 97, 25);
-		contentPane.add(btnFind);
+		btnFindByName.setBounds(265, 125, 97, 25);
+		contentPane.add(btnFindByName);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(32, 108, 117, 16);
@@ -123,7 +123,7 @@ public class CustomerMenu extends JFrame {
 				createCustomer();
 			}
 		});
-		btnCreate.setBounds(265, 74, 97, 25);
+		btnCreate.setBounds(358, 74, 97, 25);
 		contentPane.add(btnCreate);
 		
 		JLabel lblName = new JLabel("Name");
@@ -183,9 +183,18 @@ public class CustomerMenu extends JFrame {
 		txtf_active.setBounds(139, 362, 116, 20);
 		contentPane.add(txtf_active);
 		txtf_active.setColumns(10);
+		
+		JButton btnFindByID = new JButton("Find");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findCustomerByID();
+			}
+		});
+		btnFindByID.setBounds(265, 75, 89, 23);
+		contentPane.add(btnFindByID);
 	}
 	
-	private void findCustomer(){
+	private void findCustomerByName(){
 		String input = txtf_name.getText();
 		Customer customer = cstctr.findCustomerByName(input);
 		if(customer!= null){
@@ -201,8 +210,27 @@ public class CustomerMenu extends JFrame {
 		txtf_specialService.setText(""+customer.getSpecialService());
 		txtf_roomID.setText(""+customer.getRoomID());
 		txtf_active.setText(""+customer.getActive());
-		
 		}
+	}
+		
+		private void findCustomerByID(){
+			String input = txtf_ID.getText();
+			Customer customer = cstctr.findCustomerByID(input);
+			if(customer!= null){
+			txtf_ID.setText(""+customer.getCustomerID());
+			txtf_password.setText(""+customer.getPassword());
+			txtf_name.setText(""+customer.getName());
+			txtf_country.setText(""+customer.getCountry());
+			txtf_address.setText(""+customer.getAddress());
+			txtf_phoneNumber.setText(""+customer.getPhoneNumber());
+			txtf_email.setText(""+customer.getEmail());
+			txtf_idType.setText(""+customer.getIdType());
+			txtf_idNumber.setText(""+customer.getIdNumber());
+			txtf_specialService.setText(""+customer.getSpecialService());
+			txtf_roomID.setText(""+customer.getRoomID());
+			txtf_active.setText(""+customer.getActive());
+			
+			}
 	}
 	
 	private void createCustomer(){
