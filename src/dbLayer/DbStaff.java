@@ -182,6 +182,11 @@ public class DbStaff {
 			}
 			return staffObj;
 		}
+
+		public Staff findStaffByStaffID(int staffID) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 
 }

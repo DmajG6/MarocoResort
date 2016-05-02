@@ -1,12 +1,13 @@
 package dbLayer;
 
-import java.util.LinkedList;
 import java.sql.*;
+import java.util.LinkedList;
+
 import modelLayer.*;
 
 public class DbReservationOfStay {
 	
-	private Connection con;
+	private static Connection con;
 	private DbCustomer dbcp = new DbCustomer();
 	
 	
@@ -14,9 +15,9 @@ public class DbReservationOfStay {
 		con = DbConnection.getInstance().getDBcon();
 	}
 	
-	public LinkedList<ReservationOfStay> getAll(){
+	public LinkedList<ReservationOfStay> getAllReservations(){
 		int rc = -1;
-		LinkedList<ReservationOfStay> reservations = new LinkedList<ReservationOfStay>();
+		LinkedList<ReservationOfStay> reservations = new LinkedList<>();
 		
 		String query = "";
 		query = "SELECT *" + "FROM [ReservationOfStay]";
@@ -92,7 +93,6 @@ public class DbReservationOfStay {
 				reservationOfStay.setPrice(results.getDouble("price"));
 				//reservationOfStay.setStaff(new Staff(results.getInt("staff")));
 				//reservationOfStay.setAgency(new Agency(results.getInt("agency")));
-				reservationOfStay.setCustomers(dbcp.getCustomers(reservationID));
 				
 			}
 				stmt.close();
@@ -130,8 +130,6 @@ public class DbReservationOfStay {
 		} catch (SQLException ex) {
 			System.out.println("ReservationOfStay not inserted");
 		}
-		
-		dbcp.insertCustomer(reservationOfStay.getCustomers(), reservationOfStay.getReservationID());
 		return rc;
 		
 	}	

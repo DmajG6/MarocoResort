@@ -65,6 +65,11 @@ public class CustomerController {
 	public int updateCustomer(String name, Customer customer){
 		return dbCustomer.updateCustomer(name, customer);		
 	}
+
+	public Customer findCustomerByID(String input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

@@ -14,7 +14,7 @@ DbStaff dbStaff = new DbStaff();
 	
 	public Staff findStaffByName(String name){
 		try {
-			return dbStaff.findStaff(name);
+			return dbStaff.findStaffByName(name);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

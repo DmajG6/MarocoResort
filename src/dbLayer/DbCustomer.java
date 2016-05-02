@@ -44,14 +44,10 @@ public class DbCustomer {
 		
 	}
 	
-	public int insertCustomer(LinkedList<Customer> customer, int cusotmerID){
+	public int insertCustomer(Customer customer){
 		int rc = -1;
 		String query = "";
 		
-		for(int i = 0 ; i < customer.size() ; i++){
-			Customer customers = customer.get(i);
-			int customerID = getCustomerID(customer);
-		}
 		
 		query = "INSERT INTO [Customer Table] (customerID, password, name, country, address, phoneNumber, email, idType, idNumber, specialService, roomID, active) VALUES (" 
 		+ customer.getCustomerID() + ",'"
@@ -83,6 +79,7 @@ public class DbCustomer {
 		
 	}
 	
+/*
 	private int getCustomerID(Customer customer) {
 		
 		int rc = -1;
@@ -126,7 +123,7 @@ public class DbCustomer {
 		
 		return rc;
 	}
-
+*/
 	public ArrayList<Customer> getAllCustomers() {
 		return miscWhere(""); 
 	}

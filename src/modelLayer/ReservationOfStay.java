@@ -18,7 +18,6 @@ public class ReservationOfStay {
 	private double price;
 	private Staff staff;
 	private Agency agency;
-	private LinkedList<Customer> customers;
 	
 
 	public ReservationOfStay(int reservationID, int durationOfStay, Customer customer, Date arrivalDate,
@@ -170,7 +169,7 @@ public class ReservationOfStay {
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
-	
+	/*
 	public LinkedList<Customer> getCustomers() {
 		return customers;
 	}
@@ -186,7 +185,7 @@ public class ReservationOfStay {
 
 	public LinkedList<Customer> getListOfItems() {
 		return customers;
-	}
+	}*/
 		
 	
 }

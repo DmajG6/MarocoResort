@@ -22,6 +22,10 @@ public class Staff {
 		
 	}
 	
+	public Staff() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName() {
 		return name;
 	}
