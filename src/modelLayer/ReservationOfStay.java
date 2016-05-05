@@ -1,14 +1,12 @@
 package modelLayer;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ReservationOfStay {
 	
     private int reservationID;
 	private int durationOfStay;
-	private Customer customer ;
 	private Date arrivalDate;
 	private Date departureDate;
 	private String paymentInfo;
@@ -18,15 +16,14 @@ public class ReservationOfStay {
 	private double price;
 	private Staff staff;
 	private Agency agency;
-	
+	private LinkedList<Customer> customers;
 
-	public ReservationOfStay(int reservationID, int durationOfStay, Customer customer, Date arrivalDate,
+	public ReservationOfStay(int reservationID, int durationOfStay, Date arrivalDate,
 			Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount,
 			double price, Staff staff, Agency agency, LinkedList<Customer> customers) {
 		
 		this.reservationID = reservationID;
 		this.durationOfStay = durationOfStay;
-		this.customer = customer;
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
 		this.paymentInfo = paymentInfo;
@@ -40,8 +37,7 @@ public class ReservationOfStay {
 	}
 	
 
-
-	public ReservationOfStay(Customer customer2, int durationOfStay2, Date arrivalDate2, Date departureDate2, String paymentInfo2, String paymentConfirmation2, Date dateOfReservation2, double discount2, double price2, LinkedList<Customer> customers2) {
+	public ReservationOfStay(int durationOfStay2, Date arrivalDate2, Date departureDate2, String paymentInfo2, String paymentConfirmation2, Date dateOfReservation2, double discount2, double price2, LinkedList<Customer> customers2) {
 		super();
 	}
 
@@ -70,15 +66,6 @@ public class ReservationOfStay {
 		this.durationOfStay = durationOfStay;
 	}
 
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 
 	public Date getArrivalDate() {
@@ -169,23 +156,14 @@ public class ReservationOfStay {
 	public void setAgency(Agency agency) {
 		this.agency = agency;
 	}
-	/*
+	
 	public LinkedList<Customer> getCustomers() {
 		return customers;
 	}
 	
-	public void setCustomers(LinkedList<Customer> customerss) {
+	public void setCustomers(LinkedList<Customer> customers) {
 		this.customers = customers;
 	}
 	
-	public void setListOfItems(LinkedList<Customer> customers) {
-		this.customers = customers;
-	}
-
-
-	public LinkedList<Customer> getListOfItems() {
-		return customers;
-	}*/
 		
-	
 }

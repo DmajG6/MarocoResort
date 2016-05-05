@@ -18,10 +18,10 @@ public class ReservationOfStayController {
 		
 	}
 
-	public void createReservationOfStay(Customer customer, int durationOfStay, Date arrivalDate, Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount, double price, LinkedList<Customer> customers){
+	public void createReservationOfStay( int durationOfStay, Date arrivalDate, Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount, double price, LinkedList<Customer> customers){
 		//Staff & Agency have to be added also
 		
-		ReservationOfStay reservationOfStay = new ReservationOfStay(customer, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, customers);
+		ReservationOfStay reservationOfStay = new ReservationOfStay(durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, customers);
 		reservationOfStay.setReservationID(DbReservationOfStay.getNewID());
 		
 		//Transaction
@@ -35,7 +35,7 @@ public class ReservationOfStayController {
 			return manyReservations;
 	}
 	
-	//Get ReservationOfStay by reervationID
+	//Get ReservationOfStay by reservationID
 	public ReservationOfStay findReservationOfStay(int ReservationID){
 			ReservationOfStay reservation = dbReservationOfStay.findReservationOfStay(ReservationID);
 			return reservation;
