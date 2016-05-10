@@ -183,10 +183,10 @@ public class ReservationMenu extends JFrame {
 		textF_Agency.setColumns(10);
 	}
 	
-	//dates are missing from here (vagina, hate, Stalin)
+	//dates are missing from here
 	private void findReservationOfStay(){
 		String input = textF_ReservationID.getText();
-		ReservationOfStay reservationOfStay = rosctr.findReservationOfStay(input);
+		ReservationOfStay reservationOfStay = rosctr.findReservationOfStay(Integer.parseInt(input));
 		if(reservationOfStay != null){
 			textF_ReservationID.setText("" + reservationOfStay.getReservationID());
 			textF_DurationOfStay.setText("" + reservationOfStay.getDurationOfStay());
@@ -199,7 +199,7 @@ public class ReservationMenu extends JFrame {
 	}
 	
 	
-	//dates will rest for now and this method is not complete (balls, ass, tits)
+	//dates will rest for now and this method is not complete 
 	private void createReservationOfStay(){		
 		rosctr.createReservationOfStay(
 				Integer.parseInt(textF_ReservationID.getText()),
