@@ -4,20 +4,29 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class StaffMenu {
+import controlLayer.*;
+import modelLayer.*;
+import java.awt.Button;
 
-	private JFrame frame;
-	private JTextField txtName;
-	private JTextField txtStaffId;
-	private JTextField txtType;
-	private JTextField txtPassword;
-	private JTextField txtEmail;
-	private JTextField txtWorkPhoneNumber;
-	private JTextField txtPersonalPhoneNumber;
+public class StaffMenu extends JFrame {
+	
+	private StaffController sctr = new StaffController ();
+
+	private JPanel contentPane;
+	private JTextField txtf_Name;
+	private JTextField txtf_StaffId;
+	private JTextField txtf_Type;
+	private JTextField txtf_Password;
+	private JTextField txtf_Email;
+	private JTextField txtf_WorkPhoneNumber;
+	private JTextField txtf_PersonalPhoneNumber;
 
 	/**
 	 * Launch the application.
@@ -26,8 +35,8 @@ public class StaffMenu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StaffMenu window = new StaffMenu();
-					window.frame.setVisible(true);
+					StaffMenu frame = new StaffMenu();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,72 +55,132 @@ public class StaffMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		txtName = new JTextField();
-		txtName.setBounds(176, 11, 127, 20);
-		frame.getContentPane().add(txtName);
-		txtName.setColumns(10);
+		txtf_Name = new JTextField();
+		txtf_Name.setBounds(176, 11, 127, 20);
+		contentPane.add(txtf_Name);
+		txtf_Name.setColumns(10);
 		
-		txtStaffId = new JTextField();
-		txtStaffId.setBounds(176, 39, 127, 20);
-		frame.getContentPane().add(txtStaffId);
-		txtStaffId.setColumns(10);
+		txtf_StaffId = new JTextField();
+		txtf_StaffId.setBounds(176, 39, 127, 20);
+		contentPane.add(txtf_StaffId);
+		txtf_StaffId.setColumns(10);
 		
-		txtType = new JTextField();
-		txtType.setBounds(176, 70, 127, 20);
-		frame.getContentPane().add(txtType);
-		txtType.setColumns(10);
+		txtf_Type = new JTextField();
+		txtf_Type.setBounds(176, 70, 127, 20);
+		contentPane.add(txtf_Type);
+		txtf_Type.setColumns(10);
 		
-		txtPassword = new JTextField();
-		txtPassword.setBounds(176, 101, 127, 20);
-		frame.getContentPane().add(txtPassword);
-		txtPassword.setColumns(10);
+		txtf_Password = new JTextField();
+		txtf_Password.setBounds(176, 101, 127, 20);
+		contentPane.add(txtf_Password);
+		txtf_Password.setColumns(10);
 		
-		txtEmail = new JTextField();
-		txtEmail.setBounds(176, 132, 127, 20);
-		frame.getContentPane().add(txtEmail);
-		txtEmail.setColumns(10);
+		txtf_Email = new JTextField();
+		txtf_Email.setBounds(176, 132, 127, 20);
+		contentPane.add(txtf_Email);
+		txtf_Email.setColumns(10);
 		
-		txtWorkPhoneNumber = new JTextField();
-		txtWorkPhoneNumber.setBounds(176, 163, 127, 20);
-		frame.getContentPane().add(txtWorkPhoneNumber);
-		txtWorkPhoneNumber.setColumns(10);
+		txtf_WorkPhoneNumber = new JTextField();
+		txtf_WorkPhoneNumber.setBounds(176, 172, 127, 20);
+		contentPane.add(txtf_WorkPhoneNumber);
+		txtf_WorkPhoneNumber.setColumns(10);
 		
-		txtPersonalPhoneNumber = new JTextField();
-		txtPersonalPhoneNumber.setBounds(176, 194, 127, 20);
-		frame.getContentPane().add(txtPersonalPhoneNumber);
-		txtPersonalPhoneNumber.setColumns(10);
+		txtf_PersonalPhoneNumber = new JTextField();
+		txtf_PersonalPhoneNumber.setBounds(176, 221, 127, 20);
+		contentPane.add(txtf_PersonalPhoneNumber);
+		txtf_PersonalPhoneNumber.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Name");
 		lblNewLabel.setBounds(22, 17, 77, 14);
-		frame.getContentPane().add(lblNewLabel);
+		contentPane.add(lblNewLabel);
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(22, 42, 77, 14);
-		frame.getContentPane().add(lblId);
+		contentPane.add(lblId);
 		
 		JLabel lblType = new JLabel("Type");
 		lblType.setBounds(22, 73, 77, 14);
-		frame.getContentPane().add(lblType);
+		contentPane.add(lblType);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(22, 104, 77, 17);
-		frame.getContentPane().add(lblPassword);
+		contentPane.add(lblPassword);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setBounds(22, 135, 77, 14);
-		frame.getContentPane().add(lblEmail);
+		contentPane.add(lblEmail);
 		
 		JLabel lblWorkPhoneNumber = new JLabel("Work phone number");
-		lblWorkPhoneNumber.setBounds(22, 166, 97, 14);
-		frame.getContentPane().add(lblWorkPhoneNumber);
+		lblWorkPhoneNumber.setBounds(22, 166, 97, 33);
+		contentPane.add(lblWorkPhoneNumber);
 		
 		JLabel lblPersonalPhoneNumber = new JLabel("Personal phone number");
-		lblPersonalPhoneNumber.setBounds(22, 197, 113, 17);
-		frame.getContentPane().add(lblPersonalPhoneNumber);
+		lblPersonalPhoneNumber.setBounds(22, 212, 97, 38);
+		contentPane.add(lblPersonalPhoneNumber);
+		
+		JButton btnFindStaffByName = new JButton("Find Staff By Name");
+		btnFindStaffByName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findStaffByName();
+				
+			}
+		});
+		btnFindStaffByName.setBounds(327, 17, 86, 68);
+		contentPane.add(btnFindStaffByName);
+		
+		JButton btnFindStaffByID = new JButton("Find Staff By ID");
+		btnFindStaffByID.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findStaffByID();
+			}
+		});
+		btnFindStaffByID.setBounds(327, 101, 87, 68);
+		contentPane.add(btnFindStaffByID);
+		
+		JButton btnCreateStaff = new JButton("Create Staff");
+		btnCreateStaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createStaff();
+			}
+		});
+		btnCreateStaff.setBounds(327, 192, 86, 49);
+		contentPane.add(btnCreateStaff);
+	}
+
+	private void findStaffByName(){
+		String input = txtf_Name.getText();
+		Staff staff = sctr.findStaffByName(input);
+		if(staff!= null){
+		txtf_Name.setText(""+staff.getName());
+		txtf_StaffId.setText(""+staff.getStaffID());
+		txtf_Type.setText(""+staff.getStaffType());
+		txtf_Password.setText(""+staff.getPassword());
+		txtf_Email.setText(""+staff.getEmail());
+		txtf_PersonalPhoneNumber.setText(""+staff.getPersonalPhoneNumber());
+		txtf_WorkPhoneNumber.setText(""+staff.getWorkPhoneNumber());
+		}
+	}
+	
+	private void findStaffByID(){
+		String input = txtf_StaffId.getText();
+		Staff staff = sctr.findStaffByID(Integer.parseInt(input));
+		if(staff!= null){
+			txtf_Name.setText(""+staff.getName());
+			txtf_StaffId.setText(""+staff.getStaffID());
+			txtf_Type.setText(""+staff.getStaffType());
+			txtf_Password.setText(""+staff.getPassword());
+			txtf_Email.setText(""+staff.getEmail());
+			txtf_PersonalPhoneNumber.setText(""+staff.getPersonalPhoneNumber());
+			txtf_WorkPhoneNumber.setText(""+staff.getWorkPhoneNumber());
+		}
+	}
+	private void createStaff(){
+		sctr.createStaff(txtf_Name.getText(),Integer.parseInt(txtf_StaffId.getText()), txtf_Type.getText(), txtf_Password.getText(), txtf_Email.getText(), Integer.parseInt(txtf_PersonalPhoneNumber.getText()), Integer.parseInt(txtf_WorkPhoneNumber.getText()) );
 	}
 }
