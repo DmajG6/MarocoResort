@@ -12,6 +12,7 @@ public class AgencyController {
 	DbAgency dbAgency = new DbAgency();
 	
 	public LinkedList<Agency> getAllAgencys(){
+
 		return dbAgency.getAllAgencies();
 	}
 	
