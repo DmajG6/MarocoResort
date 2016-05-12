@@ -17,8 +17,8 @@ public class DbAgency {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(agencyID)"
-				+ "FROM [Agency Table]";
+		query = "SELECT MAX(agencyID) as agencyID"
+				+ "FROM Agency";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
@@ -31,7 +31,7 @@ public class DbAgency {
 			results = stmt.executeQuery(query);
 			
 			if (results.next()) {
-				rc = results.getInt("AgencyID");
+				rc = results.getInt("agencyID");
 			}
 				stmt.close();
 			
@@ -49,7 +49,7 @@ public class DbAgency {
 		String query = "";
 		
 		
-		query = "INSERT INTO [Agency Table] (agencyID, name, country, address, phoneNumber, email, cvrNumber, extraInfo, discount) VALUES (" 
+		query = "INSERT INTO Agency (agencyID, name, country, address, phoneNumber, email, cvrNumber, extraInfo, discount) VALUES (" 
 		+ agency.getAgencyID() + ",'"
 		+ agency.getName() + ","
 		+ agency.getCountry() + ","
@@ -93,7 +93,7 @@ public class DbAgency {
 	}
 	
 	public int updateAgency(String name, Agency agency) {
-		String q = "update [Agency Table] set agencyID = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, cvrNumber = ?, extraInfo = ?, discount = ? where name='" + agency.getName()+"'";
+		String q = "update Agency set agencyID = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, cvrNumber = ?, extraInfo = ?, discount = ? where name='" + agency.getName()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -164,7 +164,7 @@ public class DbAgency {
 		}
 		
 		private String buildQuery(String wClause) {
-			String query = "SELECT *  FROM [Agency Table]";
+			String query = "SELECT * FROM Agency";
 
 			if (wClause.length() > 0)
 				query = query + " WHERE " + wClause;
