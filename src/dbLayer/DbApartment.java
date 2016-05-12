@@ -8,6 +8,7 @@ import modelLayer.*;
 public class DbApartment {
 	private DbCustomer dbCustomer;
 	private Connection con;
+	private Apartment apartment= new Apartment();
 	
 	public DbApartment() {
 		con = DbConnection.getInstance().getDBcon();
@@ -17,26 +18,33 @@ public class DbApartment {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(roomID)"
-				+ "FROM [Apartment Table]";
+		query = "SELECT MAX(roomID)  as roomID "
+				+ "FROM Apartment "
+				+ "WHERE floor = "+apartment.getFloor();
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			//rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			
-			stmt.close();
+			//stmt.close();
 			
 			results = stmt.executeQuery(query);
 			
 			if (results.next()) {
-				rc = results.getInt("RoomID");
+				rc = results.getInt("roomID");
 			}
-				stmt.close();
+			stmt.close();
+			
+			if(rc<1){
+				rc = (apartment.getFloor()*100)+rc+1;
+			}else{
+				rc++;
+			}
 			
 		} catch (SQLException ex) {
-			System.out.println("ID not found");
+			System.out.println("ID not found: "+ex.getMessage());
 			
 		}
 		
@@ -45,15 +53,16 @@ public class DbApartment {
 	}
 	
 	public int insertApartment(Apartment apartment){
+		this.apartment = apartment;
+		this.apartment.setRoomID(getNewID());
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO [Apartment Table] (roomID, type, price, floor, customer, specialNeeds) VALUES (" 
-		+ apartment.getRoomID() + ",'"
-		+ apartment.getType() + ","
+		query = "INSERT INTO Apartment (roomID, type, price, floor, specialNeeds) VALUES (" 
+		+ this.apartment.getRoomID() + ",'"
+		+ apartment.getType() + "',"
 		+ apartment.getPrice() + ","
-		+ apartment.getFloor() + ","
-		+ apartment.getCustomer() + ","
-		+ apartment.getSpecialNeeds() + "',";
+		+ apartment.getFloor() + ",'"
+		+ apartment.getSpecialNeeds() + "')";
 		
 			
 		

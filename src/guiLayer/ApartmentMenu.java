@@ -48,7 +48,7 @@ public class ApartmentMenu extends JFrame {
 	 */
 	public ApartmentMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 471, 444);
+		setBounds(100, 100, 496, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
