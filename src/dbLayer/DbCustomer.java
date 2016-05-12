@@ -16,8 +16,8 @@ public class DbCustomer {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(customerID)"
-				+ "FROM [Customer Table]";
+		query = "SELECT MAX(customerID) "
+				+ "FROM Customer";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
