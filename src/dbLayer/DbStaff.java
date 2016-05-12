@@ -93,8 +93,8 @@ public class DbStaff {
 			s.setInt(1, staff.getStaffID());
 			s.setString(2, staff.getName());
 			s.setString(3, staff.getPassword());
-			s.setInt(4, staff.getWorkPhoneNumber());
-			s.setInt(5, staff.getPersonalPhoneNumber());
+			s.setString(4, staff.getWorkPhoneNumber());
+			s.setString(5, staff.getPersonalPhoneNumber());
 			s.setString(6, staff.getStaffType());
 			s.setString(7, staff.getEmail());
 	
@@ -171,8 +171,8 @@ public class DbStaff {
 				staffObj.setStaffID(results.getInt("staffID"));
 				staffObj.setPassword(results.getString("password"));
 				staffObj.setName(results.getString("name"));
-				staffObj.setWorkPhoneNumber(results.getInt("workPhoneNumber"));
-				staffObj.setPersonalPhoneNumber(results.getInt("personalPhoneNumber"));
+				staffObj.setWorkPhoneNumber(results.getString("workPhoneNumber"));
+				staffObj.setPersonalPhoneNumber(results.getString("personalPhoneNumber"));
 				staffObj.setEmail(results.getString("email"));
 				staffObj.setStaffType(results.getString("staffType"));
 				

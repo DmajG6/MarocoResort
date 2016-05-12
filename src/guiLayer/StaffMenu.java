@@ -55,14 +55,14 @@ public class StaffMenu extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		txtf_Name = new JTextField();
-		txtf_Name.setBounds(176, 11, 127, 20);
+		txtf_Name.setBounds(176, 8, 127, 20);
 		contentPane.add(txtf_Name);
 		txtf_Name.setColumns(10);
 		
@@ -117,11 +117,11 @@ public class StaffMenu extends JFrame {
 		contentPane.add(lblEmail);
 		
 		JLabel lblWorkPhoneNumber = new JLabel("Work phone number");
-		lblWorkPhoneNumber.setBounds(22, 166, 97, 33);
+		lblWorkPhoneNumber.setBounds(22, 166, 121, 33);
 		contentPane.add(lblWorkPhoneNumber);
 		
 		JLabel lblPersonalPhoneNumber = new JLabel("Personal phone number");
-		lblPersonalPhoneNumber.setBounds(22, 212, 97, 38);
+		lblPersonalPhoneNumber.setBounds(22, 212, 121, 38);
 		contentPane.add(lblPersonalPhoneNumber);
 		
 		JButton btnFindStaffByName = new JButton("Find Staff By Name");
@@ -131,7 +131,7 @@ public class StaffMenu extends JFrame {
 				
 			}
 		});
-		btnFindStaffByName.setBounds(327, 17, 86, 68);
+		btnFindStaffByName.setBounds(327, 17, 147, 51);
 		contentPane.add(btnFindStaffByName);
 		
 		JButton btnFindStaffByID = new JButton("Find Staff By ID");
@@ -140,7 +140,7 @@ public class StaffMenu extends JFrame {
 				findStaffByID();
 			}
 		});
-		btnFindStaffByID.setBounds(327, 101, 87, 68);
+		btnFindStaffByID.setBounds(327, 101, 147, 51);
 		contentPane.add(btnFindStaffByID);
 		
 		JButton btnCreateStaff = new JButton("Create Staff");
@@ -149,7 +149,7 @@ public class StaffMenu extends JFrame {
 				createStaff();
 			}
 		});
-		btnCreateStaff.setBounds(327, 192, 86, 49);
+		btnCreateStaff.setBounds(327, 192, 147, 49);
 		contentPane.add(btnCreateStaff);
 	}
 
@@ -181,6 +181,6 @@ public class StaffMenu extends JFrame {
 		}
 	}
 	private void createStaff(){
-		sctr.createStaff(txtf_Name.getText(),Integer.parseInt(txtf_StaffId.getText()), txtf_Type.getText(), txtf_Password.getText(), txtf_Email.getText(), Integer.parseInt(txtf_PersonalPhoneNumber.getText()), Integer.parseInt(txtf_WorkPhoneNumber.getText()) );
+		sctr.createStaff(txtf_Name.getText(),Integer.parseInt(txtf_StaffId.getText()), txtf_Type.getText(), txtf_Password.getText(), txtf_Email.getText(), txtf_PersonalPhoneNumber.getText(), txtf_WorkPhoneNumber.getText() );
 	}
 }

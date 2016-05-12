@@ -7,10 +7,10 @@ public class Staff {
 	private String staffType;
 	private String password;
 	private String email;
-	private int workPhoneNumber;
-	private int personalPhoneNumber;
+	private String workPhoneNumber;
+	private String personalPhoneNumber;
 	
-	public Staff (String name, int staffID, String staffType, String password, String email, int workPhoneNumber, int personalPhoneNumber){
+	public Staff (String name, int staffID, String staffType, String password, String email, String workPhoneNumber, String personalPhoneNumber){
 		
 		this.name = name;
 		this.staffID = staffID;
@@ -66,19 +66,19 @@ public class Staff {
 		this.email = email;
 	}
 
-	public int getWorkPhoneNumber() {
+	public String getWorkPhoneNumber() {
 		return workPhoneNumber;
 	}
 
-	public void setWorkPhoneNumber(int workPhoneNumber) {
+	public void setWorkPhoneNumber(String workPhoneNumber) {
 		this.workPhoneNumber = workPhoneNumber;
 	}
 
-	public int getPersonalPhoneNumber() {
+	public String getPersonalPhoneNumber() {
 		return personalPhoneNumber;
 	}
 
-	public void setPersonalPhoneNumber(int personalPhoneNumber) {
+	public void setPersonalPhoneNumber(String personalPhoneNumber) {
 		this.personalPhoneNumber = personalPhoneNumber;
 	}
 
