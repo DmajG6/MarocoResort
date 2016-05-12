@@ -28,6 +28,10 @@ public class Agency {
 		this.discount = discount;
 	}
 
+        public Agency() {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public int getAgencyID() {
 		return agencyID;
