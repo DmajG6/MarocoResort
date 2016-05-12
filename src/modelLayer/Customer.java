@@ -7,7 +7,7 @@ public class Customer {
 	private String name;
 	private String country;
 	private String address;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String email;
 	private String idType;
 	private int idNumber;
@@ -19,7 +19,7 @@ public class Customer {
 		this.customerID = ID;
 	}
 	
-	public Customer(int customerID, String password, String name, String country, String address, int phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
+	public Customer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
 		
 		this.customerID = customerID;
 		this.password = password;
@@ -71,10 +71,10 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getEmail() {
