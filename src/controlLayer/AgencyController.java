@@ -11,11 +11,8 @@ public class AgencyController {
 	
 	DbAgency dbAgency = new DbAgency();
 	
-<<<<<<< HEAD
 	public LinkedList<Agency> getAllAgencys(){
-=======
-	public LinkedList<Agency> getAllAgencies(){
->>>>>>> origin/master
+
 		return dbAgency.getAllAgencies();
 	}
 	
