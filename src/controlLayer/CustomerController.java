@@ -1,6 +1,6 @@
 package controlLayer;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import dbLayer.*;
 import modelLayer.*;
 
@@ -10,7 +10,7 @@ public class CustomerController {
 	
 	DbCustomer dbCustomer = new DbCustomer();
 	
-	public ArrayList<Customer> getAllCustomers(){
+	public LinkedList<Customer> getAllCustomers(){
 		return dbCustomer.getAllCustomers();
 	}
 	
