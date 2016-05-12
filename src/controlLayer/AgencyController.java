@@ -12,7 +12,7 @@ public class AgencyController {
 	DbAgency dbAgency = new DbAgency();
 	
 	public LinkedList<Agency> getAllAgencys(){
-		return dbAgency.getAllAgencys();
+		return dbAgency.getAllAgencies();
 	}
 	
 	public Agency findAgencyByName(String name){
