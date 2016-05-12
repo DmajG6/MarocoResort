@@ -35,7 +35,7 @@ public class CustomerController {
 	}
 
 	
-	public Customer createCustomer(int customerID, String password, String name, String country, String address, int phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
+	public Customer createCustomer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
 		Customer customer = new Customer();
 		customer.setCustomerID(0);
 		customer.setPassword(password);
