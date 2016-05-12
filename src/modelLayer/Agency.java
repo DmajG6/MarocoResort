@@ -8,13 +8,13 @@ public class Agency {
 	private int cvrNumber;
 	private String country;
 	private String email;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String extraInfo;
 	private ReservationOfStay reservationOfStay;
 	private double discount;
 
 	
-	public Agency(int agencyID, String name, String address, int cvrNumber, String country, String email, int phoneNumber, String extraInfo, ReservationOfStay reservationOfStay, double discount){
+	public Agency(int agencyID, String name, String address, int cvrNumber, String country, String email, String phoneNumber, String extraInfo, ReservationOfStay reservationOfStay, double discount){
 		
 		this.agencyID = agencyID;
 		this.name = name;
@@ -89,12 +89,12 @@ public class Agency {
 	}
 
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
