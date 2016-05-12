@@ -31,7 +31,7 @@ DbStaff dbStaff = new DbStaff();
 	}
 
 	
-	public Staff createStaff(String name, int staffID, String staffType, String password, String email, int workPhoneNumber, int personalPhoneNumber){
+	public Staff createStaff(String name, int staffID, String staffType, String password, String email, String workPhoneNumber, String personalPhoneNumber){
 		Staff staff = new Staff();
 		staff.setName(name);
 		staff.setStaffID(0);
