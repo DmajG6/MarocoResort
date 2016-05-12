@@ -135,7 +135,7 @@ public class ApartmentMenu extends JFrame {
 		
 		private void findApartmentByRoomID(){
 			String input = txtf_roomID.getText();
-			Apartment apartment = aptctr.findApartmentByRoomID(input);
+			Apartment apartment = aptctr.findApartmentByRoomID(Integer.parseInt(input));
 			if(apartment!= null){
 			txtf_roomID.setText(""+apartment.getRoomID());
 			txtf_type.setText(""+apartment.getType());
