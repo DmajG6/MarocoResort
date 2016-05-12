@@ -1,7 +1,6 @@
 package dbLayer;
 
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.sql.*;
 import modelLayer.*;
@@ -124,7 +123,7 @@ public class DbCustomer {
 		return rc;
 	}
 */
-	public ArrayList<Customer> getAllCustomers() {
+	public LinkedList<Customer> getAllCustomers() {
 		return miscWhere(""); 
 	}
 	
@@ -166,9 +165,9 @@ public class DbCustomer {
 	}
 	
     // misc where
-	private ArrayList<Customer> miscWhere(String wClause) {
+	private LinkedList<Customer> miscWhere(String wClause) {
 		ResultSet results;
-		ArrayList<Customer> list = new ArrayList<Customer>();
+		LinkedList<Customer> list = new LinkedList<Customer>();
 		String query = buildQuery(wClause);
 		try {
 			Statement stmt = con.createStatement();
