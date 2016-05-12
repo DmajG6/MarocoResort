@@ -26,9 +26,11 @@ public class DbApartment {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			//rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			
-			//stmt.close();
+			/*
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.close();
+			*/
 			
 			results = stmt.executeQuery(query);
 			
