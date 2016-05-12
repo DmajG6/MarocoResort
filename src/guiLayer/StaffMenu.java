@@ -181,6 +181,6 @@ public class StaffMenu extends JFrame {
 		}
 	}
 	private void createStaff(){
-		sctr.createStaff(txtf_Name.getText(),Integer.parseInt(txtf_StaffId.getText()), txtf_Type.getText(), txtf_Password.getText(), txtf_Email.getText(), Integer.parseInt(txtf_PersonalPhoneNumber.getText()), Integer.parseInt(txtf_WorkPhoneNumber.getText()) );
+		sctr.createStaff(txtf_Name.getText(),Integer.parseInt(txtf_StaffId.getText()), txtf_Type.getText(), txtf_Password.getText(), txtf_Email.getText(), txtf_PersonalPhoneNumber.getText(), txtf_WorkPhoneNumber.getText() );
 	}
 }
