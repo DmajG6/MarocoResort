@@ -151,6 +151,16 @@ public class StaffMenu extends JFrame {
 		});
 		btnCreateStaff.setBounds(327, 192, 147, 49);
 		contentPane.add(btnCreateStaff);
+	
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				StaffMenu.this.dispose();
+			    }
+			});
+		btnMainMenu.setBounds(10, 0, 89, 23);
+		contentPane.add(btnMainMenu);
 	}
 
 	private void findStaffByName(){
