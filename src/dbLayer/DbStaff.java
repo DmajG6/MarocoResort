@@ -16,26 +16,23 @@ public class DbStaff {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(staffID)"
+		query = "SELECT MAX(staffID) as staffID "
 				+ "FROM Staff";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.close();
 			
 			results = stmt.executeQuery(query);
 			
 			if (results.next()) {
-				rc = results.getInt("StaffID");
+				rc = results.getInt("staffID");
 			}
 				stmt.close();
-			
+			rc++;
 		} catch (SQLException ex) {
-			System.out.println("ID not found");
+			System.out.println("ID not found: "+ex.getSQLState());
 			
 		}
 		
@@ -46,8 +43,8 @@ public class DbStaff {
 	public int insertStaff(Staff staff){
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO Staff (staffID, name, password, workPhoneNumber, personalPhoneNumber, staffType, email) VALUES (" 
-		+ staff.getStaffID() + ",'"
+		query = "INSERT INTO Staff (staffID, name, password, workPhoneNo, personalPhoneNo, staffType, email) VALUES (" 
+		+ getNewID() + ",'"
 		+ staff.getName() + "','"
 		+ staff.getPassword() + "',"
 		+ staff.getWorkPhoneNumber() + ","
@@ -64,7 +61,7 @@ public class DbStaff {
 			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.close();
 		} catch (SQLException ex) {
-			System.out.println("Staff not inserted");
+			System.out.println("Staff not inserted: "+ex.getMessage());
 		}
 		
 		return rc;
@@ -86,7 +83,7 @@ public class DbStaff {
 	}
 	
 	public int updateStaff(String name, Staff staff) {
-		String q = "update Staff set staffID = ?, name = ?, password = ?, workPhoneNumber = ?, personalPhoneNumber = ?, staffType = ?, email = ? where name='" + staff.getName()+"'";
+		String q = "update Staff set staffID = ?, name = ?, password = ?, workPhoneNo = ?, personalPhoneNo = ?, staffType = ?, email = ? where name='" + staff.getName()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -171,8 +168,8 @@ public class DbStaff {
 				staffObj.setStaffID(results.getInt("staffID"));
 				staffObj.setPassword(results.getString("password"));
 				staffObj.setName(results.getString("name"));
-				staffObj.setWorkPhoneNumber(results.getString("workPhoneNumber"));
-				staffObj.setPersonalPhoneNumber(results.getString("personalPhoneNumber"));
+				staffObj.setWorkPhoneNumber(results.getString("workPhoneNo"));
+				staffObj.setPersonalPhoneNumber(results.getString("personalPhoneNo"));
 				staffObj.setEmail(results.getString("email"));
 				staffObj.setStaffType(results.getString("staffType"));
 				
