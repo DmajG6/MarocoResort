@@ -138,7 +138,7 @@ public class DbCustomer {
 	}
 	
 	public int updateCustomer(String name, Customer customer) {
-		String q = "update [Customer Table] set customerID = ?, password = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, idType = ?, idNumber = ?, specialService = ?, roomID = ?, active = ? where name='" + customer.getName()+"'";
+		String q = "update Customer set customerID = ?, password = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, idType = ?, idNumber = ?, specialService = ?, roomID = ?, active = ? where name='" + customer.getName()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -212,7 +212,7 @@ public class DbCustomer {
 		}
 		
 		private String buildQuery(String wClause) {
-			String query = "SELECT *  FROM [Customer Table]";
+			String query = "SELECT *  FROM Customer";
 
 			if (wClause.length() > 0)
 				query = query + " WHERE " + wClause;

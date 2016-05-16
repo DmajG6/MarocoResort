@@ -20,7 +20,7 @@ public class DbReservationOfStay {
 		LinkedList<ReservationOfStay> reservations = new LinkedList<>();
 		
 		String query = "";
-		query = "SELECT *" + "FROM [ReservationOfStay]";
+		query = "SELECT *" + "FROM ReservationOfStay";
 		System.out.println("insert : " + query);
 		
 		try {
@@ -67,7 +67,7 @@ public class DbReservationOfStay {
 		ReservationOfStay reservationOfStay = new ReservationOfStay(reservationID);
 		
 		String query = "";
-		query = "SELECT * "+ "FROM [ReservationOfStay]"
+		query = "SELECT * "+ "FROM ReservationOfStay"
 				+ "WHERE reservationID = " + reservationID;
 		System.out.println("insert : " + query);
 		
@@ -92,7 +92,7 @@ public class DbReservationOfStay {
 				reservationOfStay.setDiscount(results.getDouble("discount"));
 				reservationOfStay.setPrice(results.getDouble("price"));
 				//reservationOfStay.setStaff(new Staff(results.getInt("staff")));
-				//reservationOfStay.setAgency(new Agency(results.getInt("agency")));
+				//getClass()reservationOfStay.setAgency(new Agency(results.getInt("agency")));
 				
 			}
 				stmt.close();
@@ -115,11 +115,11 @@ public class DbReservationOfStay {
 		+ reservationOfStay.getDurationOfStay() + ","
 		+ reservationOfStay.getArrivalDate() + ","
 		+ reservationOfStay.getDepartureDate() + ",'"
-		+ reservationOfStay.getPaymentInfo() + "',"
-		+ reservationOfStay.getPaymentConfirmation()+ "') "
-		+ reservationOfStay.getDateOfReservation()+ "') "
-		+ reservationOfStay.getDiscount()+ "') "
-		+ reservationOfStay.getPrice()+ "') ";
+		+ reservationOfStay.getPaymentInfo() + "','"
+		+ reservationOfStay.getPaymentConfirmation()+ "',"
+		+ reservationOfStay.getDateOfReservation()+ ","
+		+ reservationOfStay.getDiscount()+ ","
+		+ reservationOfStay.getPrice()+ ")";
 		
 		System.out.println("insert : " + query);
 		try {

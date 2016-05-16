@@ -97,7 +97,7 @@ public class DbApartment {
 	}
 	
 	public int updateApartment(double price, Apartment apartment) {
-		String q = "update [Apartment Table] set roomID = ?, type = ?, price = ?, floor = ?, customer = ?, specialNeeds = ? where name='" + apartment.getPrice()+"'";
+		String q = "update Apartment set roomID = ?, type = ?, price = ?, floor = ?, customer = ?, specialNeeds = ? where name='" + apartment.getPrice()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -166,7 +166,7 @@ public class DbApartment {
 		}
 		
 		private String buildQuery(String wClause) {
-			String query = "SELECT *  FROM [Apartment Table]";
+			String query = "SELECT *  FROM Apartment";
 
 			if (wClause.length() > 0)
 				query = query + " WHERE " + wClause;

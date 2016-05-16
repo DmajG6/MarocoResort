@@ -86,7 +86,7 @@ public class DbStaff {
 	}
 	
 	public int updateStaff(String name, Staff staff) {
-		String q = "update [Staff Table] set staffID = ?, name = ?, password = ?, workPhoneNumber = ?, personalPhoneNumber = ?, staffType = ?, email = ? where name='" + staff.getName()+"'";
+		String q = "update Staff set staffID = ?, name = ?, password = ?, workPhoneNumber = ?, personalPhoneNumber = ?, staffType = ?, email = ? where name='" + staff.getName()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -156,7 +156,7 @@ public class DbStaff {
 		}
 		
 		private String buildQuery(String wClause) {
-			String query = "SELECT *  FROM [Staff Table]";
+			String query = "SELECT *  FROM Staff";
 
 			if (wClause.length() > 0)
 				query = query + " WHERE " + wClause;
