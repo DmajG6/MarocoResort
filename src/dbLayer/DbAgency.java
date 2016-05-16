@@ -49,7 +49,7 @@ public class DbAgency {
 		String query = "";
 		
 		
-		query = "INSERT INTO Agency (agencyID, name, country, address, phoneNo, email, cvrNumber, extraInfo, discount) VALUES (" 
+		query = "INSERT INTO Agency (agencyID, name, country, address, phoneNo, email, cvrNo, extraInfo, discount) VALUES (" 
 		+ agency.getAgencyID() + ",'"
 		+ agency.getName() + "','"
 		+ agency.getCountry() + "','"
@@ -93,7 +93,7 @@ public class DbAgency {
 	}
 	
 	public int updateAgency(String name, Agency agency) {
-		String q = "update Agency set agencyID = ?, name = ?, country = ?, address = ?, phoneNo = ?, email = ?, cvrNumber = ?, extraInfo = ?, discount = ? where name='" + agency.getName()+"'";
+		String q = "update Agency set agencyID = ?, name = ?, country = ?, address = ?, phoneNo = ?, email = ?, cvrNo = ?, extraInfo = ?, discount = ? where name='" + agency.getName()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -219,7 +219,7 @@ public class DbAgency {
 					agency.setName(results.getString("name"));
 					agency.setCountry(results.getString("country"));
 					agency.setAddress(results.getString("address"));
-					agency.setPhoneNumber(results.getString("phoneNumber"));
+					agency.setPhoneNumber(results.getString("phoneNo"));
 					agency.setEmail(results.getString("email"));
 					agency.setExtraInfo(results.getString("extraInfo"));
 					agency.setDiscount(results.getDouble("discount"));
