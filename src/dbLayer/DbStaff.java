@@ -17,7 +17,7 @@ public class DbStaff {
 		int rc = -1;
 		String query = "";
 		query = "SELECT MAX(staffID)"
-				+ "FROM [Staff Table]";
+				+ "FROM Staff";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
@@ -46,14 +46,14 @@ public class DbStaff {
 	public int insertStaff(Staff staff){
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO [Staff Table] (staffID, name, password, workPhoneNumber, personalPhoneNumber, staffType, email) VALUES (" 
+		query = "INSERT INTO Staff (staffID, name, password, workPhoneNumber, personalPhoneNumber, staffType, email) VALUES (" 
 		+ staff.getStaffID() + ",'"
-		+ staff.getName() + ","
-		+ staff.getPassword() + ","
+		+ staff.getName() + "','"
+		+ staff.getPassword() + "',"
 		+ staff.getWorkPhoneNumber() + ","
-		+ staff.getPersonalPhoneNumber() + ","
-		+ staff.getStaffType() + ","
-		+ staff.getEmail() + ",";
+		+ staff.getPersonalPhoneNumber() + ",'"
+		+ staff.getStaffType() + "','"
+		+ staff.getEmail() + "')";
 	
 			
 		

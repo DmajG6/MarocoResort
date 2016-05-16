@@ -48,19 +48,19 @@ public class DbCustomer {
 		String query = "";
 		
 		
-		query = "INSERT INTO [Customer Table] (customerID, password, name, country, address, phoneNumber, email, idType, idNumber, specialService, roomID, active) VALUES (" 
+		query = "INSERT INTO Customer (customerID, password, name, country, address, phoneNumber, email, idType, idNumber, specialService, roomID, active) VALUES (" 
 		+ customer.getCustomerID() + ",'"
-		+ customer.getPassword() + ","
-		+ customer.getName() + ","
-		+ customer.getCountry() + ","
-		+ customer.getAddress() + ","
-		+ customer.getPhoneNumber() + "',"
-		+ customer.getEmail() + ","
-		+ customer.getIdType() + ","
-		+ customer.getIdNumber() + "',"
-		+ customer.getSpecialService() + ","
+		+ customer.getPassword() + "','"
+		+ customer.getName() + "','"
+		+ customer.getCountry() + "','"
+		+ customer.getAddress() + "',"
+		+ customer.getPhoneNumber() + ",'"
+		+ customer.getEmail() + "','"
+		+ customer.getIdType() + "',"
+		+ customer.getIdNumber() + ",'"
+		+ customer.getSpecialService() + "',"
 		+ customer.getRoomID() + "',"
-		+ customer.getActive() + ",";
+		+ customer.getActive() + "')";
 		
 			
 		
