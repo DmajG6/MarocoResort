@@ -192,6 +192,16 @@ public class CustomerMenu extends JFrame {
 		});
 		btnFindByID.setBounds(265, 75, 89, 23);
 		contentPane.add(btnFindByID);
+	
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				CustomerMenu.this.dispose();
+			    }
+			});
+		btnMainMenu.setBounds(10, 0, 89, 23);
+		contentPane.add(btnMainMenu);
 	}
 	
 	private void findCustomerByName(){
