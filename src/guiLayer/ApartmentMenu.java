@@ -131,6 +131,16 @@ public class ApartmentMenu extends JFrame {
 		lblApartmentMenu.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		lblApartmentMenu.setBounds(97, 11, 265, 33);
 		contentPane.add(lblApartmentMenu);
+	
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				ApartmentMenu.this.dispose();
+			    }
+			});
+		btnMainMenu.setBounds(10, 0, 89, 23);
+		contentPane.add(btnMainMenu);
 	}
 		
 		private void findApartmentByRoomID(){
