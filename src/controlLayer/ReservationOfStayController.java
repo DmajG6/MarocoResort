@@ -41,4 +41,10 @@ public class ReservationOfStayController {
 			return reservation;
 	}
 
+	public void createReservationOfStay(int parseInt, int parseInt2, String text, String text2, double parseDouble,
+			double parseDouble2, String text3) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

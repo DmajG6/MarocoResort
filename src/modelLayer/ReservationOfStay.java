@@ -164,6 +164,18 @@ public class ReservationOfStay {
 	public void setCustomers(LinkedList<Customer> customers) {
 		this.customers = customers;
 	}
+
+
+	public void setCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public Customer getCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 		
 }
