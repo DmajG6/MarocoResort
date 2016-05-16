@@ -181,6 +181,16 @@ public class ReservationMenu extends JFrame {
 		textF_Agency.setBounds(292, 160, 86, 20);
 		contentPane.add(textF_Agency);
 		textF_Agency.setColumns(10);
+	
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				ReservationMenu.this.dispose();
+			    }
+			});
+		btnMainMenu.setBounds(10, 0, 89, 23);
+		contentPane.add(btnMainMenu);
 	}
 	
 	//dates are missing from here
