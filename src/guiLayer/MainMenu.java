@@ -52,7 +52,7 @@ public class MainMenu extends JFrame {
 		JButton btnReservationMenu = new JButton("Reservation Menu");
 		btnReservationMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.setVisible(false);
+				MainMenu.this.dispose();
 				new ReservationMenu().setVisible(true);
 			}
 		});
@@ -64,7 +64,7 @@ public class MainMenu extends JFrame {
 		JButton btnCustomerMenu = new JButton("Customer Menu");
 		btnCustomerMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.setVisible(false);
+				MainMenu.this.dispose();
 				new CustomerMenu().setVisible(true);
 			}
 		});
@@ -74,7 +74,7 @@ public class MainMenu extends JFrame {
 		JButton btnApartmentMenu = new JButton("Apartment Menu");
 		btnApartmentMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.setVisible(false);
+				MainMenu.this.dispose();
 				new ApartmentMenu().setVisible(true);
 			}
 		});
@@ -84,7 +84,7 @@ public class MainMenu extends JFrame {
 		JButton btnStaffMenu = new JButton("Staff Menu");
 		btnStaffMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.setVisible(false);
+				MainMenu.this.dispose();
 				new StaffMenu().setVisible(true);
 			}
 		});
@@ -96,6 +96,5 @@ public class MainMenu extends JFrame {
 		lblNewLabel.setBounds(171, 75, 74, 37);
 		contentPane.add(lblNewLabel);
 	}
-	
-	
+		
 }
