@@ -11,11 +11,14 @@ public class FillInTestDdata {
 
 	private static ApartmentController apctr = new ApartmentController();
 	
+	
 	public static void main(String[] args){
 		
-		apctr.createApartment(101, "single", 60, 1, null, "no");
+		for(int e = 0; e<10; e++){
+			for(int i = 1; i<5; i++){
+				apctr.createApartment(1+(100*i), "family", 60, i, "no");
+			}
 		
-		
+		}
 	}
-
 }

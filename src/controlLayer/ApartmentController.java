@@ -25,13 +25,12 @@ public class ApartmentController {
 	}
 	
 		
-	public Apartment createApartment(int roomID, String type, double price, int floor, String customerID, String specialNeeds){
+	public Apartment createApartment(int roomID, String type, double price, int floor, String specialNeeds){
 		Apartment apartment = new Apartment();
 		apartment.setRoomID(0);
 		apartment.setType(type);
 		apartment.setPrice(price);
 		apartment.setFloor(floor);
-		apartment.setCustomer(new Customer(Integer.parseInt(customerID)));
 		apartment.setSpecialNeeds(specialNeeds);
 		
 		try {
