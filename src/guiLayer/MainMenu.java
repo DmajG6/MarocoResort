@@ -71,16 +71,6 @@ public class MainMenu extends JFrame {
 		btnCustomerMenu.setBounds(146, 165, 125, 23);
 		contentPane.add(btnCustomerMenu);
 		
-		JButton btnApartmentMenu = new JButton("Apartment Menu");
-		btnApartmentMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.dispose();
-				new ApartmentMenu().setVisible(true);
-			}
-		});
-		btnApartmentMenu.setBounds(146, 196, 125, 23);
-		contentPane.add(btnApartmentMenu);
-		
 		JButton btnStaffMenu = new JButton("Staff Menu");
 		btnStaffMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
