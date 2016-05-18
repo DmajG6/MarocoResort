@@ -54,7 +54,6 @@ public class ReservationOfStayController {
 		
 		
 		
-		
 	}
 	
 	private LinkedList <String> getAllDays(String arrivalDate, String departureDate){
@@ -64,19 +63,17 @@ public class ReservationOfStayController {
 		int[] depDate = new int[3];
 		int[] dateInQuestion = new int[3];
 		
-		allDays.add(arrivalDate);
-		
 		arrDate[0] = Integer.parseInt(arrivalDate.substring(0, 1));
-		arrDate[1] = Integer.parseInt(arrivalDate.substring(2, 3));
-		arrDate[2] = Integer.parseInt(arrivalDate.substring(4, 7));
+		arrDate[1] = Integer.parseInt(arrivalDate.substring(3, 4));
+		arrDate[2] = Integer.parseInt(arrivalDate.substring(6, 9));
 		
 		depDate[0] = Integer.parseInt(departureDate.substring(0, 1));
-		depDate[1] = Integer.parseInt(departureDate.substring(2, 3));
-		depDate[2] = Integer.parseInt(departureDate.substring(4, 7));
+		depDate[1] = Integer.parseInt(departureDate.substring(3, 4));
+		depDate[2] = Integer.parseInt(departureDate.substring(6, 9));
 		
-		dateInQuestion[0] = Integer.parseInt(arrivalDate.substring(0, 1));
-		dateInQuestion[1] = Integer.parseInt(arrivalDate.substring(2, 3));
-		dateInQuestion[2] = Integer.parseInt(arrivalDate.substring(4, 7));
+		dateInQuestion[0] = arrDate[0];
+		dateInQuestion[1] = arrDate[1];
+		dateInQuestion[2] = arrDate[2];
 		
 		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		
