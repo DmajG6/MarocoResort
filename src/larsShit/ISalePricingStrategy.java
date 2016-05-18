@@ -6,3 +6,4 @@ public interface ISalePricingStrategy {
 	public double getTotal(Sale sale);
 	
 }
+//
