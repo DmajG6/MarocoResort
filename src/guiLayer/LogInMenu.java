@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import controlLayer.LogInControl;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 /**
 	May 18, 2016 - 12:43:59 PM
@@ -22,10 +23,10 @@ public class LogInMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField ID_Field;
-	private JTextField Password;
 	private LogInControl control = new LogInControl();
 	private String password;
 	private String idCode;
+	private JPasswordField Password;
 
 	/**
 	 * Launch the application.
@@ -69,11 +70,6 @@ public class LogInMenu extends JFrame {
 		lblId.setBounds(159, 142, 28, 28);
 		contentPane.add(lblId);
 		
-		Password = new JTextField();
-		Password.setBounds(199, 192, 184, 39);
-		contentPane.add(Password);
-		Password.setColumns(10);
-		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPassword.setBounds(96, 194, 91, 28);
@@ -87,6 +83,10 @@ public class LogInMenu extends JFrame {
 		});
 		btnLogIn.setBounds(199, 244, 184, 39);
 		contentPane.add(btnLogIn);
+		
+		Password = new JPasswordField();
+		Password.setBounds(199, 192, 184, 39);
+		contentPane.add(Password);
 	}
 	
 	private void buttonPressed(){
@@ -99,7 +99,7 @@ public class LogInMenu extends JFrame {
 				dispose();
 				return;
 			case 2:
-				new FacilityBookingMenu(2);
+				new BookingMenu(2);
 				dispose();
 				return;
 			case -1:
