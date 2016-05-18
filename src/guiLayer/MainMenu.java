@@ -103,6 +103,15 @@ public class MainMenu extends JFrame {
 		});
 		FacilityBooking.setBounds(146, 253, 125, 23);
 		contentPane.add(FacilityBooking);
+		
+		JButton LogOut = new JButton("Log Out");
+		LogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logOutPressed();
+			}
+		});
+		LogOut.setBounds(146, 281, 125, 23);
+		contentPane.add(LogOut);
 	}
 	
 	private void facilityBookingPressed(){
@@ -111,6 +120,11 @@ public class MainMenu extends JFrame {
 	}
 	private void faciltyMenuPressed(){
 		new BookingMenu(1);
+		this.dispose();
+	}
+	
+	private void logOutPressed(){
+		new LogInMenu();
 		this.dispose();
 	}
 }
