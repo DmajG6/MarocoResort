@@ -104,4 +104,4 @@ public class FacilityMenu extends JFrame {
 		btnDelete.setBounds(222, 40, 89, 23);
 		contentPane.add(btnDelete);
 	}
-}
+}//
