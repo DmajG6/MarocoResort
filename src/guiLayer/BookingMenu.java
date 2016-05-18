@@ -71,6 +71,7 @@ public class BookingMenu extends JFrame {
 		
 		JLabel label_1 = new JLabel("Type");
 		label_1.setBounds(15, 127, 46, 14);
+		label_1.setVisible(false);
 		
 		JRadioButton rdbtnBookFacility = new JRadioButton("Book Facility");
 		rdbtnBookFacility.setBounds(32, 94, 109, 23);
@@ -80,6 +81,7 @@ public class BookingMenu extends JFrame {
 		
 		JLabel lblFacility = new JLabel("Facility");
 		lblFacility.setBounds(15, 149, 46, 14);
+		lblFacility.setVisible(false);
 		
 		JCheckBox chckbx_Instructor = new JCheckBox("Instructor");
 		chckbx_Instructor.setBounds(11, 172, 97, 23);
@@ -92,32 +94,41 @@ public class BookingMenu extends JFrame {
 		txtDropboxhere.setBounds(55, 124, 86, 20);
 		txtDropboxhere.setText("DropBoxHere");
 		txtDropboxhere.setColumns(10);
+		txtDropboxhere.setVisible(false);
 		
 		textField = new JTextField();
 		textField.setBounds(55, 146, 86, 20);
 		textField.setText("DropBoxHere");
 		textField.setColumns(10);
+		textField.setVisible(false);
 		
 		JLabel lblLocations = new JLabel("Locations:");
 		lblLocations.setBounds(15, 327, 49, 14);
+		lblLocations.setVisible(false);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("loc1(1hour)");
 		chckbxNewCheckBox.setBounds(123, 323, 81, 23);
+		chckbxNewCheckBox.setVisible(false);
 		
 		JCheckBox chckbxLochour = new JCheckBox("loc2(2hour)");
 		chckbxLochour.setBounds(227, 323, 81, 23);
+		chckbxLochour.setVisible(false);
 		
 		JCheckBox chckbxLochour_1 = new JCheckBox("loc3(3hour)");
 		chckbxLochour_1.setBounds(15, 349, 81, 23);
+		chckbxLochour_1.setVisible(false);
 		
 		JCheckBox chckbxLochour_2 = new JCheckBox("loc4(4hour)");
 		chckbxLochour_2.setBounds(123, 349, 81, 23);
+		chckbxLochour_2.setVisible(false);
 		
 		JCheckBox chckbxLochour_3 = new JCheckBox("loc5(5hour)");
 		chckbxLochour_3.setBounds(227, 349, 81, 23);
+		chckbxLochour_3.setVisible(false);
 		
 		JLabel lblPrice = new JLabel("Price");
 		lblPrice.setBounds(15, 393, 23, 14);
+		lblPrice.setVisible(false);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(48, 390, 86, 20);
@@ -125,6 +136,7 @@ public class BookingMenu extends JFrame {
 		
 		JLabel lblTourLength = new JLabel("Tour Length");
 		lblTourLength.setBounds(237, 393, 58, 14);
+		lblTourLength.setVisible(false);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(299, 390, 86, 20);
@@ -155,10 +167,12 @@ public class BookingMenu extends JFrame {
 		contentPane.add(lblTourLength);
 		contentPane.add(textField_2);
 		contentPane.add(btnBook);
+		btnBook.setVisible(false);
 		
 		JLabel lblPrice_1 = new JLabel("Price");
 		lblPrice_1.setBounds(182, 149, 46, 14);
 		contentPane.add(lblPrice_1);
+		lblPrice_1.setVisible(false);
 		
 		textField_3 = new JTextField();
 		textField_3.setEditable(false);
@@ -169,6 +183,7 @@ public class BookingMenu extends JFrame {
 		JButton btnDate = new JButton("Date");
 		btnDate.setBounds(175, 225, 89, 23);
 		contentPane.add(btnDate);
+		btnDate.setVisible(false);
 		
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
@@ -179,6 +194,7 @@ public class BookingMenu extends JFrame {
 		JButton button = new JButton("Date");
 		button.setBounds(15, 428, 89, 23);
 		contentPane.add(button);
+		button.setVisible(false);
 		
 		textField_5 = new JTextField();
 		textField_5.setEditable(false);
