@@ -57,4 +57,11 @@ DbStaff dbStaff = new DbStaff();
 		return dbStaff.updateStaff(name, staff);		
 	}
 	
+	public boolean logInStaff(String iD, String password){
+		
+		Staff staffLogIn = dbStaff.findStaffByID(Integer.parseInt(iD));
+		
+		return staffLogIn.getPassword().equals(password);
+	}
+	
 }

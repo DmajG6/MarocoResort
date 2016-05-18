@@ -71,5 +71,11 @@ public class CustomerController {
 		return null;
 	}
 	
+	public boolean customerLogIn(String iD, String password){
+		
+		Customer logInCustomer = dbCustomer.findCustomerByCustomerID(Integer.parseInt(iD));
+		
+		return logInCustomer.getPassword().equals(password);
+	}
 	
 }
