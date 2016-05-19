@@ -66,11 +66,7 @@ public class CustomerController {
 		return dbCustomer.updateCustomer(name, customer);		
 	}
 
-	public Customer findCustomerByID(String input) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
 	public boolean customerLogIn(String iD, String password){
 		
 		Customer logInCustomer = dbCustomer.findCustomerByCustomerID(Integer.parseInt(iD));
