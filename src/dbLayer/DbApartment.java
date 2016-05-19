@@ -1,7 +1,7 @@
 package dbLayer;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import modelLayer.*;
 
@@ -9,7 +9,6 @@ public class DbApartment {
 	private DbCustomer dbCustomer;
 	private Connection con;
 	private Apartment apartment= new Apartment();
-	private DbReservationOfStay dbRes;
 	
 	public DbApartment() {
 		con = DbConnection.getInstance().getDBcon();
@@ -83,7 +82,7 @@ public class DbApartment {
 		
 	}
 	
-	public ArrayList<Apartment> getAllApartments() {
+	public LinkedList<Apartment> getAllApartments() {
 		return miscWhere(""); 
 	}
 	
@@ -92,13 +91,11 @@ public class DbApartment {
 		return singleWhere(wClause);
 	}
 	
-	public Apartment findApartmentByPrice(double price) {
-		String wClause = "  roomID = '" + price + "'";
-		return singleWhere(wClause);
-	}
 	
-	public int updateApartment(double price, Apartment apartment) {
-		String q = "update Apartment set roomID = ?, type = ?, price = ?, floor = ?, customer = ?, specialNeeds = ? where name='" + apartment.getPrice()+"'";
+	
+	
+	public int updateApartment(int roomID , Apartment apartment) {
+		String q = "update Apartment set roomID = ?, type = ?, price = ?, floor = ?, customer = ?, specialNeeds = ? where name='" + apartment.getRoomID()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -120,9 +117,9 @@ public class DbApartment {
 	}
 	
     // misc where
-	private ArrayList<Apartment> miscWhere(String wClause) {
+	private LinkedList<Apartment> miscWhere(String wClause) {
 		ResultSet results;
-		ArrayList<Apartment> list = new ArrayList<Apartment>();
+		LinkedList<Apartment> list = new LinkedList<Apartment>();
 		String query = buildQuery(wClause);
 		try {
 			Statement stmt = con.createStatement();
@@ -193,16 +190,15 @@ public class DbApartment {
 			return apartmentObj;
 		}
 		
-		public LinkedList<Apartment> getApartments(int reservationID){
+		public LinkedList<Apartment> getApartments(int roomID){
 			int rc = -1;
 			LinkedList<Apartment> apartments = new LinkedList<Apartment>();
 			
 			String query = "";
 			
-			query = "SELECT o.reservationID, o.durationOfStay, o.arrivalDate, o.departureDate, o.paymentInfo, o.paymentConfirmation, o.dateOfReservation, o.discount, o.price, c.customerID, c.password, c.name, c.country, c.address, c.phoneNo, c.email, c.idType, c.idNumber, c.specialService, c.active, c.reservationID, c.roomID "
-					+ "FROM ReservationOfStay o, Customer c "
-					+ "WHERE reservationOfStayID = " + reservationID + " AND "
-							+ " o.customerID = c.reservationID";
+			query = "SELECT o.facilityID, o.type, o.floor, o.price, o.customer, o.specialNeeds"
+					+ "FROM Apartment o "
+					+ "WHERE roomID = " + roomID;
 			System.out.println("insert : " + query);
 			try {
 				ResultSet results;
@@ -216,8 +212,8 @@ public class DbApartment {
 					Apartment apartment = new Apartment();
 					apartment.setRoomID(results.getInt("roomID"));
 					apartment.setType(results.getString("type"));
-					apartment.setPrice(results.getDouble("price"));
 					apartment.setFloor(results.getInt("floor"));
+					apartment.setPrice(results.getDouble("price"));
 					apartment.setCustomer(dbCustomer.findCustomerByCustomerID (results.getInt("customer")));
 					apartment.setSpecialNeeds(results.getString("specialNeeds"));
 					
@@ -233,5 +229,6 @@ public class DbApartment {
 			}
 			return apartments;
 		}
+
 
 }
