@@ -1,9 +1,7 @@
 package controlLayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-import dbLayer.DbReservationOfStay;
 import modelLayer.Apartment;
 import modelLayer.ReservationOfStay;
 import modelLayer.Customer;
