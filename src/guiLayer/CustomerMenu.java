@@ -185,7 +185,7 @@ public class CustomerMenu extends JFrame {
 		txtf_active.setColumns(10);
 		
 		JButton btnFindByID = new JButton("Find");
-		btnCreate.addActionListener(new ActionListener() {
+		btnFindByID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findCustomerByID();
 			}

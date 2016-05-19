@@ -17,29 +17,26 @@ public class DbAgency {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(agencyID)"
+		query = "SELECT MAX(agencyID) as agencyID "
 				+ "FROM Agency";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.close();
 			
 			results = stmt.executeQuery(query);
 			
 			if (results.next()) {
-				rc = results.getInt("AgencyID");
+				rc = results.getInt("agencyID");
 			}
+			rc++;
 				stmt.close();
 			
 		} catch (SQLException ex) {
 			System.out.println("ID not found");
 			
 		}
-		
 		return rc;
 		
 	}
@@ -50,7 +47,7 @@ public class DbAgency {
 		
 		
 		query = "INSERT INTO Agency (agencyID, name, country, address, phoneNo, email, cvrNo, extraInfo, discount) VALUES (" 
-		+ agency.getAgencyID() + ",'"
+		+ getNewID() + ",'"
 		+ agency.getName() + "','"
 		+ agency.getCountry() + "','"
 		+ agency.getAddress() + "',"
@@ -70,7 +67,7 @@ public class DbAgency {
 			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.close();
 		} catch (SQLException ex) {
-			System.out.println("Agency not inserted");
+			System.out.println("Agency not inserted: "+ex.getMessage());
 		}
 		
 		return rc;

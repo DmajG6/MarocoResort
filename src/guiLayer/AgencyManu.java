@@ -157,15 +157,25 @@ public class AgencyManu extends JFrame {
 		textF_Discount.setColumns(10);
 		
 		JButton btnFind_ID = new JButton("Find");
+		btnFind_ID.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findAgencyByID();
+			}
+		});
 		btnFind_ID.setBounds(165, 56, 89, 23);
 		contentPane.add(btnFind_ID);
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createAgency();
+			}
+		});
 		btnCreate.setBounds(264, 56, 89, 23);
 		contentPane.add(btnCreate);
 		
 		JButton btnFind_Name = new JButton("Find");
-		btnCreate.addActionListener(new ActionListener() {
+		btnFind_Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findAgencyByName();
 			}
@@ -187,6 +197,34 @@ public class AgencyManu extends JFrame {
 			textF_ExtraInfo.setText(""+agency.getExtraInfo());
 			textF_Discount.setText(""+agency.getDiscount());
 		}
+	}
+	
+	private void findAgencyByID(){
+		String input = textF_AgencyID.getText();
+		Agency agency = agnc.findAgencyByAgencyID(Integer.parseInt(input));
+		if(agency!= null){
+			textF_AgencyID.setText(""+agency.getAgencyID());
+			textF_Name.setText(""+agency.getName());
+			textF_Address.setText(""+agency.getAddress());
+			textF_CVR.setText(""+agency.getCvrNumber());
+			textF_Country.setText(""+agency.getCountry());
+			textF_Phone.setText(""+agency.getPhoneNumber());
+			textF_ExtraInfo.setText(""+agency.getExtraInfo());
+			textF_Discount.setText(""+agency.getDiscount());
+		}
+	}
+	
+	private void createAgency(){
+		agnc.createAgency(Integer.parseInt(textF_AgencyID.getText()),
+				textF_Name.getText(),
+				textF_Address.getText(),
+				(Integer.parseInt(textF_CVR.getText())),
+				textF_Country.getText(),
+				textF_Phone.getText(),
+				textF_ExtraInfo.getText(),
+				textF_ExtraInfo.getText(),
+				(Double.parseDouble(textF_Discount.getText()))
+				);
 	}
 }
 ///
