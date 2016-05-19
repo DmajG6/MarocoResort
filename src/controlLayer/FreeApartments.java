@@ -25,7 +25,7 @@ public class FreeApartments {
 	public LinkedList<Apartment> getAllFreeApartmentsForPeriod(String arrivalDate, String departureDate){
 		LinkedList<Apartment> allFreeApartments = new LinkedList<Apartment>();
 		
-		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
+		LinkedList<Apartment> apartments = new LinkedList<Apartment>();
 		apartments = apCtr.getAllApartments();
 		
 		LinkedList<ReservationOfStay> reservations= new LinkedList<ReservationOfStay>();
