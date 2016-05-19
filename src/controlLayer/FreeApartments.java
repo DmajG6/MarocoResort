@@ -93,7 +93,7 @@ public class FreeApartments {
 		
 		while((depDate[0]!=dateInQuestion[0])&&(depDate[1]!=dateInQuestion[1])&&(depDate[2]!=dateInQuestion[2])){
 			
-			allDays.add(dateInQuestion[0]+""+dateInQuestion[1]+""+dateInQuestion[2]);
+			allDays.add(dateInQuestion[0]+"-"+dateInQuestion[1]+"-"+dateInQuestion[2]);
 			
 			
 			if((depDate[2]!=dateInQuestion[2])&&(dateInQuestion[0]>=31)&&(dateInQuestion[1]>=12)){	//New Year
