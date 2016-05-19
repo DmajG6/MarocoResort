@@ -16,21 +16,18 @@ public class DbCustomer {
 	public int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(customerID) "
+		query = "SELECT MAX(customerID) as customerID "
 				+ "FROM Customer";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.close();
 			
 			results = stmt.executeQuery(query);
 			
 			if (results.next()) {
-				rc = results.getInt("CustomerID");
+				rc = results.getInt("customerID");
 			}
 				stmt.close();
 			
@@ -39,7 +36,7 @@ public class DbCustomer {
 			
 		}
 		
-		return rc;
+		return rc++;
 		
 	}
 	
@@ -48,18 +45,18 @@ public class DbCustomer {
 		String query = "";
 		
 		
-		query = "INSERT INTO Customer (customerID, password, name, country, address, phoneNumber, email, idType, idNumber, specialService, roomID, active) VALUES (" 
-		+ customer.getCustomerID() + ",'"
+		query = "INSERT INTO Customer (customerID, password, name, country, address, phoneNo, email, idType, idNumber, specialService, roomID, active) VALUES (" 
+		+ getNewID() + ",'"
 		+ customer.getPassword() + "','"
 		+ customer.getName() + "','"
 		+ customer.getCountry() + "','"
-		+ customer.getAddress() + "',"
-		+ customer.getPhoneNumber() + ",'"
+		+ customer.getAddress() + "','"
+		+ customer.getPhoneNumber() + "','"
 		+ customer.getEmail() + "','"
 		+ customer.getIdType() + "',"
 		+ customer.getIdNumber() + ",'"
 		+ customer.getSpecialService() + "',"
-		+ customer.getRoomID() + "',"
+		+ customer.getRoomID() + ",'"
 		+ customer.getActive() + "')";
 		
 			
@@ -71,7 +68,7 @@ public class DbCustomer {
 			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.close();
 		} catch (SQLException ex) {
-			System.out.println("Customer not inserted");
+			System.out.println("Customer not inserted: "+ex.getMessage());
 		}
 		
 		return rc;
@@ -244,16 +241,16 @@ public class DbCustomer {
 			return customerObj;
 		}
 		
-		public LinkedList<Customer> getCustomers(int reservationID){
+		public LinkedList<Customer> getCustomers(int customerID){
 			int rc = -1;
 			LinkedList<Customer> customers = new LinkedList<Customer>();
 			
 			String query = "";
 			
-			query = "SELECT o.reservationID, o.durationOfStay, o.arrivalDate, o.departureDate, o.paymentInfo, o.paymentConfirmation, o.dateOfReservation, o.discount, o.price, c.customerID, c.password, c.name, c.country, c.address, c.phoneNo, c.email, c.idType, c.idNumber, c.specialService, c.active, c.reservationID, c.roomID "
-					+ "FROM ReservationOfStay o, Customer c "
-					+ "WHERE reservationOfStayID = " + reservationID + " AND "
-							+ " o.customerID = c.reservationID";
+			query = "SELECT c.customerID, c.password, c.name, c.country, c.address, c.phoneNo, c.email, c.idType, c.idNumber, c.specialService, c.active, o.reservationID"
+					+ "FROM Customer c , ReservationOfStay o"
+					+ "WHERE customerID = " + customerID + " AND "
+							+ " c.customerID = o.reservationID";
 			System.out.println("insert : " + query);
 			try {
 				ResultSet results;

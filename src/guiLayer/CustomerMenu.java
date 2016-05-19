@@ -225,7 +225,7 @@ public class CustomerMenu extends JFrame {
 		
 		private void findCustomerByID(){
 			String input = txtf_ID.getText();
-			Customer customer = cstctr.findCustomerByID(input);
+			Customer customer = cstctr.findCustomerByID(Integer.parseInt(input));
 			if(customer!= null){
 			txtf_ID.setText(""+customer.getCustomerID());
 			txtf_password.setText(""+customer.getPassword());

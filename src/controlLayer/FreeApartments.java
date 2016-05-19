@@ -1,9 +1,7 @@
 package controlLayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-import dbLayer.DbReservationOfStay;
 import modelLayer.Apartment;
 import modelLayer.ReservationOfStay;
 import modelLayer.Customer;
@@ -25,7 +23,7 @@ public class FreeApartments {
 	public LinkedList<Apartment> getAllFreeApartmentsForPeriod(String arrivalDate, String departureDate){
 		LinkedList<Apartment> allFreeApartments = new LinkedList<Apartment>();
 		
-		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
+		LinkedList<Apartment> apartments = new LinkedList<Apartment>();
 		apartments = apCtr.getAllApartments();
 		
 		LinkedList<ReservationOfStay> reservations= new LinkedList<ReservationOfStay>();
@@ -93,7 +91,7 @@ public class FreeApartments {
 		
 		while((depDate[0]!=dateInQuestion[0])&&(depDate[1]!=dateInQuestion[1])&&(depDate[2]!=dateInQuestion[2])){
 			
-			allDays.add(dateInQuestion[0]+""+dateInQuestion[1]+""+dateInQuestion[2]);
+			allDays.add(dateInQuestion[0]+"-"+dateInQuestion[1]+"-"+dateInQuestion[2]);
 			
 			
 			if((depDate[2]!=dateInQuestion[2])&&(dateInQuestion[0]>=31)&&(dateInQuestion[1]>=12)){	//New Year

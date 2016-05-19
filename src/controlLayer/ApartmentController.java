@@ -1,8 +1,6 @@
 package controlLayer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-
 import dbLayer.*;
 import modelLayer.*;
 
@@ -12,7 +10,7 @@ public class ApartmentController {
 	
 	DbApartment dbApartment = new DbApartment();
 	
-	public ArrayList<Apartment> getAllApartments(){
+	public LinkedList<Apartment> getAllApartments(){
 		return dbApartment.getAllApartments();
 	}
 	
@@ -51,4 +49,5 @@ public class ApartmentController {
 		return dbApartment.updateApartment(roomID, apartment);		
 	}
 
+		
 }

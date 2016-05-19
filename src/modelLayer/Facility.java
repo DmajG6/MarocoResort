@@ -15,8 +15,10 @@ public class Facility {
 		this.price = price;
 		this.instructorPrice = instructorPrice;
 	}
-
-
+         public Facility() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getFacilityID() {
 		return facilityID;
 	}
