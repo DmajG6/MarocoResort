@@ -18,7 +18,6 @@ public class FillInTestDdata {
 			for(int i = 1; i<5; i++){
 				apctr.createApartment(1+(100*i), "family", 60, i, "no");
 			}
-		
 		}
 	}
 }

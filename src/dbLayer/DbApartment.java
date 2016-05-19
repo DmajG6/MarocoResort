@@ -9,6 +9,7 @@ public class DbApartment {
 	private DbCustomer dbCustomer;
 	private Connection con;
 	private Apartment apartment= new Apartment();
+	private DbReservationOfStay dbRes;
 	
 	public DbApartment() {
 		con = DbConnection.getInstance().getDBcon();
@@ -232,6 +233,5 @@ public class DbApartment {
 			}
 			return apartments;
 		}
-
 
 }

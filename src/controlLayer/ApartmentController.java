@@ -1,6 +1,8 @@
 package controlLayer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import dbLayer.*;
 import modelLayer.*;
 
@@ -49,5 +51,4 @@ public class ApartmentController {
 		return dbApartment.updateApartment(roomID, apartment);		
 	}
 
-		
 }
