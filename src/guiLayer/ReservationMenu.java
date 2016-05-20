@@ -21,36 +21,10 @@ import controlLayer.*;
 import modelLayer.*;
 
 import java.sql.Date;
-import org.jdatepicker.*;
-import java.util.Calendar;
-import org.jdatepicker.impl.*;
 import java.util.LinkedList;
-
-public class DateLabelFormatter extends AbstractFormatter {
-
-    private String datePattern = "yyyy-MM-dd";
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-
-    @Override
-    public Object stringToValue(String text) throws ParseException {
-        return dateFormatter.parseObject(text);
-    }
-
-    @Override
-    public String valueToString(Object value) throws ParseException {
-        if (value != null) {
-            Calendar cal = (Calendar) value;
-            return dateFormatter.format(cal.getTime());
-        }
-
-        return "";
-    }
-
-}
 
 public class ReservationMenu extends JFrame {
 	
-	private ReservationOfStayController rosctr = new ReservationOfStayController();
 	private FreeApartments available = new FreeApartments();
 	
 	private JPanel contentPane;
@@ -102,7 +76,6 @@ public class ReservationMenu extends JFrame {
 		JButton btnArrivalDate = new JButton("Arrival Date");
 		btnArrivalDate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 				getArrivalDate();
 			}
 		});
