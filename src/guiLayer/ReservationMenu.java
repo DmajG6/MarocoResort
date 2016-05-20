@@ -25,7 +25,6 @@ import java.util.LinkedList;
 
 public class ReservationMenu extends JFrame {
 	
-	private ReservationOfStayController rosctr = new ReservationOfStayController();
 	private FreeApartments available = new FreeApartments();
 	
 	private JPanel contentPane;
