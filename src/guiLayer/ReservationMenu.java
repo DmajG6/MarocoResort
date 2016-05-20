@@ -21,16 +21,21 @@ import controlLayer.*;
 import modelLayer.*;
 
 import java.sql.Date;
+import java.util.LinkedList;
 
 public class ReservationMenu extends JFrame {
 	
 	private ReservationOfStayController rosctr = new ReservationOfStayController();
-
+	private FreeApartments available = new FreeApartments();
+	
 	private JPanel contentPane;
 	private JTextField ArrivalDate;
 	private JTextField DepartureDate;
 	private JTextField freeSingleRooms;
 	private JTextField freeFamilyRooms;
+	private String arrivalDate = null;
+	private String departureDate = null;
+	private LinkedList<Apartment> apartments = new LinkedList<Apartment>();
 
 	/**
 	 * Launch the application.
@@ -72,37 +77,41 @@ public class ReservationMenu extends JFrame {
 		JButton btnArrivalDate = new JButton("Arrival Date");
 		btnArrivalDate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getArrivalDate();
 			}
 		});
-		btnArrivalDate.setBounds(394, 13, 125, 25);
+		btnArrivalDate.setBounds(217, 68, 125, 25);
 		contentPane.add(btnArrivalDate);
 		
 		JButton btnDepartureDate = new JButton("Departure Date");
-		btnDepartureDate.setBounds(394, 51, 125, 25);
+		btnDepartureDate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getDepartureDate();
+			}
+		});
+		btnDepartureDate.setBounds(217, 106, 125, 25);
 		contentPane.add(btnDepartureDate);
 		
 		ArrivalDate = new JTextField();
-		ArrivalDate.setEditable(false);
-		ArrivalDate.setBounds(531, 13, 116, 23);
+		ArrivalDate.setBounds(101, 68, 116, 23);
 		contentPane.add(ArrivalDate);
 		ArrivalDate.setColumns(10);
 		
 		DepartureDate = new JTextField();
-		DepartureDate.setEditable(false);
-		DepartureDate.setBounds(531, 52, 116, 22);
+		DepartureDate.setBounds(101, 107, 116, 22);
 		contentPane.add(DepartureDate);
 		DepartureDate.setColumns(10);
 		
 		JLabel lblNumberOfFree = new JLabel("Number of free rooms during selected period:");
-		lblNumberOfFree.setBounds(36, 131, 270, 16);
+		lblNumberOfFree.setBounds(408, 72, 270, 16);
 		contentPane.add(lblNumberOfFree);
 		
 		JLabel lblSingle = new JLabel("Single:");
-		lblSingle.setBounds(64, 172, 56, 16);
+		lblSingle.setBounds(437, 109, 56, 16);
 		contentPane.add(lblSingle);
 		
 		JLabel lblFamily = new JLabel("Family:");
-		lblFamily.setBounds(64, 201, 56, 16);
+		lblFamily.setBounds(437, 138, 56, 16);
 		contentPane.add(lblFamily);
 		
 		JButton btnBookingThroughAgency = new JButton("Booking Through Agency");
@@ -115,14 +124,48 @@ public class ReservationMenu extends JFrame {
 		
 		freeSingleRooms = new JTextField();
 		freeSingleRooms.setEditable(false);
-		freeSingleRooms.setBounds(124, 169, 116, 22);
+		freeSingleRooms.setBounds(497, 106, 116, 22);
 		contentPane.add(freeSingleRooms);
 		freeSingleRooms.setColumns(10);
 		
 		freeFamilyRooms = new JTextField();
 		freeFamilyRooms.setEditable(false);
-		freeFamilyRooms.setBounds(124, 201, 116, 22);
+		freeFamilyRooms.setBounds(497, 138, 116, 22);
 		contentPane.add(freeFamilyRooms);
 		freeFamilyRooms.setColumns(10);
 	}
+	
+	private void getArrivalDate(){
+		arrivalDate = ArrivalDate.getText();
+		checkBoth();
+	}
+	
+	private void getDepartureDate(){
+		departureDate = DepartureDate.getText();
+		checkBoth();
+	}
+	
+	private void checkBoth(){
+		if((arrivalDate != null)&&(departureDate != null)){
+			findAvailableRooms();
+		}
+	}
+	
+	private void findAvailableRooms(){
+		apartments = available.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
+		
+		int freeSingle = 0;
+		int freeFamily = 0;
+		
+		for(Apartment ap: apartments){
+			if(ap.getType().equals("Single")){
+				freeSingle++;
+			}else if(ap.getType().equals("Family")){
+				freeFamily++;
+			}
+		}
+		freeSingleRooms.setText(""+freeSingle);
+		freeFamilyRooms.setText(""+freeFamily);
+	}
+	
 }
