@@ -56,12 +56,14 @@ public class FreeApartments {
 				}
 			}
 		}
-		
 		for(Apartment apa: apartments){
 			for(Customer cus: customers){
 				if(apa.getRoomID() == cus.getRoomID()){
 					allFreeApartments.add(apa);
 				}
+			}
+			if(customers.size()==0){
+				allFreeApartments.add(apa);
 			}
 		}
 		return allFreeApartments;

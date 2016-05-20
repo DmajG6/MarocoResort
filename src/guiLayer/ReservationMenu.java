@@ -158,9 +158,9 @@ public class ReservationMenu extends JFrame {
 		int freeFamily = 0;
 		
 		for(Apartment ap: apartments){
-			if(ap.getType().equals("Single")){
+			if(ap.getType().equals("single")){
 				freeSingle++;
-			}else if(ap.getType().equals("Family")){
+			}else if(ap.getType().equals("family")){
 				freeFamily++;
 			}
 		}
