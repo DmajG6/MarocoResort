@@ -74,4 +74,13 @@ public class CustomerController {
 		return (logInCustomer.getPassword().equals(password))&&(logInCustomer.getActive().equals("yes"));
 	}
 	
+	public void checkInOut(int cutomerID, boolean outIn){
+		if(outIn){
+			//when check in
+			//x -> yes
+		}else{
+			//check out, db, String Active - "yes"/"no"
+			//x -> no
+		}
+	}
 }
