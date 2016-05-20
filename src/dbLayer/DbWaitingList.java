@@ -76,45 +76,33 @@ private Connection con;
 		
 	}
 	
-
 	public LinkedList<WaitingList> getAllWaitingLists() {
 		return miscWhere(""); 
 	}
-	
 	
 	public WaitingList findWaitingListByID(int waitingListID) {
 		String wClause = "  waitingListID = " + waitingListID;
 		return singleWhere(wClause);
 	}
 	
-	public int updateAgency(String name, Agency agency) {
-		String q = "update Agency set agencyID = ?, name = ?, country = ?, address = ?, phoneNo = ?, email = ?, cvrNo = ?, extraInfo = ?, discount = ? where name='" + agency.getName()+"'";
-		int res = 0;
-		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
-				.prepareStatement(q)) {
-			s.setInt(1, agency.getAgencyID());
-			s.setString(3, agency.getName());
-			s.setString(4, agency.getCountry());
-			s.setString(5, agency.getAddress());
-			s.setString(6, agency.getPhoneNumber());
-			s.setString(7, agency.getEmail());
-			s.setInt(8, agency.getCvrNumber());
-			s.setString(9, agency.getExtraInfo());
-			s.setDouble(10, agency.getDiscount());
-			
-			res = s.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NullPointerException npe) {
-
+	public int deleteWaitingList(int waitingListID) {
+		int rc = -1;
+		String query = "DELETE FROM Agency WHERE waitingListID="+waitingListID;
+		System.out.println("insert: "+query);
+		try{
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.close();
+		} catch (Exception ex) {
+			System.out.println("waiting list not deleted: "+ex.getMessage());
 		}
-		return res;
+		return rc;
 	}
 	
-    // misc where
 	private LinkedList<WaitingList> miscWhere(String wClause) {
 		ResultSet results;
-		LinkedList<Agency> list = new LinkedList<Agency>();
+		LinkedList<WaitingList> list = new LinkedList<WaitingList>();
 		String query = buildQuery(wClause);
 		try {
 			Statement stmt = con.createStatement();
@@ -122,8 +110,8 @@ private Connection con;
 			results = stmt.executeQuery(query);
 
 			while (results.next()) {
-				Agency agencyObj = new Agency();
-				agencyObj = buildAgency(results);
+				WaitingList agencyObj = new WaitingList();
+				agencyObj = buildWaitingList(results);
 				list.add(agencyObj);
 			}
 			stmt.close();
@@ -135,10 +123,9 @@ private Connection con;
 		return list;
 	}
 	
-
-		private WaitingList singleWhere(String wClause) {
+	private WaitingList singleWhere(String wClause) {
 			ResultSet results;
-			Agency agencyObj = new Agency();
+			WaitingList agencyObj = new WaitingList();
 			String query = buildQuery(wClause);
 			System.out.println(query);
 			try {
@@ -146,19 +133,19 @@ private Connection con;
 				stmt.setQueryTimeout(5);
 				results = stmt.executeQuery(query);
 				if (results.next()) {
-					agencyObj = buildAgency(results);
+					agencyObj = buildWaitingList(results);
 					stmt.close();
 				} else {
 					agencyObj = null;
 				}
 			}
 			catch (Exception e) {
-				System.out.println("Query exception: " + e);
+				System.out.println("Query exception: " + e.getMessage());
 			}
 			return agencyObj;
 		}
 		
-		private String buildQuery(String wClause) {
+	private String buildQuery(String wClause) {
 			String query = "SELECT *  FROM Agency";
 
 			if (wClause.length() > 0)
@@ -166,9 +153,8 @@ private Connection con;
 
 			return query;
 		}
-		
-		
-		private WaitingList buildWaitingList(ResultSet results) {
+
+	private WaitingList buildWaitingList(ResultSet results) {
 			WaitingList waitingListObj = new WaitingList();
 			try {
 				waitingListObj.setWaitingListID(results.getInt("waitingListObjID"));
@@ -183,48 +169,5 @@ private Connection con;
 			return waitingListObj;
 		}
 		
-		public LinkedList<WaitingList> getAgencys(int reservationID){
-			int rc = -1;
-			LinkedList<WaitingList> waitingLists = new LinkedList<WaitingList>();
-			
-			String query = "";
-			
-			query = "SELECT o.reservationID, o.durationOfStay, o.arrivalDate, o.departureDate, o.paymentInfo, o.paymentConfirmation, o.dateOfReservation, o.discount, o.price, c.agencyID, c.password, c.name, c.country, c.address, c.phoneNo, c.email, c.idType, c.idNumber, c.specialService, c.active, c.reservationID, c.roomID "
-					+ "FROM ReservationOfStay o, Agency c "
-					+ "WHERE reservationOfStayID = " + reservationID + " AND "
-							+ " o.agencyID = c.reservationID";
-			System.out.println("insert : " + query);
-			try {
-				ResultSet results;
-				Statement stmt = con.createStatement();
-				stmt.setQueryTimeout(5);
-				
-				
-				results = stmt.executeQuery(query);
-				
-				if (results.next()) {
-					Agency agency = new Agency();
-					
-					agency.setAgencyID(results.getInt("agencyID"));
-					agency.setName(results.getString("name"));
-					agency.setCountry(results.getString("country"));
-					agency.setAddress(results.getString("address"));
-					agency.setPhoneNumber(results.getString("phoneNo"));
-					agency.setEmail(results.getString("email"));
-					agency.setExtraInfo(results.getString("extraInfo"));
-					agency.setDiscount(results.getDouble("discount"));
-					
-					agencies.add(agency);
-					
-				}
-				
-				
-					stmt.close();
-			} catch (SQLException ex) {
-				System.out.println("ID not found "+rc+" "+ex.getMessage());
-				
-			}
-			return agencies;
-		}
-
+		
 }
