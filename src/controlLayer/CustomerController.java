@@ -71,7 +71,7 @@ public class CustomerController {
 		
 		Customer logInCustomer = dbCustomer.findCustomerByCustomerID(Integer.parseInt(iD));
 		
-		return logInCustomer.getPassword().equals(password);
+		return (logInCustomer.getPassword().equals(password))&&(logInCustomer.getActive().equals("yes"));
 	}
 	
 }
