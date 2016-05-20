@@ -288,4 +288,22 @@ public class DbCustomer {
 			return customers;
 		}
 
+		public int checkInOut(int customerID, String active) {
+			
+			String q = "update Customer set active = ? where customerID=" + customerID;
+			int res = 0;
+			try (PreparedStatement s = DbConnection.getInstance().getDBcon()
+					.prepareStatement(q)) {
+				s.setString(1, active);			
+				
+				res = s.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NullPointerException npe) {
+
+			}
+			return res;
+			
+		}
+
 }
