@@ -92,11 +92,13 @@ public class ReservationMenu extends JFrame {
 		contentPane.add(btnDepartureDate);
 		
 		ArrivalDate = new JTextField();
+		ArrivalDate.setEditable(false);
 		ArrivalDate.setBounds(101, 68, 116, 23);
 		contentPane.add(ArrivalDate);
 		ArrivalDate.setColumns(10);
 		
 		DepartureDate = new JTextField();
+		DepartureDate.setEditable(false);
 		DepartureDate.setBounds(101, 107, 116, 22);
 		contentPane.add(DepartureDate);
 		DepartureDate.setColumns(10);
@@ -135,13 +137,11 @@ public class ReservationMenu extends JFrame {
 	}
 	
 	private void getArrivalDate(){
-		arrivalDate = ArrivalDate.getText();
-		checkBoth();
+		new ReservationOfStayDate(this, 1);
 	}
 	
 	private void getDepartureDate(){
-		departureDate = DepartureDate.getText();
-		checkBoth();
+		new ReservationOfStayDate(this, 2);
 	}
 	
 	private void checkBoth(){
@@ -165,6 +165,18 @@ public class ReservationMenu extends JFrame {
 		}
 		freeSingleRooms.setText(""+freeSingle);
 		freeFamilyRooms.setText(""+freeFamily);
+	}
+	
+	public void setArrivalDate(String date){
+		this.arrivalDate = date;
+		ArrivalDate.setText(arrivalDate);
+		checkBoth();
+	}
+	
+	public void setDepartureDate(String date){
+		this.departureDate = date;
+		DepartureDate.setText(departureDate);
+		checkBoth();
 	}
 	
 }
