@@ -20,16 +20,13 @@ public class DbReservationOfStay {
 		LinkedList<ReservationOfStay> reservations = new LinkedList<>();
 		
 		String query = "";
-		query = "SELECT *" + "FROM ReservationOfStay";
+		query = "SELECT *" + " FROM ReservationOfStay";
 		System.out.println("insert : " + query);
 		
 		try {
 			ResultSet results;
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.close();
 			
 			results = stmt.executeQuery(query);
 			
@@ -45,19 +42,16 @@ public class DbReservationOfStay {
 				newReservationOfStay.setDateOfReservation(results.getDate("dateOfReservation"));
 				newReservationOfStay.setDiscount(results.getDouble("discount"));
 				newReservationOfStay.setPrice(results.getDouble("price"));
-				//newReservationOfStay.setStaff(new Staff(results.getInt("staff")));
-				//newReservationOfStay.setAgency(new Agency(results.getInt("agency")));
-				
+				newReservationOfStay.setStaff(new Staff(results.getInt("staffID")));
+				newReservationOfStay.setAgency(new Agency(results.getInt("agencyID")));
 				
 				reservations.add(newReservationOfStay);
 			}
 				stmt.close();
 			
 		} catch (SQLException ex) {
-			System.out.println("ID not found: "+rc+" "+ex.getCause());
-			
+			System.out.println("Building ReservationOfStay Object Failed: "+ex.getMessage());
 		}
-		
 		
 		return reservations;
 	}
@@ -83,7 +77,7 @@ public class DbReservationOfStay {
 
 			if (results.next()) {
 				reservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
-				reservationOfStay.setCustomer(new Customer(results.getInt("customer")));
+				reservationOfStay.setCustomer(new Customer(results.getInt("customerID")));
 				reservationOfStay.setArrivalDate(results.getDate("arrivalDate"));
 				reservationOfStay.setDepartureDate(results.getDate("departureDate"));
 				reservationOfStay.setPaymentInfo(results.getString("paymentInfo"));
@@ -91,8 +85,8 @@ public class DbReservationOfStay {
 				reservationOfStay.setDateOfReservation(results.getDate("dateOfReservation"));
 				reservationOfStay.setDiscount(results.getDouble("discount"));
 				reservationOfStay.setPrice(results.getDouble("price"));
-				//reservationOfStay.setStaff(new Staff(results.getInt("staff")));
-				//getClass()reservationOfStay.setAgency(new Agency(results.getInt("agency")));
+				reservationOfStay.setStaff(new Staff(results.getInt("staffID")));
+				reservationOfStay.setAgency(new Agency(results.getInt("agencyID")));
 				
 			}
 				stmt.close();

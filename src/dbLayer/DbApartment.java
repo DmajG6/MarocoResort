@@ -180,12 +180,11 @@ public class DbApartment {
 				apartmentObj.setType(results.getString("type"));
 				apartmentObj.setPrice(results.getDouble("price"));
 				apartmentObj.setFloor(results.getInt("floor"));
-				apartmentObj.setCustomer(dbCustomer.findCustomerByCustomerID (results.getInt("customer")));
 				apartmentObj.setSpecialNeeds(results.getString("specialNeeds"));
 				
 
 			} catch (Exception e) {
-				System.out.println("Error in building the apartment object");
+				System.out.println("Error in building the apartment object: "+e.getMessage());
 			}
 			return apartmentObj;
 		}

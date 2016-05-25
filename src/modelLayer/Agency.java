@@ -33,6 +33,10 @@ public class Agency {
 	}
 
 
+	public Agency(int agencyID) {
+			this.agencyID = agencyID;
+		}
+
 	public int getAgencyID() {
 		return agencyID;
 	}

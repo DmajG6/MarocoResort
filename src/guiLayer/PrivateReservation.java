@@ -39,6 +39,7 @@ public class PrivateReservation extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public PrivateReservation() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 622, 374);
