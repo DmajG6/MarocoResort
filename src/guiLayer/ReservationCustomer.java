@@ -7,18 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modelLayer.Apartment;
+import modelLayer.Customer;
+import modelLayer.Staff;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.util.LinkedList;
 import java.awt.Choice;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class ReservationCustomer extends JFrame {
@@ -29,8 +29,6 @@ public class ReservationCustomer extends JFrame {
 	private JTextField address;
 	private JTextField Country;
 	private JTextField name;
-	private String arrivalDate;
-	private String departureDate;
 	private Choice choice;
 	private LinkedList<Apartment> apartments;
 	private LinkedList<String> apartmentsInfo = new LinkedList<String>();
@@ -38,6 +36,7 @@ public class ReservationCustomer extends JFrame {
 	private JTextField txtSpecialNeeds;
 	private JTextField phoneNo;
 	private JTextField email;
+	private ReservationMenu menu;
 
 	/**
 	 * Launch the application.
@@ -46,7 +45,7 @@ public class ReservationCustomer extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReservationCustomer frame = new ReservationCustomer("25-01-2016", "26-02-2016", new LinkedList<Apartment>());
+					ReservationCustomer frame = new ReservationCustomer(new LinkedList<Apartment>(), new ReservationMenu(new Staff()));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,8 +56,10 @@ public class ReservationCustomer extends JFrame {
 
 
 	
-	public ReservationCustomer(String arrivalDate, String departureDate, LinkedList<Apartment> apartments) {
+	public ReservationCustomer(LinkedList<Apartment> apartments, ReservationMenu menu) {
 		setTitle("Private Reservation");
+		
+		this.menu = menu;
 		
 		this.setVisible(true);
 		
@@ -119,15 +120,23 @@ public class ReservationCustomer extends JFrame {
 		name.setColumns(10);
 		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addCustomer();
+			}
+		});
 		btnAdd.setBounds(119, 179, 97, 25);
 		contentPane.add(btnAdd);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exitCalled();
+			}
+		});
 		btnExit.setBounds(22, 180, 86, 22);
 		contentPane.add(btnExit);
 		
-		this.arrivalDate = arrivalDate;
-		this.departureDate = departureDate;
 		this.apartments = apartments;
 		
 		choice = new Choice();
@@ -194,5 +203,31 @@ public class ReservationCustomer extends JFrame {
 				chosenApartment = apa;
 			}
 		}
+	}
+	
+	private void addCustomer(){
+		
+		Customer customer = new Customer();
+		customer.setActive("no");
+		customer.setCountry(Country.getText());
+		customer.setName(name.getText());
+		customer.setEmail(email.getText());
+		customer.setAddress(address.getText());
+		customer.setPhoneNumber(phoneNo.getText());
+		customer.setRoomID(chosenApartment.getRoomID());
+		customer.setIdType(IDType.getText());
+		customer.setIdNumber(IDNumber.getText());
+		customer.setSpecialService(txtSpecialNeeds.getText());
+		
+		menu.setEnabled(true);
+		menu.addCustomer(customer);
+		
+		this.dispose();
+	}
+	
+	private void exitCalled(){
+		menu.setEnabled(true);
+		
+		this.dispose();
 	}
 }

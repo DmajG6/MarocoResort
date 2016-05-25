@@ -10,7 +10,7 @@ public class Customer {
 	private String phoneNumber;
 	private String email;
 	private String idType;
-	private int idNumber;
+	private String idNumber;
 	private String specialService;
 	private int roomID;
 	private String active;
@@ -19,7 +19,7 @@ public class Customer {
 		this.customerID = ID;
 	}
 	
-	public Customer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
+	public Customer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, String idNumber, String specialService, int roomID, String active){
 		
 		this.customerID = customerID;
 		this.password = password;
@@ -90,10 +90,10 @@ public class Customer {
 	public void setIdType(String idType) {
 		this.idType = idType;
 	}
-	public int getIdNumber() {
+	public String getIdNumber() {
 		return idNumber;
 	}
-	public void setIdNumber(int idNumber) {
+	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
 	}
 	public String getSpecialService() {

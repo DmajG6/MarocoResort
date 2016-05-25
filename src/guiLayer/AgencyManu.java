@@ -63,12 +63,6 @@ public class AgencyManu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new MainMenu().setVisible(true);
-				AgencyManu.this.dispose();
-			    }
-			});
 		btnMainMenu.setBounds(10, 11, 89, 23);
 		contentPane.add(btnMainMenu);
 		
@@ -197,6 +191,7 @@ public class AgencyManu extends JFrame {
 			textF_AgencyID.setText(""+agency.getAgencyID());
 			textF_Name.setText(""+agency.getName());
 			textF_Address.setText(""+agency.getAddress());
+			textF_Email.setText(""+agency.getEmail());
 			textF_CVR.setText(""+agency.getCvrNumber());
 			textF_Country.setText(""+agency.getCountry());
 			textF_Phone.setText(""+agency.getPhoneNumber());
@@ -212,6 +207,7 @@ public class AgencyManu extends JFrame {
 			textF_AgencyID.setText(""+agency.getAgencyID());
 			textF_Name.setText(""+agency.getName());
 			textF_Address.setText(""+agency.getAddress());
+			textF_Email.setText(""+agency.getEmail());
 			textF_CVR.setText(""+agency.getCvrNumber());
 			textF_Country.setText(""+agency.getCountry());
 			textF_Phone.setText(""+agency.getPhoneNumber());
@@ -226,8 +222,8 @@ public class AgencyManu extends JFrame {
 				textF_Address.getText(),
 				(Integer.parseInt(textF_CVR.getText())),
 				textF_Country.getText(),
+				textF_Email.getText(),
 				textF_Phone.getText(),
-				textF_ExtraInfo.getText(),
 				textF_ExtraInfo.getText(),
 				(Double.parseDouble(textF_Discount.getText()))
 				);

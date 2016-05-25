@@ -32,8 +32,9 @@ import java.awt.event.ItemEvent;
 
 public class ReservationMenu extends JFrame {
 	
-	private FreeApartments available = new FreeApartments();
+	private ApartmentController apCtr = new ApartmentController();
 	
+	private Staff loggedInStaff;
 	private JPanel contentPane;
 	private JTextField ArrivalDate;
 	private JTextField DepartureDate;
@@ -42,8 +43,8 @@ public class ReservationMenu extends JFrame {
 	private String arrivalDate = null;
 	private String departureDate = null;
 	private LinkedList<Apartment> apartments = new LinkedList<Apartment>();
-	private JTextField textField;
-	private JTextField numberOfDays;
+	private JTextField staffText;
+	private JTextField numberOfDaysTXT;
 	private JTextField priceTxt;
 	private JTable table;
 	private AgencyController ageCtr = new AgencyController();
@@ -51,6 +52,10 @@ public class ReservationMenu extends JFrame {
 	private Choice choiceAgency;
 	private Agency selectedAgency;
 	private LinkedList<Customer> customers = new LinkedList<Customer>();
+	private double price = 0;
+	private LinkedList<Apartment> usedApartments = new LinkedList<Apartment>();
+	private int numberOfDays = 0;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -59,7 +64,7 @@ public class ReservationMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReservationMenu frame = new ReservationMenu();
+					ReservationMenu frame = new ReservationMenu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +76,10 @@ public class ReservationMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReservationMenu() {
+	public ReservationMenu(Staff staff) {
+		setTitle("Reservation");
+		loggedInStaff = staff;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1017, 643);
 		contentPane = new JPanel();
@@ -137,21 +145,21 @@ public class ReservationMenu extends JFrame {
 		staffLabel.setBounds(27, 13, 56, 16);
 		contentPane.add(staffLabel);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(27, 43, 116, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		staffText = new JTextField();
+		staffText.setEditable(false);
+		staffText.setBounds(27, 43, 116, 22);
+		contentPane.add(staffText);
+		staffText.setColumns(10);
 		
 		JLabel lblNumberOfDays = new JLabel("Number Of Days:");
 		lblNumberOfDays.setBounds(27, 205, 116, 16);
 		contentPane.add(lblNumberOfDays);
 		
-		numberOfDays = new JTextField();
-		numberOfDays.setEditable(false);
-		numberOfDays.setBounds(27, 234, 116, 22);
-		contentPane.add(numberOfDays);
-		numberOfDays.setColumns(10);
+		numberOfDaysTXT = new JTextField();
+		numberOfDaysTXT.setEditable(false);
+		numberOfDaysTXT.setBounds(27, 234, 116, 22);
+		contentPane.add(numberOfDaysTXT);
+		numberOfDaysTXT.setColumns(10);
 		
 		JLabel lblPrice = new JLabel("Price:");
 		lblPrice.setBounds(27, 269, 56, 16);
@@ -198,6 +206,11 @@ public class ReservationMenu extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnAddCustomer = new JButton("Add Customer");
+		btnAddCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addButtonPressed();
+			}
+		});
 		btnAddCustomer.setBounds(190, 96, 150, 25);
 		contentPane.add(btnAddCustomer);
 		
@@ -217,7 +230,11 @@ public class ReservationMenu extends JFrame {
 		btnExit.setBounds(35, 526, 97, 25);
 		contentPane.add(btnExit);
 		
+		staffText.setText(loggedInStaff.getName());
+		
 		getApartments();
+		
+		model = (DefaultTableModel) table.getModel();
 	}
 	
 	private void getArrivalDate(){
@@ -234,8 +251,13 @@ public class ReservationMenu extends JFrame {
 		}
 	}
 	
+	private void getNumberOfDays(){
+		LinkedList<String> allDays = apCtr.getAllDays(arrivalDate, departureDate);
+		numberOfDays = allDays.size();
+	}
+	
 	private void findAvailableRooms(){
-		apartments = available.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
+		apartments = apCtr.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
 		
 		int freeSingle = 0;
 		int freeFamily = 0;
@@ -282,9 +304,39 @@ public class ReservationMenu extends JFrame {
 	
 	public void addCustomer(Customer customer){
 		customers.add(customer);
+		
+		
+		model.addRow(new String[]{customer.getName(), customer.getCountry(), customer.getPhoneNumber(), customer.getEmail(), ""+customer.getRoomID(), customer.getIdType(), customer.getIdNumber(), customer.getSpecialService()});
+		
+		setPriceAndUsedApartments();
+		
+		
 	}
 	
 	private void updateCustomer(){
 		
+	}
+	
+	private void addButtonPressed(){
+		new ReservationCustomer(apartments, this);
+		this.setEnabled(false);
+	}
+	
+	private void setPriceAndUsedApartments(){
+		
+		for(Apartment apa: apartments){
+			for(Customer cus: customers){
+				if(apa.getRoomID() == cus.getRoomID()){
+					if(!usedApartments.contains(apa)){
+						usedApartments.add(apa);
+						price += apa.getPrice();
+					}
+				}
+			}
+		}
+		
+		price *= numberOfDays;
+		
+		priceTxt.setText(""+price);
 	}
 }
