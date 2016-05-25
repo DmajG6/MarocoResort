@@ -305,5 +305,26 @@ public class DbCustomer {
 			return res;
 			
 		}
+		
+		public void updateActivityConnection(int actID, LinkedList<Integer> customerIDs){
+			for(int cusID: customerIDs){
+				
+				int rc = -1;
+				String query = "";
+				query = "INSERT INTO ActivityConnectionTable (activityID, customerID) VALUES ("
+						+ actID + ","
+						+ cusID + ")";
+				
+				System.out.println("insert : " + query);
+				try {
+					Statement stmt = con.createStatement();
+					stmt.setQueryTimeout(5);
+					rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+					stmt.close();
+				} catch (SQLException ex) {
+					System.out.println("ActivityConnection not inserted");
+			}
+		}
 
+	}
 }

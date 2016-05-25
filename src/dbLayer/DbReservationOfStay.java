@@ -103,7 +103,7 @@ public class DbReservationOfStay {
 	public int insertReservationOfStay(ReservationOfStay reservationOfStay){
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO ReservationOfStay (reservationID, customer, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price) VALUES (" 
+		query = "INSERT INTO ReservationOfStay (reservationID, customer, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, agency) VALUES (" 
 		+ reservationOfStay.getReservationID() + ",'"
 		+ reservationOfStay.getCustomer().getCustomerID() + "',"
 		+ reservationOfStay.getDurationOfStay() + ","
@@ -113,7 +113,8 @@ public class DbReservationOfStay {
 		+ reservationOfStay.getPaymentConfirmation()+ "',"
 		+ reservationOfStay.getDateOfReservation()+ ","
 		+ reservationOfStay.getDiscount()+ ","
-		+ reservationOfStay.getPrice()+ ")";
+		+ reservationOfStay.getPrice()+ ","
+		+ reservationOfStay.getAgency().getAgencyID()+ ")";
 		
 		System.out.println("insert : " + query);
 		try {
@@ -153,6 +154,27 @@ public class DbReservationOfStay {
 		
 		return rc;
 		
+	}
+	
+	public void updateReservationConnection(int resID, LinkedList<Integer> customerIDs){
+		for(int cusID: customerIDs){
+			
+			int rc = -1;
+			String query = "";
+			query = "INSERT INTO ReservationConnectionTable (reservationID, customerID) VALUES ("
+					+ resID + ","
+					+ cusID + ")";
+		
+			System.out.println("insert : " + query);
+			try {
+				Statement stmt = con.createStatement();
+				stmt.setQueryTimeout(5);
+				rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+				stmt.close();
+			} catch (SQLException ex) {
+				System.out.println("ReservationConnection not inserted");
+			}								
+		}
 	}
 		
 }
