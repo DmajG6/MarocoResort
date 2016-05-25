@@ -49,7 +49,7 @@ public class FacilityController {
 	}
 
 	public void deleteFacility(int facilityID) {
-		//dbFacility.    to be continued...kjasdlkfdbsjkdfsfgvbnm,
+		//dbFacility.    to be continued...kjasdlkfdbsjkdfsfgvbnm,b
 		
 	}
 		
