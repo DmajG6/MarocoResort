@@ -48,5 +48,9 @@ public class FacilityController {
 		return dbFacility.updateFacility(facilityID, facility);		
 	}
 
+	public void deleteFacility(int facilityID) {
+		//dbFacility.    to be continued...kjasdlkfdbsjkdfsfgvbnm,b
+		
+	}
 		
 }

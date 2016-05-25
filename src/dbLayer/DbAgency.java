@@ -177,6 +177,7 @@ public class DbAgency {
 				agencyObj.setName(results.getString("name"));
 				agencyObj.setCountry(results.getString("country"));
 				agencyObj.setAddress(results.getString("address"));
+				agencyObj.setCvrNumber(results.getInt("cvrNo"));
 				agencyObj.setPhoneNumber(results.getString("phoneNo"));
 				agencyObj.setEmail(results.getString("email"));
 				agencyObj.setExtraInfo(results.getString("extraInfo"));
@@ -216,6 +217,7 @@ public class DbAgency {
 					agency.setName(results.getString("name"));
 					agency.setCountry(results.getString("country"));
 					agency.setAddress(results.getString("address"));
+					agency.setCvrNumber(results.getInt("cvrNo"));
 					agency.setPhoneNumber(results.getString("phoneNo"));
 					agency.setEmail(results.getString("email"));
 					agency.setExtraInfo(results.getString("extraInfo"));

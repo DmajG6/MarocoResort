@@ -8,10 +8,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import controlLayer.*;
+import modelLayer.*;
+
 public class FacilityMenu extends JFrame {
+	
+	private FacilityController fac = new FacilityController();
 
 	private JPanel contentPane;
 	private JTextField textF_FacilityID;
@@ -62,10 +70,21 @@ public class FacilityMenu extends JFrame {
 		contentPane.add(lblFacilityid);
 		
 		JButton btn_Create_Facility = new JButton("Create");
+		btn_Create_Facility.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createFacility();
+			}
+		});
 		btn_Create_Facility.setBounds(24, 40, 89, 23);
 		contentPane.add(btn_Create_Facility);
 		
 		JButton btn_MainMenu = new JButton("Main Menu");
+		btn_MainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				FacilityMenu.this.dispose();
+			    }
+			});
 		btn_MainMenu.setBounds(321, 40, 89, 23);
 		contentPane.add(btn_MainMenu);
 		
@@ -97,11 +116,43 @@ public class FacilityMenu extends JFrame {
 		contentPane.add(lblInstPrice);
 		
 		JButton btnFind = new JButton("Find");
+		btnFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findFacilityByID();
+			}
+		});
 		btnFind.setBounds(123, 40, 89, 23);
 		contentPane.add(btnFind);
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(222, 40, 89, 23);
 		contentPane.add(btnDelete);
-	}
+		}
+	
+		private void createFacility(){
+			fac.createFacility(Integer.parseInt(textF_FacilityID.getText()), 
+				textF_Type.getText(),
+				Double.parseDouble(textF_Price.getText()),
+				Double.parseDouble(textF_InstructorPrice.getText())
+				);
+		}
+		
+		private void findFacilityByID(){
+			String input = textF_FacilityID.getText();
+			Facility facility = fac.findFacilityByFacilityID(Integer.parseInt(input));
+			if(facility!= null){
+				textF_FacilityID.setText("" + facility.getFacilityID());
+				textF_Type.setText("" + facility.getType());
+				textF_Price.setText("" + facility.getPrice());
+				textF_InstructorPrice.setText("" + facility.getInstructorPrice());
+			}
+		}
+		
+		private void deleteFacility(){
+			fac.deleteFacility(Integer.parseInt(textF_FacilityID.getText()), 
+				textF_Type.getText(),
+				Double.parseDouble(textF_Price.getText()),
+				Double.parseDouble(textF_InstructorPrice.getText())
+				);//finish this shit//b
+		}
 }//
