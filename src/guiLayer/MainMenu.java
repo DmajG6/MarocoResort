@@ -45,73 +45,83 @@ public class MainMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblMainMenu = new JLabel("Main Menu");
-		lblMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblMainMenu.setBounds(136, 11, 171, 37);
+		lblMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		contentPane.add(lblMainMenu);
 		
 		JButton btnReservationMenu = new JButton("Reservation Menu");
+		btnReservationMenu.setBounds(309, 147, 125, 23);
 		btnReservationMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
 				new ReservationMenu().setVisible(true);
 			}
 		});
-		btnReservationMenu.setBounds(146, 135, 125, 23);
 		contentPane.add(btnReservationMenu);
 		
 		
 		
 		JButton btnCustomerMenu = new JButton("Customer Menu");
+		btnCustomerMenu.setBounds(10, 147, 125, 23);
 		btnCustomerMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
 				new CustomerMenu().setVisible(true);
 			}
 		});
-		btnCustomerMenu.setBounds(146, 165, 125, 23);
 		contentPane.add(btnCustomerMenu);
 		
 		JButton btnStaffMenu = new JButton("Staff Menu");
+		btnStaffMenu.setBounds(10, 181, 125, 23);
 		btnStaffMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
 				new StaffMenu().setVisible(true);
 			}
 		});
-		btnStaffMenu.setBounds(146, 195, 125, 23);
 		contentPane.add(btnStaffMenu);
 		
 		JLabel lblNewLabel = new JLabel("( \u0361\u00B0 \u035C\u0296 \u0361\u00B0)");
+		lblNewLabel.setBounds(171, 52, 74, 37);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(171, 75, 74, 37);
 		contentPane.add(lblNewLabel);
 		
 		JButton FacilityMenu = new JButton("Facility Menu");
+		FacilityMenu.setBounds(10, 215, 125, 23);
 		FacilityMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				faciltyMenuPressed();
 			}
 		});
-		FacilityMenu.setBounds(146, 224, 125, 23);
 		contentPane.add(FacilityMenu);
 		
 		JButton FacilityBooking = new JButton("Facility Booking");
+		FacilityBooking.setBounds(10, 249, 125, 23);
 		FacilityBooking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				facilityBookingPressed();
 			}
 		});
-		FacilityBooking.setBounds(146, 253, 125, 23);
 		contentPane.add(FacilityBooking);
 		
 		JButton LogOut = new JButton("Log Out");
+		LogOut.setBounds(309, 249, 125, 23);
 		LogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logOutPressed();
 			}
 		});
-		LogOut.setBounds(146, 281, 125, 23);
 		contentPane.add(LogOut);
+		
+		JButton btnAgencyMenu = new JButton("Agency Menu");
+		btnAgencyMenu.setBounds(309, 181, 125, 23);
+		btnAgencyMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				MainMenu.this.dispose();
+				new AgencyManu().setVisible(true);
+			}
+		});
+		contentPane.add(btnAgencyMenu);
 	}
 	
 	private void facilityBookingPressed(){

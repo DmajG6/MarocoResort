@@ -63,6 +63,12 @@ public class AgencyManu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+				AgencyManu.this.dispose();
+			    }
+			});
 		btnMainMenu.setBounds(10, 11, 89, 23);
 		contentPane.add(btnMainMenu);
 		
