@@ -19,6 +19,8 @@ public class StaffMenu extends JFrame {
 	
 	private StaffController sctr = new StaffController ();
 
+	private Staff staff;
+	
 	private JPanel contentPane;
 	private JTextField txtf_Name;
 	private JTextField txtf_StaffId;
@@ -35,7 +37,7 @@ public class StaffMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StaffMenu frame = new StaffMenu();
+					StaffMenu frame = new StaffMenu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +49,8 @@ public class StaffMenu extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public StaffMenu() {
+	public StaffMenu(Staff staff) {
+		this.staff = staff;
 		initialize();
 	}
 
@@ -155,7 +158,7 @@ public class StaffMenu extends JFrame {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MainMenu().setVisible(true);
+				new MainMenu(staff).setVisible(true);
 				StaffMenu.this.dispose();
 			    }
 			});

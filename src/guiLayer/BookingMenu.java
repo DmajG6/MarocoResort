@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelLayer.Customer;
+import modelLayer.Staff;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -31,7 +35,9 @@ public class BookingMenu extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
+	private Staff staff = null;
+	private Customer customer = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -40,7 +46,7 @@ public class BookingMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BookingMenu frame = new BookingMenu(2);
+					BookingMenu frame = new BookingMenu(new Customer(), 2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,8 +58,19 @@ public class BookingMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BookingMenu(int type) {
+	public BookingMenu(Staff staff, int type) {
+		this.staff = staff;
 		this.type = type;
+		buildWindow();
+	}
+
+	public BookingMenu(Customer customer, int type){
+		this.customer = customer;
+		this.type = type;
+		buildWindow();
+	}
+	
+	private void buildWindow(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 513);
 		contentPane = new JPanel();
@@ -204,5 +221,5 @@ public class BookingMenu extends JFrame {
 		contentPane.add(textField_5);
 		
 	}
+	
 }
-///

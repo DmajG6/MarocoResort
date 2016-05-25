@@ -35,11 +35,11 @@ public class DbReservationOfStay {
 				
 				newReservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
 				newReservationOfStay.setCustomer(new Customer(results.getInt("customer")));
-				newReservationOfStay.setArrivalDate(results.getDate("arrivalDate"));
-				newReservationOfStay.setDepartureDate(results.getDate("departureDate"));
+				newReservationOfStay.setArrivalDate(results.getString("arrivalDate"));
+				newReservationOfStay.setDepartureDate(results.getString("departureDate"));
 				newReservationOfStay.setPaymentInfo(results.getString("paymentInfo"));
 				newReservationOfStay.setPaymentConfirmation(results.getString("paymentConfirmation"));
-				newReservationOfStay.setDateOfReservation(results.getDate("dateOfReservation"));
+				newReservationOfStay.setDateOfReservation(results.getString("dateOfReservation"));
 				newReservationOfStay.setDiscount(results.getDouble("discount"));
 				newReservationOfStay.setPrice(results.getDouble("price"));
 				newReservationOfStay.setStaff(new Staff(results.getInt("staffID")));
@@ -78,11 +78,11 @@ public class DbReservationOfStay {
 			if (results.next()) {
 				reservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
 				reservationOfStay.setCustomer(new Customer(results.getInt("customerID")));
-				reservationOfStay.setArrivalDate(results.getDate("arrivalDate"));
-				reservationOfStay.setDepartureDate(results.getDate("departureDate"));
+				reservationOfStay.setArrivalDate(results.getString("arrivalDate"));
+				reservationOfStay.setDepartureDate(results.getString("departureDate"));
 				reservationOfStay.setPaymentInfo(results.getString("paymentInfo"));
 				reservationOfStay.setPaymentConfirmation(results.getString("paymentConfirmation"));
-				reservationOfStay.setDateOfReservation(results.getDate("dateOfReservation"));
+				reservationOfStay.setDateOfReservation(results.getString("dateOfReservation"));
 				reservationOfStay.setDiscount(results.getDouble("discount"));
 				reservationOfStay.setPrice(results.getDouble("price"));
 				reservationOfStay.setStaff(new Staff(results.getInt("staffID")));

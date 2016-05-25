@@ -26,6 +26,8 @@ public class FacilityMenu extends JFrame {
 	private JTextField textF_Type;
 	private JTextField textF_Price;
 	private JTextField textF_InstructorPrice;
+	
+	private Staff staff;
 
 	/**
 	 * Launch the application.
@@ -34,7 +36,7 @@ public class FacilityMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FacilityMenu frame = new FacilityMenu();
+					FacilityMenu frame = new FacilityMenu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +48,9 @@ public class FacilityMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FacilityMenu() {
+	public FacilityMenu(Staff staff) {
+		
+		this.staff = staff;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -81,7 +85,7 @@ public class FacilityMenu extends JFrame {
 		JButton btn_MainMenu = new JButton("Main Menu");
 		btn_MainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MainMenu().setVisible(true);
+				new MainMenu(staff).setVisible(true);
 				FacilityMenu.this.dispose();
 			    }
 			});

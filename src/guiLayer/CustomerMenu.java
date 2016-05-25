@@ -31,6 +31,8 @@ public class CustomerMenu extends JFrame {
 	private JTextField txtf_specialService;
 	private JTextField txtf_roomID;
 	private JTextField txtf_active;
+	private Staff staff;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +40,7 @@ public class CustomerMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerMenu frame = new CustomerMenu();
+					CustomerMenu frame = new CustomerMenu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +52,9 @@ public class CustomerMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomerMenu() {
+	public CustomerMenu(Staff staff) {
+		this.staff = staff;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 471, 444);
 		contentPane = new JPanel();
@@ -196,7 +200,7 @@ public class CustomerMenu extends JFrame {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MainMenu().setVisible(true);
+				new MainMenu(staff).setVisible(true);
 				CustomerMenu.this.dispose();
 			    }
 			});

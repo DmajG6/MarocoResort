@@ -229,7 +229,7 @@ public class DbCustomer {
 				customerObj.setPhoneNumber(results.getString("phoneNumber"));
 				customerObj.setEmail(results.getString("email"));
 				customerObj.setIdType(results.getString("idType"));
-				customerObj.setIdNumber(results.getInt("idNumber"));
+				customerObj.setIdNumber(results.getString("idNumber"));
 				customerObj.setSpecialService(results.getString("specialService"));
 				customerObj.setRoomID(results.getInt("roomID"));
 				customerObj.setActive(results.getString("active"));
@@ -270,7 +270,7 @@ public class DbCustomer {
 					customer.setPhoneNumber(results.getString("phoneNumber"));
 					customer.setEmail(results.getString("email"));
 					customer.setIdType(results.getString("idType"));
-					customer.setIdNumber(results.getInt("idNumber"));
+					customer.setIdNumber(results.getString("idNumber"));
 					customer.setSpecialService(results.getString("specialService"));
 					customer.setRoomID(results.getInt("roomID"));
 					customer.setActive(results.getString("active"));

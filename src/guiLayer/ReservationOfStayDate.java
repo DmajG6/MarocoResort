@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.util.Calendar;
 import org.freixas.jcalendar.*;
 
+import modelLayer.Staff;
+
 
 class ReservationOfStayDate  extends JFrame {
 	
@@ -11,7 +13,7 @@ class ReservationOfStayDate  extends JFrame {
 	private int arrDep;
 	
 	public static void main( String[] args) {
-		new ReservationOfStayDate(new ReservationMenu(), 1);
+		new ReservationOfStayDate(new ReservationMenu(new Staff()), 1);
 	}
 
 

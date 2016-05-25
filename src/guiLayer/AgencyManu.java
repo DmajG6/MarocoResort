@@ -34,6 +34,8 @@ public class AgencyManu extends JFrame {
 	private JTextField textF_Phone;
 	private JTextField textF_ExtraInfo;
 	private JTextField textF_Discount;
+	
+	private Staff staff;
 
 	/**
 	 * Launch the application.
@@ -42,7 +44,7 @@ public class AgencyManu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgencyManu frame = new AgencyManu();
+					AgencyManu frame = new AgencyManu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +56,8 @@ public class AgencyManu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgencyManu() {
+	public AgencyManu(Staff staff) {
+		this.staff = staff;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 377);
 		contentPane = new JPanel();

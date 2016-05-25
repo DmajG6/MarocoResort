@@ -13,9 +13,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import modelLayer.Staff;
+
 public class MainMenu extends JFrame {
 
 	private JPanel contentPane;
+	
+	private Staff staff;
 
 	/**
 	 * Launch the application.
@@ -24,7 +28,7 @@ public class MainMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainMenu frame = new MainMenu();
+					MainMenu frame = new MainMenu(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +40,8 @@ public class MainMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainMenu() {
+	public MainMenu(Staff staff) {
+		this.staff = staff;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 387);
 		contentPane = new JPanel();
@@ -54,7 +59,7 @@ public class MainMenu extends JFrame {
 		btnReservationMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
-				new ReservationMenu().setVisible(true);
+				new ReservationMenu(staff).setVisible(true);
 			}
 		});
 		contentPane.add(btnReservationMenu);
@@ -66,7 +71,7 @@ public class MainMenu extends JFrame {
 		btnCustomerMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
-				new CustomerMenu().setVisible(true);
+				new CustomerMenu(staff).setVisible(true);
 			}
 		});
 		contentPane.add(btnCustomerMenu);
@@ -76,7 +81,7 @@ public class MainMenu extends JFrame {
 		btnStaffMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
-				new StaffMenu().setVisible(true);
+				new StaffMenu(staff).setVisible(true);
 			}
 		});
 		contentPane.add(btnStaffMenu);
@@ -118,18 +123,18 @@ public class MainMenu extends JFrame {
 		btnAgencyMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				MainMenu.this.dispose();
-				new AgencyManu().setVisible(true);
+				new AgencyManu(staff).setVisible(true);
 			}
 		});
 		contentPane.add(btnAgencyMenu);
 	}
 	
 	private void facilityBookingPressed(){
-		new FacilityMenu();
+		new FacilityMenu(staff);
 		this.dispose();
 	}
 	private void faciltyMenuPressed(){
-		new BookingMenu(1);
+		new BookingMenu(staff, 1);
 		this.dispose();
 	}
 	

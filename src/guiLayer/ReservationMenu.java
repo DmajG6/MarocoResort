@@ -81,6 +81,7 @@ public class ReservationMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public ReservationMenu(Staff staff) {
+		this.loggedInStaff = staff;
 		setTitle("Reservation");
 		loggedInStaff = staff;
 		
@@ -378,7 +379,7 @@ public class ReservationMenu extends JFrame {
 	}
 	
 	private void exitPressed(){
-		new MainMenu();
+		new MainMenu(loggedInStaff);
 		this.dispose();
 	}
 
@@ -392,7 +393,7 @@ public class ReservationMenu extends JFrame {
 		
 		currentDate = df.format(cal.getTime());
 		
-		resCtr.createReservationOfStay(numberOfDays, arrivalDate, departureDate, paymentInfo, paymentConfirmation, currentDate, selectedAgency.getDiscount(), price, customers, loggedInStaff);
+		resCtr.createReservationOfStay(numberOfDays, arrivalDate, departureDate, "//payment info", "not confirmed", currentDate, selectedAgency.getDiscount(), price, loggedInStaff, customers, selectedAgency);
 		
 		
 		
