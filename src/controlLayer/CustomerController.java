@@ -45,7 +45,7 @@ public class CustomerController {
 		customer.setPhoneNumber(phoneNumber);
 		customer.setEmail(email);
 		customer.setIdType(idType);
-		customer.setIdNumber(idNumber);
+		customer.setIdNumber(""+idNumber);
 		customer.setSpecialService(specialService);
 		customer.setRoomID(roomID);
 		customer.setActive(active);

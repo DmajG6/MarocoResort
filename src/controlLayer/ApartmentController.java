@@ -7,8 +7,8 @@ import modelLayer.*;
 
 public class ApartmentController {
 
-	private ReservationOfStayController resCtr = new ReservationOfStayController();
 	private CustomerController cusCtr = new CustomerController();
+	private ReservationOfStayController resCtr;
 	
 	DbApartment dbApartment = new DbApartment();
 	
@@ -58,6 +58,7 @@ public class ApartmentController {
 		apartments = getAllApartments();
 		
 		LinkedList<ReservationOfStay> reservations= new LinkedList<ReservationOfStay>();
+		resCtr = new ReservationOfStayController();
 		reservations = resCtr.getAllReservaions();
 		
 		LinkedList<String> allDays = new LinkedList<String>();

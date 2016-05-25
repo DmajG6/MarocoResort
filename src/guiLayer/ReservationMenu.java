@@ -21,6 +21,9 @@ import controlLayer.*;
 import modelLayer.*;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.awt.Choice;
 import javax.swing.JScrollPane;
@@ -56,6 +59,7 @@ public class ReservationMenu extends JFrame {
 	private LinkedList<Apartment> usedApartments = new LinkedList<Apartment>();
 	private int numberOfDays = 0;
 	private DefaultTableModel model;
+	private ReservationOfStayController resCtr = new ReservationOfStayController();
 
 	/**
 	 * Launch the application.
@@ -223,16 +227,26 @@ public class ReservationMenu extends JFrame {
 		contentPane.add(btnChangeCustomer);
 		
 		JButton btnBook = new JButton("Book");
+		btnBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bookPressed();
+			}
+		});
 		btnBook.setBounds(35, 488, 97, 25);
 		contentPane.add(btnBook);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exitPressed();
+			}
+		});
 		btnExit.setBounds(35, 526, 97, 25);
 		contentPane.add(btnExit);
 		
 		staffText.setText(loggedInStaff.getName());
 		
-		getApartments();
+		getAgencies();
 		
 		model = (DefaultTableModel) table.getModel();
 	}
@@ -249,6 +263,7 @@ public class ReservationMenu extends JFrame {
 		if((arrivalDate != null)&&(departureDate != null)){
 			findAvailableRooms();
 		}
+		getNumberOfDays();
 	}
 	
 	private void getNumberOfDays(){
@@ -285,7 +300,7 @@ public class ReservationMenu extends JFrame {
 		checkBoth();
 	}
 	
-	private void getApartments(){
+	private void getAgencies(){
 		agencies = ageCtr.getAllAgencys();
 		
 		for(Agency age: agencies){
@@ -306,7 +321,7 @@ public class ReservationMenu extends JFrame {
 		customers.add(customer);
 		
 		
-		model.addRow(new String[]{customer.getName(), customer.getCountry(), customer.getPhoneNumber(), customer.getEmail(), ""+customer.getRoomID(), customer.getIdType(), customer.getIdNumber(), customer.getSpecialService()});
+		model.addRow(new String[]{customer.getName(), customer.getCountry(), customer.getAddress(), customer.getPhoneNumber(), customer.getEmail(), ""+customer.getRoomID(), customer.getIdType(), customer.getIdNumber(), customer.getSpecialService()});
 		
 		setPriceAndUsedApartments();
 		
@@ -324,12 +339,18 @@ public class ReservationMenu extends JFrame {
 	
 	private void setPriceAndUsedApartments(){
 		
-		for(Apartment apa: apartments){
-			for(Customer cus: customers){
+		for(Customer cus: customers){
+			for(Apartment apa: apartments){
 				if(apa.getRoomID() == cus.getRoomID()){
 					if(!usedApartments.contains(apa)){
 						usedApartments.add(apa);
 						price += apa.getPrice();
+						apartments.remove(apa);
+						if(apa.getType().equals("single")){
+							freeSingleRooms.setText(""+(Integer.parseInt(freeSingleRooms.getText()) - 1));
+						}else if(apa.getType().equals("family")){
+							checkFamilyApartmentFullness(apa);
+						}
 					}
 				}
 			}
@@ -337,6 +358,43 @@ public class ReservationMenu extends JFrame {
 		
 		price *= numberOfDays;
 		
+		price *= selectedAgency.getDiscount();
+		
 		priceTxt.setText(""+price);
+	}
+	
+	private void checkFamilyApartmentFullness(Apartment apa){
+		
+			int count = 0;
+			
+			for(Customer cus: customers){
+				if(cus.getRoomID() == apa.getRoomID()){
+					count++;
+				}
+			}
+			if(count == 5){
+				apartments.remove(apa);
+			}
+	}
+	
+	private void exitPressed(){
+		new MainMenu();
+		this.dispose();
+	}
+
+	private void bookPressed(){
+		//check values
+		
+		String currentDate = "";
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		Calendar cal = Calendar.getInstance();
+		
+		currentDate = df.format(cal.getTime());
+		
+		resCtr.createReservationOfStay(numberOfDays, arrivalDate, departureDate, paymentInfo, paymentConfirmation, currentDate, selectedAgency.getDiscount(), price, customers, loggedInStaff);
+		
+		
+		
 	}
 }

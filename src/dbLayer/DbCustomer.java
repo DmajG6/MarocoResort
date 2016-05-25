@@ -147,7 +147,7 @@ public class DbCustomer {
 			s.setString(6, customer.getPhoneNumber());
 			s.setString(7, customer.getEmail());
 			s.setString(8, customer.getIdType());
-			s.setInt(9, customer.getIdNumber());
+			s.setInt(9, Integer.parseInt(customer.getIdNumber()));
 			s.setString(10, customer.getSpecialService());
 			s.setInt(11, customer.getRoomID());
 			s.setString(12, customer.getActive());			

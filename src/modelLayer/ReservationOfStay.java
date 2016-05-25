@@ -7,19 +7,19 @@ public class ReservationOfStay {
 	
     private int reservationID;
 	private int durationOfStay;
-	private Date arrivalDate;
-	private Date departureDate;
+	private String arrivalDate;
+	private String departureDate;
 	private String paymentInfo;
 	private String paymentConfirmation;
-	private Date dateOfReservation;
+	private String dateOfReservation;
 	private double discount;
 	private double price;
 	private Staff staff;
 	private Agency agency;
 	private LinkedList<Customer> customers;
 
-	public ReservationOfStay(int reservationID, int durationOfStay, Date arrivalDate,
-			Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount,
+	public ReservationOfStay(int reservationID, int durationOfStay, String arrivalDate,
+			String departureDate, String paymentInfo, String paymentConfirmation, String dateOfReservation, double discount,
 			double price, Staff staff, Agency agency, LinkedList<Customer> customers) {
 		
 		this.reservationID = reservationID;
@@ -36,10 +36,6 @@ public class ReservationOfStay {
 	
 	}
 	
-
-	public ReservationOfStay(int durationOfStay2, Date arrivalDate2, Date departureDate2, String paymentInfo2, String paymentConfirmation2, Date dateOfReservation2, double discount2, double price2, LinkedList<Customer> customers2) {
-		super();
-	}
 
 
 
@@ -68,22 +64,22 @@ public class ReservationOfStay {
 
 
 
-	public Date getArrivalDate() {
+	public String getArrivalDate() {
 		return arrivalDate;
 	}
 
 
-	public void setArrivalDate(Date arrivalDate) {
+	public void setArrivalDate(String arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
 
 
-	public Date getDepartureDate() {
+	public String getDepartureDate() {
 		return departureDate;
 	}
 
 
-	public void setDepartureDate(Date departureDate) {
+	public void setDepartureDate(String departureDate) {
 		this.departureDate = departureDate;
 	}
 
@@ -108,12 +104,12 @@ public class ReservationOfStay {
 	}
 
 
-	public Date getDateOfReservation() {
+	public String getDateOfReservation() {
 		return dateOfReservation;
 	}
 
 
-	public void setDateOfReservation(Date dateOfReservation) {
+	public void setDateOfReservation(String dateOfReservation) {
 		this.dateOfReservation = dateOfReservation;
 	}
 

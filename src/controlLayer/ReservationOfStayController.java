@@ -12,19 +12,15 @@ public class ReservationOfStayController {
 	
 	private DbReservationOfStay dbReservationOfStay = new DbReservationOfStay();
 	
-	private DbCustomer dbCustomer = new DbCustomer();
-	
-	private ApartmentController apCtr = new ApartmentController();
-	
-		
+
 	public ReservationOfStayController() {
 		
 	}
 
-	public void createReservationOfStay( int durationOfStay, Date arrivalDate, Date departureDate, String paymentInfo, String paymentConfirmation, Date dateOfReservation, double discount, double price, LinkedList<Customer> customers){
+	public void createReservationOfStay( int durationOfStay, String arrivalDate, String departureDate, String paymentInfo, String paymentConfirmation, String dateOfReservation, double discount, double price, Staff staff, LinkedList<Customer> customers, Agency agency){
 		//Staff & Agency have to be added also
 		
-		ReservationOfStay reservationOfStay = new ReservationOfStay(durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, customers);
+		ReservationOfStay reservationOfStay = new ReservationOfStay(1 , durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, staff, agency, customers);
 		reservationOfStay.setReservationID(DbReservationOfStay.getNewID());
 		
 		//Transaction
