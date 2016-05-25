@@ -153,6 +153,6 @@ public class FacilityMenu extends JFrame {
 				textF_Type.getText(),
 				Double.parseDouble(textF_Price.getText()),
 				Double.parseDouble(textF_InstructorPrice.getText())
-				);//finish this shit
+				);//finish this shit//
 		}
 }//
