@@ -134,11 +134,11 @@ public class MainMenu extends JFrame {
 	}
 	
 	private void facilityBookingPressed(){
-		new FacilityMenu(staff).setVisible(true);;
+		new BookingMenu(staff, 1).setVisible(true);
 		this.dispose();
 	}
 	private void faciltyMenuPressed(){
-		new BookingMenu(staff, 1);
+		new FacilityMenu(staff).setVisible(true);
 		this.dispose();
 	}
 	
