@@ -153,10 +153,6 @@ public class FacilityMenu extends JFrame {
 		}
 		
 		private void deleteFacility(){
-			fac.deleteFacility(Integer.parseInt(textF_FacilityID.getText()), 
-				textF_Type.getText(),
-				Double.parseDouble(textF_Price.getText()),
-				Double.parseDouble(textF_InstructorPrice.getText())
-				);//finish this shit//b
+			fac.deleteFacility(Integer.parseInt(textF_FacilityID.getText()));//finish this shit//b
 		}
 }//

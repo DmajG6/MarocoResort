@@ -1,5 +1,7 @@
 package modelLayer;
 
+import java.util.LinkedList;
+
 /**
 	May 20, 2016 - 1:49:32 PM
 */
@@ -7,7 +9,7 @@ package modelLayer;
 public class WaitingList {
 
 	private int waitingListID;
-	private int customerID;
+	private LinkedList<Integer> customerIDs;
 	private int facilityID;
 	private String time;
 	
@@ -15,20 +17,20 @@ public class WaitingList {
 		
 	}
 
-	public WaitingList(int waitingListID, int customerID, int facilityID, String time) {
+	public WaitingList(int waitingListID, LinkedList<Integer> customerIDs, int facilityID, String time) {
 		super();
 		this.waitingListID = waitingListID;
-		this.customerID = customerID;
+		this.customerIDs = customerIDs;
 		this.facilityID = facilityID;
 		this.time = time;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public LinkedList<Integer> getCustomerIDs() {
+		return customerIDs;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setCustomerIDs(LinkedList<Integer> customerID) {
+		this.customerIDs = customerID;
 	}
 	
 	public int getWaitingListID() {

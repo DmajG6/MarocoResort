@@ -55,7 +55,7 @@ private Connection con;
 		
 		query = "INSERT INTO waitingList (waitingListID, customerID, facilityID, date) VALUES (" 
 		+ getNewID() + ","
-		+ waitingList.getCustomerID() + ","
+		+ waitingList.getCustomerIDs().getFirst() + ","
 		+ waitingList.getFacilityID()+ ",'"
 		+ waitingList.getTime() + "')";
 		
@@ -102,7 +102,7 @@ private Connection con;
 	
 	private LinkedList<WaitingList> miscWhere(String wClause) {
 		ResultSet results;
-		LinkedList<WaitingList> list = new LinkedList<WaitingList>();
+		LinkedList<WaitingList> lists = new LinkedList<WaitingList>();
 		String query = buildQuery(wClause);
 		try {
 			Statement stmt = con.createStatement();
@@ -112,15 +112,34 @@ private Connection con;
 			while (results.next()) {
 				WaitingList agencyObj = new WaitingList();
 				agencyObj = buildWaitingList(results);
-				list.add(agencyObj);
+				lists.add(agencyObj);
 			}
 			stmt.close();
+			
+			
+			for(int i = 0; i<lists.size(); i++){
+				
+				LinkedList<Integer> customerIDs = new LinkedList<Integer>();
+				LinkedList<Integer> topList = lists.get(i).getCustomerIDs();
+				
+				for(int e = 0; e<lists.size(); e++){
+					LinkedList<Integer> secondList = lists.get(e).getCustomerIDs();
+					
+					for(int data: secondList){
+
+						if(!topList.contains(data)){
+							customerIDs.add(data);
+						}
+					}
+				}
+				lists.get(i).setCustomerIDs(customerIDs);
+			}
 		}
 		catch (Exception e) {
 			System.out.println("Query exception - select: " + e);
 			e.printStackTrace();
 		}
-		return list;
+		return lists;
 	}
 	
 	private WaitingList singleWhere(String wClause) {
@@ -158,11 +177,11 @@ private Connection con;
 			WaitingList waitingListObj = new WaitingList();
 			try {
 				waitingListObj.setWaitingListID(results.getInt("waitingListObjID"));
-				waitingListObj.setCustomerID(results.getInt("customerID"));
+				LinkedList<Integer> link = new LinkedList<Integer>();
+				link.add(results.getInt("customerID"));
+				waitingListObj.setCustomerIDs(link);
 				waitingListObj.setFacilityID(results.getInt("facilityID"));
 				waitingListObj.setTime(results.getString("time"));
-				
-
 			} catch (Exception e) {
 				System.out.println("Error in building the agency object");
 			}

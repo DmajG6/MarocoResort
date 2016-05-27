@@ -46,15 +46,15 @@ public class DbCustomer {
 		
 		
 		query = "INSERT INTO Customer (customerID, password, name, country, address, phoneNo, email, idType, idNumber, specialService, roomID, active) VALUES (" 
-		+ getNewID() + ",'"
+		+ customer.getCustomerID() + ",'"
 		+ customer.getPassword() + "','"
 		+ customer.getName() + "','"
 		+ customer.getCountry() + "','"
 		+ customer.getAddress() + "','"
 		+ customer.getPhoneNumber() + "','"
 		+ customer.getEmail() + "','"
-		+ customer.getIdType() + "',"
-		+ customer.getIdNumber() + ",'"
+		+ customer.getIdType() + "','"
+		+ customer.getIdNumber() + "','"
 		+ customer.getSpecialService() + "',"
 		+ customer.getRoomID() + ",'"
 		+ customer.getActive() + "')";
@@ -226,7 +226,7 @@ public class DbCustomer {
 				customerObj.setName(results.getString("name"));
 				customerObj.setCountry(results.getString("country"));
 				customerObj.setAddress(results.getString("address"));
-				customerObj.setPhoneNumber(results.getString("phoneNumber"));
+				customerObj.setPhoneNumber(results.getString("phoneNo"));
 				customerObj.setEmail(results.getString("email"));
 				customerObj.setIdType(results.getString("idType"));
 				customerObj.setIdNumber(results.getString("idNumber"));
@@ -236,7 +236,7 @@ public class DbCustomer {
 				
 
 			} catch (Exception e) {
-				System.out.println("Error in building the customer object");
+				System.out.println("Error in building the customer object: "+e.getMessage());
 			}
 			return customerObj;
 		}

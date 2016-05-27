@@ -97,10 +97,8 @@ public class MainMenu extends JFrame {
 		JButton FacilityMenu = new JButton("Facility Menu");
 		FacilityMenu.setBounds(10, 215, 125, 23);
 		FacilityMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MainMenu.this.dispose();
+			public void actionPerformed(ActionEvent arg0) {
 				faciltyMenuPressed();
-				
 			}
 		});
 		contentPane.add(FacilityMenu);
@@ -136,11 +134,11 @@ public class MainMenu extends JFrame {
 	}
 	
 	private void facilityBookingPressed(){
-		new FacilityMenu(staff).setVisible(true);;
+		new BookingMenu(staff, 1).setVisible(true);
 		this.dispose();
 	}
 	private void faciltyMenuPressed(){
-		new BookingMenu(staff, 1).setVisible(true);;
+		new FacilityMenu(staff).setVisible(true);
 		this.dispose();
 	}
 	
