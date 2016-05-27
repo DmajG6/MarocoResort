@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class WaitingList {
 
 	private int waitingListID;
-	private LinkedList<Integer> customerID;
+	private LinkedList<Integer> customerIDs;
 	private int facilityID;
 	private String time;
 	
@@ -17,20 +17,20 @@ public class WaitingList {
 		
 	}
 
-	public WaitingList(int waitingListID, LinkedList<Integer> customerID, int facilityID, String time) {
+	public WaitingList(int waitingListID, LinkedList<Integer> customerIDs, int facilityID, String time) {
 		super();
 		this.waitingListID = waitingListID;
-		this.customerID = customerID;
+		this.customerIDs = customerIDs;
 		this.facilityID = facilityID;
 		this.time = time;
 	}
 
-	public LinkedList<Integer> getCustomerID() {
-		return customerID;
+	public LinkedList<Integer> getCustomerIDs() {
+		return customerIDs;
 	}
 
-	public void setCustomerID(LinkedList<Integer> customerID) {
-		this.customerID = customerID;
+	public void setCustomerIDs(LinkedList<Integer> customerID) {
+		this.customerIDs = customerID;
 	}
 	
 	public int getWaitingListID() {
