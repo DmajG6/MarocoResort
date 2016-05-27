@@ -41,7 +41,10 @@ public class MainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public MainMenu(Staff staff) {
+		this.setVisible(true);
+		
 		this.staff = staff;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 387);
 		contentPane = new JPanel();
@@ -127,6 +130,7 @@ public class MainMenu extends JFrame {
 			}
 		});
 		contentPane.add(btnAgencyMenu);
+		
 	}
 	
 	private void facilityBookingPressed(){

@@ -145,7 +145,7 @@ public class ReservationCustomer extends JFrame {
 				apartmentChosen();
 			}
 		});
-		choice.setBounds(244, 182, 278, 22);
+		choice.setBounds(222, 182, 311, 22);
 		contentPane.add(choice);
 		
 		JLabel lblSpecialNeeds = new JLabel("Special Needs:");
@@ -220,14 +220,14 @@ public class ReservationCustomer extends JFrame {
 		customer.setSpecialService(txtSpecialNeeds.getText());
 		
 		menu.setEnabled(true);
-		menu.addCustomer(customer);
-		
 		this.dispose();
+		menu.addCustomer(customer);
 	}
 	
 	private void exitCalled(){
 		menu.setEnabled(true);
 		
 		this.dispose();
+		
 	}
 }

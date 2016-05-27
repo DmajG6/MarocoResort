@@ -10,6 +10,13 @@ public class Staff {
 	private String workPhoneNumber;
 	private String personalPhoneNumber;
 	
+	@Override
+	public String toString() {
+		return "Staff [name=" + name + ", staffID=" + staffID + ", staffType=" + staffType + ", password=" + password
+				+ ", email=" + email + ", workPhoneNumber=" + workPhoneNumber + ", personalPhoneNumber="
+				+ personalPhoneNumber + "]";
+	}
+
 	public Staff (String name, int staffID, String staffType, String password, String email, String workPhoneNumber, String personalPhoneNumber){
 		
 		this.name = name;

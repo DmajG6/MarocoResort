@@ -78,7 +78,7 @@ public class DbStaff {
 	}
 	
 	public Staff findStaffByID(int staffID) {
-		String wClause = "  staffID = '" + staffID + "'";
+		String wClause = " staffID = " + staffID;
 		return singleWhere(wClause);
 	}
 	

@@ -21,6 +21,10 @@ public class ReservationOfStayController {
 		//Staff & Agency have to be added also
 		
 		ReservationOfStay reservationOfStay = new ReservationOfStay(1 , durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, staff, agency, customers);
+		
+		/*
+		 * has to be done differently
+		 */
 		reservationOfStay.setReservationID(DbReservationOfStay.getNewID());
 		
 		//Transaction

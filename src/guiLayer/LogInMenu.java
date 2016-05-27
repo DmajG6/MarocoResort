@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import controlLayer.CustomerController;
 import controlLayer.LogInControl;
 import controlLayer.StaffController;
+import modelLayer.Staff;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -100,11 +101,14 @@ public class LogInMenu extends JFrame {
 		
 		switch(control.checkLogIn(idCode, password)){
 			case 1:
-				new MainMenu(new StaffController().findStaffByID(Integer.parseInt(idCode)));
+				StaffController staffCtr = new StaffController();
+				Staff staff = staffCtr.findStaffByID(Integer.parseInt(idCode));
+				new MainMenu(staff);
 				dispose();
 				return;
 			case 2:
-				new BookingMenu(new CustomerController().findCustomerByID(Integer.parseInt(idCode)), 2);
+				CustomerController cusCtr = new CustomerController();
+				new BookingMenu(cusCtr.findCustomerByID(Integer.parseInt(idCode)), 2);
 				dispose();
 				return;
 			case -1:

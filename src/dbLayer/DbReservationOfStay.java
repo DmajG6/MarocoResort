@@ -103,9 +103,8 @@ public class DbReservationOfStay {
 	public int insertReservationOfStay(ReservationOfStay reservationOfStay){
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO ReservationOfStay (reservationID, customer, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, agency) VALUES (" 
-		+ reservationOfStay.getReservationID() + ",'"
-		+ reservationOfStay.getCustomer().getCustomerID() + "',"
+		query = "INSERT INTO ReservationOfStay (reservationID, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, agencyID) VALUES (" 
+		+ reservationOfStay.getReservationID() + ","
 		+ reservationOfStay.getDurationOfStay() + ","
 		+ reservationOfStay.getArrivalDate() + ","
 		+ reservationOfStay.getDepartureDate() + ",'"
@@ -123,7 +122,7 @@ public class DbReservationOfStay {
 			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.close();
 		} catch (SQLException ex) {
-			System.out.println("ReservationOfStay not inserted");
+			System.out.println("ReservationOfStay not inserted: "+ex.getMessage());
 		}
 		return rc;
 		
@@ -132,8 +131,8 @@ public class DbReservationOfStay {
 	public static int getNewID(){
 		int rc = -1;
 		String query = "";
-		query = "SELECT MAX(reservationID) "
-				+ "FROM ReservaionOfStay";
+		query = "SELECT MAX(reservationID) as reservationID "
+				+ "FROM ReservationOfStay";
 		System.out.println("insert : " + query);
 		try {
 			ResultSet results;

@@ -181,6 +181,7 @@ public class ReservationMenu extends JFrame {
 		contentPane.add(lblAgency);
 		
 		choiceAgency = new Choice();
+		getAgencies();
 		choiceAgency.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				agencySelected();
@@ -188,6 +189,8 @@ public class ReservationMenu extends JFrame {
 		});
 		choiceAgency.setBounds(27, 170, 119, 23);
 		contentPane.add(choiceAgency);
+		
+		agencySelected();
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(190, 121, 784, 462);
@@ -202,7 +205,7 @@ public class ReservationMenu extends JFrame {
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, Boolean.class
+				String.class, String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -247,7 +250,6 @@ public class ReservationMenu extends JFrame {
 		
 		staffText.setText(loggedInStaff.getName());
 		
-		getAgencies();
 		
 		model = (DefaultTableModel) table.getModel();
 	}
@@ -264,15 +266,16 @@ public class ReservationMenu extends JFrame {
 		if((arrivalDate != null)&&(departureDate != null)){
 			findAvailableRooms();
 		}
-		getNumberOfDays();
 	}
 	
 	private void getNumberOfDays(){
 		LinkedList<String> allDays = apCtr.getAllDays(arrivalDate, departureDate);
 		numberOfDays = allDays.size();
+		numberOfDaysTXT.setText(""+numberOfDays);
 	}
 	
 	private void findAvailableRooms(){
+		getNumberOfDays();
 		apartments = apCtr.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
 		
 		int freeSingle = 0;
@@ -313,6 +316,7 @@ public class ReservationMenu extends JFrame {
 	private void agencySelected(){
 		for(Agency age: agencies){
 			if((age.getName()+" : "+age.getCountry()).equals(choiceAgency.getSelectedItem())){
+				System.out.println(age.getName()+" : "+age.getCountry()+" // "+choiceAgency.getSelectedItem());
 				selectedAgency = age;
 			}
 		}
@@ -320,7 +324,6 @@ public class ReservationMenu extends JFrame {
 	
 	public void addCustomer(Customer customer){
 		customers.add(customer);
-		
 		
 		model.addRow(new String[]{customer.getName(), customer.getCountry(), customer.getAddress(), customer.getPhoneNumber(), customer.getEmail(), ""+customer.getRoomID(), customer.getIdType(), customer.getIdNumber(), customer.getSpecialService()});
 		
@@ -340,8 +343,10 @@ public class ReservationMenu extends JFrame {
 	
 	private void setPriceAndUsedApartments(){
 		
-		for(Customer cus: customers){
-			for(Apartment apa: apartments){
+		for(int i = 0; i<customers.size(); i++){
+			Customer cus = customers.get(i);
+			for(int e = 0; e< apartments.size(); e++){
+				Apartment apa= apartments.get(e);
 				if(apa.getRoomID() == cus.getRoomID()){
 					if(!usedApartments.contains(apa)){
 						usedApartments.add(apa);

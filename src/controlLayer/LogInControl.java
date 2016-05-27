@@ -20,10 +20,10 @@ public class LogInControl {
 	public byte checkLogIn(String iD, String password){
 		byte user = -1;
 		
-		if(custcontr.customerLogIn(iD, password)){
-			user = 2;
-		}else if(staffctr.logInStaff(iD, password)){
+		if(staffctr.logInStaff(iD, password)){
 			user = 1;
+		}else if(custcontr.customerLogIn(iD, password)){
+			user = 2;
 		}
 		return user;
 	}

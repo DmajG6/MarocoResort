@@ -23,7 +23,7 @@ DbStaff dbStaff = new DbStaff();
 	
 	public Staff findStaffByID(int staffID){
 		try {
-			return dbStaff.findStaffByStaffID(staffID);
+			return dbStaff.findStaffByID(staffID);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
