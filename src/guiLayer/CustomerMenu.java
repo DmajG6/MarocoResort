@@ -249,7 +249,7 @@ public class CustomerMenu extends JFrame {
 	
 	private void createCustomer(){
 		
-		cstctr.createCustomer(Integer.parseInt(txtf_ID.getText()), txtf_password.getText(), txtf_name.getText(), txtf_country.getText(), txtf_address.getText(), txtf_phoneNumber.getText(), txtf_email.getText(), txtf_idType.getText(),Integer.parseInt(txtf_idNumber.getText()),txtf_specialService.getText(), Integer.parseInt(txtf_roomID.getText()),txtf_active.getText());
+		cstctr.createCustomer(Integer.parseInt(txtf_ID.getText()), txtf_password.getText(), txtf_name.getText(), txtf_country.getText(), txtf_address.getText(), txtf_phoneNumber.getText(), txtf_email.getText(), txtf_idType.getText(), txtf_idNumber.getText(),txtf_specialService.getText(), Integer.parseInt(txtf_roomID.getText()),txtf_active.getText());
 		
 	}
 }

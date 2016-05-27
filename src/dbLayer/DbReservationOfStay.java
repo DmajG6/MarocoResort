@@ -20,7 +20,7 @@ public class DbReservationOfStay {
 		LinkedList<ReservationOfStay> reservations = new LinkedList<>();
 		
 		String query = "";
-		query = "SELECT *" + " FROM ReservationOfStay";
+		query = "SELECT *" + " FROM ReservationOfStay r, ReservationConnectionTable c WHERE r.reservationID = c.reservationID";
 		System.out.println("insert : " + query);
 		
 		try {
@@ -34,7 +34,6 @@ public class DbReservationOfStay {
 				ReservationOfStay newReservationOfStay = new ReservationOfStay(results.getInt("reservationID"));
 				
 				newReservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
-				newReservationOfStay.setCustomer(new Customer(results.getInt("customer")));
 				newReservationOfStay.setArrivalDate(results.getString("arrivalDate"));
 				newReservationOfStay.setDepartureDate(results.getString("departureDate"));
 				newReservationOfStay.setPaymentInfo(results.getString("paymentInfo"));
@@ -44,11 +43,22 @@ public class DbReservationOfStay {
 				newReservationOfStay.setPrice(results.getDouble("price"));
 				newReservationOfStay.setStaff(new Staff(results.getInt("staffID")));
 				newReservationOfStay.setAgency(new Agency(results.getInt("agencyID")));
-				
+				LinkedList<Customer> customers = new LinkedList<Customer>();
+				customers.add(new Customer(results.getInt("customerID")));
+				newReservationOfStay.setCustomers(customers);
 				reservations.add(newReservationOfStay);
 			}
 				stmt.close();
-			
+				
+				for(ReservationOfStay res: reservations){
+					for(ReservationOfStay res2: reservations){
+						if(res.getReservationID() == res2.getReservationID()){
+							res.getCustomers().add(res2.getCustomers().getFirst());
+							reservations.remove(res2);
+						}
+					}
+				}
+				
 		} catch (SQLException ex) {
 			System.out.println("Building ReservationOfStay Object Failed: "+ex.getMessage());
 		}
@@ -77,7 +87,6 @@ public class DbReservationOfStay {
 
 			if (results.next()) {
 				reservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
-				reservationOfStay.setCustomer(new Customer(results.getInt("customerID")));
 				reservationOfStay.setArrivalDate(results.getString("arrivalDate"));
 				reservationOfStay.setDepartureDate(results.getString("departureDate"));
 				reservationOfStay.setPaymentInfo(results.getString("paymentInfo"));
@@ -103,17 +112,18 @@ public class DbReservationOfStay {
 	public int insertReservationOfStay(ReservationOfStay reservationOfStay){
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO ReservationOfStay (reservationID, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, agencyID) VALUES (" 
+		query = "INSERT INTO ReservationOfStay (reservationID, durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, agencyID, staffID) VALUES (" 
 		+ reservationOfStay.getReservationID() + ","
-		+ reservationOfStay.getDurationOfStay() + ","
-		+ reservationOfStay.getArrivalDate() + ","
-		+ reservationOfStay.getDepartureDate() + ",'"
+		+ reservationOfStay.getDurationOfStay() + ",'"
+		+ reservationOfStay.getArrivalDate() + "','"
+		+ reservationOfStay.getDepartureDate() + "','"
 		+ reservationOfStay.getPaymentInfo() + "','"
-		+ reservationOfStay.getPaymentConfirmation()+ "',"
-		+ reservationOfStay.getDateOfReservation()+ ","
+		+ reservationOfStay.getPaymentConfirmation()+ "','"
+		+ reservationOfStay.getDateOfReservation()+ "',"
 		+ reservationOfStay.getDiscount()+ ","
 		+ reservationOfStay.getPrice()+ ","
-		+ reservationOfStay.getAgency().getAgencyID()+ ")";
+		+ reservationOfStay.getAgency().getAgencyID()+ ","
+		+ reservationOfStay.getStaff().getStaffID()+")";
 		
 		System.out.println("insert : " + query);
 		try {
@@ -155,7 +165,7 @@ public class DbReservationOfStay {
 		
 	}
 	
-	public void updateReservationConnection(int resID, LinkedList<Integer> customerIDs){
+	public void updateReservationConnection(int resID, int[] customerIDs){
 		for(int cusID: customerIDs){
 			
 			int rc = -1;
@@ -168,13 +178,13 @@ public class DbReservationOfStay {
 			try {
 				Statement stmt = con.createStatement();
 				stmt.setQueryTimeout(5);
-				rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+				rc = stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException ex) {
-				System.out.println("ReservationConnection not inserted");
+				System.out.println("ReservationConnection not inserted: "+ex.getMessage());
+
 			}								
 		}
 	}
 		
 }
-//

@@ -35,9 +35,9 @@ public class CustomerController {
 	}
 
 	
-	public Customer createCustomer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, int idNumber, String specialService, int roomID, String active){
+	public Customer createCustomer(int customerID, String password, String name, String country, String address, String phoneNumber, String email, String idType, String idNumber, String specialService, int roomID, String active){
 		Customer customer = new Customer();
-		customer.setCustomerID(0);
+		customer.setCustomerID(dbCustomer.getNewID());
 		customer.setPassword(password);
 		customer.setName(name);
 		customer.setCountry(country);
@@ -45,7 +45,7 @@ public class CustomerController {
 		customer.setPhoneNumber(phoneNumber);
 		customer.setEmail(email);
 		customer.setIdType(idType);
-		customer.setIdNumber(""+idNumber);
+		customer.setIdNumber(idNumber);
 		customer.setSpecialService(specialService);
 		customer.setRoomID(roomID);
 		customer.setActive(active);

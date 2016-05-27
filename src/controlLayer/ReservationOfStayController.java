@@ -2,7 +2,8 @@ package controlLayer;
 
 import modelLayer.*;
 import dbLayer.*;
-import java.sql.Date;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -12,6 +13,7 @@ public class ReservationOfStayController {
 	
 	private DbReservationOfStay dbReservationOfStay = new DbReservationOfStay();
 	
+	private CustomerController cusCtr;
 
 	public ReservationOfStayController() {
 		
@@ -22,14 +24,35 @@ public class ReservationOfStayController {
 		
 		ReservationOfStay reservationOfStay = new ReservationOfStay(1 , durationOfStay, arrivalDate, departureDate, paymentInfo, paymentConfirmation, dateOfReservation, discount, price, staff, agency, customers);
 		
-		/*
-		 * has to be done differently
-		 */
-		reservationOfStay.setReservationID(DbReservationOfStay.getNewID());
+		reservationOfStay.setReservationID(DbReservationOfStay.getNewID()+1);
 		
 		//Transaction
+		try{
+			DbConnection.startTransaction();
+			
+			dbReservationOfStay.insertReservationOfStay(reservationOfStay);
 		
-		dbReservationOfStay.insertReservationOfStay(reservationOfStay);
+			cusCtr = new CustomerController();
+		
+			int[] customerIDs = new int[(reservationOfStay.getCustomers().size())];
+			
+			for(int i = 0; i<reservationOfStay.getCustomers().size(); i++){
+				Customer cus= reservationOfStay.getCustomers().get(i);
+				customerIDs[i] = cusCtr.createCustomer(cus.getCustomerID(), cus.getPassword(), cus.getName(), cus.getCountry(), cus.getAddress(), cus.getPhoneNumber(), cus.getEmail(), cus.getIdType(), cus.getIdNumber(), cus.getSpecialService(), cus.getRoomID(), "no").getCustomerID();
+			}
+		
+			dbReservationOfStay.updateReservationConnection(reservationOfStay.getReservationID(), customerIDs);
+		
+			DbConnection.commitTransaction();
+			
+		}catch(Exception ex){
+			System.out.println("Transaction: "+ex.getMessage());
+
+			DbConnection.rollbackTransaction();
+		}
+		
+		//reservation connection table
+		
 	}
 	
 	//Get All Reservations

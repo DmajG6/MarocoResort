@@ -78,7 +78,6 @@ public class ApartmentController {
 		
 		LinkedList<Customer> customers = new LinkedList<Customer>();
 		customers = cusCtr.getAllCustomers();
-		
 		for(ReservationOfStay res: reservations){
 			for(Customer cusInRes: res.getCustomers()){
 				for(Customer cus: customers){
@@ -88,6 +87,7 @@ public class ApartmentController {
 				}
 			}
 		}
+		
 		for(Apartment apa: apartments){
 			for(Customer cus: customers){
 				if(apa.getRoomID() == cus.getRoomID()){

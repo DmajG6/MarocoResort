@@ -1,6 +1,5 @@
 package modelLayer;
 
-import java.sql.Date;
 import java.util.LinkedList;
 
 public class ReservationOfStay {
@@ -33,6 +32,7 @@ public class ReservationOfStay {
 		this.price = price;
 		this.staff = staff;
 		this.agency = agency;
+		this.customers = customers;
 	
 	}
 	
