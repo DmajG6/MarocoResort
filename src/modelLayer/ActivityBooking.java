@@ -10,7 +10,7 @@ public class ActivityBooking {
 	private String staff;
 	private Date startTime;
 	private double activityLength;
-	
+	private String customer;
 	
 	public ActivityBooking(int activityID, Facility facilities, String staff, Date startTime, double activityLength) {
 		super();
@@ -69,6 +69,16 @@ public class ActivityBooking {
 
 	public void setActivityLength(double activityLength) {
 		this.activityLength = activityLength;
+	}
+
+
+	public String getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 	
 	
