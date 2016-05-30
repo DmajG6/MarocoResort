@@ -12,13 +12,14 @@ public class ActivityBooking {
 	private double activityLength;
 	private String customer;
 	
-	public ActivityBooking(int activityID, Facility facilities, String staff, Date startTime, double activityLength) {
+	public ActivityBooking(int activityID, Facility facilities, String staff, Date startTime, double activityLength, String customer) {
 		super();
 		this.activityID = activityID;
 		this.facilities = facilities;
 		this.staff = staff;
 		this.startTime = startTime;
 		this.activityLength = activityLength;
+		this customer = customer;
 	}
 
 
