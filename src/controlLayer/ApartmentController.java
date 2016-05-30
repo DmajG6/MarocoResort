@@ -88,16 +88,19 @@ public class ApartmentController {
 			}
 		}
 		
+		LinkedList<Integer> takenApartments = new LinkedList<Integer>();
+		LinkedList<Integer> freeApartments = new LinkedList<Integer>();
+		
+		for(Customer cus: customers){
+			takenApartments.add(cus.getRoomID());
+		}
+		
 		for(Apartment apa: apartments){
-			for(Customer cus: customers){
-				if(apa.getRoomID() != cus.getRoomID()){
-					allFreeApartments.add(apa);
-				}
-			}
-			if(customers.size()==0){
+			if(!takenApartments.contains(apa.getRoomID())){
 				allFreeApartments.add(apa);
 			}
 		}
+	
 		System.out.println("apartments: "+allFreeApartments.size());
 		
 		return allFreeApartments;
@@ -111,13 +114,13 @@ public class ApartmentController {
 		int[] depDate = new int[3];
 		int[] dateInQuestion = new int[3];
 		
-		arrDate[0] = Integer.parseInt(arrivalDate.substring(0, 1));
-		arrDate[1] = Integer.parseInt(arrivalDate.substring(3, 4));
-		arrDate[2] = Integer.parseInt(arrivalDate.substring(6, 9));
+		arrDate[0] = Integer.parseInt(arrivalDate.substring(0, 2));
+		arrDate[1] = Integer.parseInt(arrivalDate.substring(3, 5));
+		arrDate[2] = Integer.parseInt(arrivalDate.substring(6, 10));
 		
-		depDate[0] = Integer.parseInt(departureDate.substring(0, 1));
-		depDate[1] = Integer.parseInt(departureDate.substring(3, 4));
-		depDate[2] = Integer.parseInt(departureDate.substring(6, 9));
+		depDate[0] = Integer.parseInt(departureDate.substring(0, 2));
+		depDate[1] = Integer.parseInt(departureDate.substring(3, 5));
+		depDate[2] = Integer.parseInt(departureDate.substring(6, 10));
 		
 		dateInQuestion[0] = arrDate[0];
 		dateInQuestion[1] = arrDate[1];
@@ -125,10 +128,23 @@ public class ApartmentController {
 		
 		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		
-		while((depDate[0]!=dateInQuestion[0])&&(depDate[1]!=dateInQuestion[1])&&(depDate[2]!=dateInQuestion[2])){
+		while(!((depDate[0]==dateInQuestion[0])&&(depDate[1]==dateInQuestion[1])&&(depDate[2]==dateInQuestion[2]))){
 			
-			allDays.add(dateInQuestion[0]+"-"+dateInQuestion[1]+"-"+dateInQuestion[2]);
+			String dateFormat = "";
 			
+			for(int i = 0; i<3; i++){
+				if( i > 0 && i < 3 ){
+					dateFormat = dateFormat + "-";
+				}
+				if(dateInQuestion[i]<10){
+					dateFormat = dateFormat + "0" + dateInQuestion[i];
+				}else{
+					dateFormat = dateFormat + "" + dateInQuestion[i];
+				}
+			}
+			
+			System.out.println(dateFormat);
+			allDays.add(dateFormat);
 			
 			if((depDate[2]!=dateInQuestion[2])&&(dateInQuestion[0]>=31)&&(dateInQuestion[1]>=12)){	//New Year
 				dateInQuestion[2]++;
@@ -136,7 +152,7 @@ public class ApartmentController {
 				dateInQuestion[0] = 1;
 			}else if(((dateInQuestion[2]%4)==0)&&(dateInQuestion[1] == 2)&&(dateInQuestion[0]==28)){	//Leap Year
 				dateInQuestion[0] = 29;
-			}else if(months[dateInQuestion[1]-1] >= dateInQuestion[0]){		//New Month
+			}else if(months[dateInQuestion[1]-1] <= dateInQuestion[0]){		//New Month
 				dateInQuestion[1]++;
 				dateInQuestion[0] = 1;
 			}else{

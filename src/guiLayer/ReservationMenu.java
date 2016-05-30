@@ -223,10 +223,20 @@ public class ReservationMenu extends JFrame {
 		contentPane.add(btnAddCustomer);
 		
 		JButton btnRemoveCustomer = new JButton("Remove Customer");
+		btnRemoveCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeCustomerPressed();
+			}
+		});
 		btnRemoveCustomer.setBounds(345, 96, 150, 25);
 		contentPane.add(btnRemoveCustomer);
 		
 		JButton btnChangeCustomer = new JButton("Change Customer");
+		btnChangeCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				updateCustomer();
+			}
+		});
 		btnChangeCustomer.setBounds(500, 96, 150, 25);
 		contentPane.add(btnChangeCustomer);
 		
@@ -334,6 +344,17 @@ public class ReservationMenu extends JFrame {
 	
 	private void updateCustomer(){
 		
+		for(int i = 0; i<model.getRowCount(); i++){
+			customers.get(i).setName(model.getValueAt(i, 0).toString());
+			customers.get(i).setCountry(model.getValueAt(i, 1).toString());
+			customers.get(i).setAddress(model.getValueAt(i, 2).toString());
+			customers.get(i).setPhoneNumber(model.getValueAt(i, 3).toString());
+			customers.get(i).setEmail(model.getValueAt(i, 4).toString());
+			customers.get(i).setIdType(model.getValueAt(i, 6).toString());
+			customers.get(i).setIdNumber(model.getValueAt(i, 7).toString());
+			customers.get(i).setSpecialService(model.getValueAt(i, 8).toString());
+		}
+		
 	}
 	
 	private void addButtonPressed(){
@@ -364,7 +385,7 @@ public class ReservationMenu extends JFrame {
 		
 		price *= numberOfDays;
 		
-		price *= selectedAgency.getDiscount();
+		price *= (1-selectedAgency.getDiscount());
 		
 		priceTxt.setText(""+price);
 	}
@@ -378,7 +399,7 @@ public class ReservationMenu extends JFrame {
 					count++;
 				}
 			}
-			if(count == 5){
+			if(count >= 5){
 				apartments.remove(apa);
 			}
 	}
@@ -387,20 +408,62 @@ public class ReservationMenu extends JFrame {
 		new MainMenu(loggedInStaff);
 		this.dispose();
 	}
-
+	
 	private void bookPressed(){
-		//check values
 		
-		String currentDate = "";
+		if(!checkRoomBookingPressed()){
+			refreshApartments();
+		}else{
+			String currentDate = "";
 		
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-		Calendar cal = Calendar.getInstance();
+			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Calendar cal = Calendar.getInstance();
 		
-		currentDate = df.format(cal.getTime());
+			currentDate = df.format(cal.getTime());
 		
-		resCtr.createReservationOfStay(numberOfDays, arrivalDate, departureDate, "//payment info", "not confirmed", currentDate, selectedAgency.getDiscount(), price, loggedInStaff, customers, selectedAgency);
+			resCtr.createReservationOfStay(numberOfDays, arrivalDate, departureDate, "//payment info", "not confirmed", currentDate, selectedAgency.getDiscount(), price, loggedInStaff, customers, selectedAgency);
+		}
+	}
+	
+	private boolean checkRoomBookingPressed(){
+		LinkedList<Apartment> newApartments = new LinkedList<Apartment>();
+		newApartments = apCtr.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
 		
+		boolean control = true;
 		
+		for(Apartment apa: usedApartments){
+			if(!newApartments.contains(apa)){
+				control = false;
+			}
+		}
+		return control;
 		
 	}
+	
+	private void removeCustomerPressed(){
+		customers.remove(table.getSelectedRow());
+		model.removeRow(table.getSelectedRow());
+		setPriceAndUsedApartments();
+	}
+
+	private void refreshApartments(){
+		LinkedList<Apartment> newApartments = new LinkedList<Apartment>();
+		newApartments = apCtr.getAllFreeApartmentsForPeriod(arrivalDate, departureDate);
+		
+		LinkedList<Integer> badApartments = new LinkedList<Integer>();
+		
+		for(Apartment apa: usedApartments){
+			if(!newApartments.contains(apa)){
+				badApartments.add(apa.getRoomID());
+			}
+		}
+		
+		for(int i = 0; i<model.getRowCount(); i++){
+			if(badApartments.contains(model.getValueAt(i, 5))){
+				model.removeRow(i);
+			}
+		}
+	}
 }
+
+

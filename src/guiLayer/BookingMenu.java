@@ -57,6 +57,7 @@ public class BookingMenu extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @wbp.parser.constructor
 	 */
 	public BookingMenu(Staff staff, int type) {
 		this.staff = staff;
