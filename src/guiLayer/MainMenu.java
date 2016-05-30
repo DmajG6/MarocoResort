@@ -134,7 +134,7 @@ public class MainMenu extends JFrame {
 	}
 	
 	private void facilityBookingPressed(){
-		new BookingMenu(staff, 1).setVisible(true);
+		new GetCustomerAtReception(staff).setVisible(true);
 		this.dispose();
 	}
 	private void faciltyMenuPressed(){
