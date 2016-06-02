@@ -18,33 +18,18 @@ public class ActivityBookingController {
 		
 	}
 
-	public void createActivityBooking(Facility facility, Staff staff, Date startTime, double activityLength, String customers){
+	public void createActivityBooking(ActivityBooking activityBooking){
 		
-		ActivityBooking activityBooking = new ActivityBooking(facility, staff, startTime, activityLength, customers);
 		
-<<<<<<< HEAD
+
 		activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
-=======
-		activityBooking.setActivityID(DbActivityBooking.getNewID()+1);
->>>>>>> branch 'master' of https://github.com/DmajG6/MarocoResort.git
-		
+
 		//Transaction
 		try{
 			DbConnection.startTransaction();
 			
 			dbActivityBooking.insertActivity(activityBooking);
-		
-			cusCtr = new CustomerController();
-		
-			int[] customerIDs = new int[(activityBooking.getFacilities().size())];
-			// This needs to call for an activity instead of creating it v
-			for(int i = 0; i<activityBooking.getFacilities().size(); i++){
-				Customer cus= activityBooking.getFacilities().get(i);
-				customerIDs[i] = cusCtr.createCustomer(cus.getCustomerID(), cus.getPassword(), cus.getName(), cus.getCountry(), cus.getAddress(), cus.getPhoneNumber(), cus.getEmail(), cus.getIdType(), cus.getIdNumber(), cus.getSpecialService(), cus.getRoomID(), "no").getCustomerID();
-			}
-		
-			dbActivityBooking.updateActivity(activityBooking.getActivityID(), customerIDs);
-		
+			
 			DbConnection.commitTransaction();
 			
 		}catch(Exception ex){
@@ -68,9 +53,13 @@ public class ActivityBookingController {
 			return activity;
 	}
 
-public ActivityBooking getCustomersInBooking(int facilityID, String startTime) {
-	return null; //new method incoming here
-}
+	public LinkedList<Customer> getCustomersInBooking(int facilityID, String startTime) {
+		
+		return null; //new method incoming here
+		
+		
+		
+	}
 		// TODO Auto-generated method stub
 		
 	}

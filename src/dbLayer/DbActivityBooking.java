@@ -41,16 +41,16 @@ public int getNewID(){
 
 
    public int insertActivity(ActivityBooking activityBooking){
-int rc = -1;
-String query= "";
-query = "INSERT INTO ActivityBooking(activityID, facilities, staff, startTime, activityLength, customer) VALUES ("
+	   	int rc = -1;
+	   	String query= "";
+	   	query = "INSERT INTO ActivityBooking(activityID, facilities, staff, startTime, activityLength, customer) VALUES ("
 		+ getNewID() + ",'"
 		+ activityBooking.getActivityID() + "','"
-		+ activityBooking.getFacilities() + "',"
-		+ activityBooking.getStaff() + ","
+		+ activityBooking.getFacility().getFacilityID() + "',"
+		+ activityBooking.getStaff().getStaffID() + ","
 		+ activityBooking.getStartTime() + ",'"
 		+ activityBooking.getActivityLength() + "','"
-		+ activityBooking.getCustomer() + "','";
+		+ activityBooking.getCustomer().getCustomerID() + "','";
 
 
 		System.out.println("insert : " + query);
@@ -84,7 +84,7 @@ public int updateActivity(int activityID , ActivityBooking activityBooking) {
 			s.setInt(1, activityBooking.getActivityID());
 			s.setInt(2, activityBooking.getFacility().getFacilityID());
 			s.setInt(3, activityBooking.getStaff().getStaffID());
-			s.setDate(4, activityBooking.getStartTime());
+			s.setString(4, activityBooking.getStartTime());
 			s.setDouble(5, activityBooking.getActivityLength());
 			s.setInt(6, activityBooking.getCustomer().getCustomerID());
 				
@@ -158,10 +158,10 @@ private ActivityBooking buildActivity(ResultSet results) {
 			try {
 				activityBookingObj.setActivityID(results.getInt("activityID"));
 				activityBookingObj.setFacility(new Facility(results.getInt("facilityID")));
-				activityBookingObj.setStaff(results.getString("staff"));
-				activityBookingObj.setStartTime(results.getDate("startTime"));
+				activityBookingObj.setStaff(new Staff(results.getInt("staffID")));
+				activityBookingObj.setStartTime(results.getString("startTime"));
 				activityBookingObj.setActivityLength(results.getDouble("activityLength"));
-				activityBookingObj.setCustomer(results.getString("customer"));
+				activityBookingObj.setCustomer(new Customer(results.getInt("customerID")));
 				
 
 			} catch (Exception e) {
@@ -192,10 +192,10 @@ private ActivityBooking buildActivity(ResultSet results) {
 					ActivityBooking activityBooking = new ActivityBooking();
 					activityBooking.setActivityID(results.getInt("activityID"));
 					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
-					activityBooking.setStaff(results.getString("staff"));
-					activityBooking.setStartTime(results.getDate("startTime"));
+					activityBooking.setStaff(new Staff(results.getInt("staff")));
+					activityBooking.setStartTime(results.getString("startTime"));
 					activityBooking.setActivityLength(results.getDouble("activityLength"));
-					activityBooking.setCustomer(results.getString("customer"));
+					activityBooking.setCustomer(new Customer(results.getInt("customer")));
 					//activityBooking.setCustomer(DbCustomer.findCustomerByCustomerID (results.getInt("customer")));
 					
 					activityBooking.add(activity);

@@ -41,6 +41,8 @@ public class BookFacility extends JFrame {
 	private Choice chooseFacility;
 	private ActivityBookingController actCtr = new ActivityBookingController();
 	private FacilityController facCtr = new FacilityController();
+	private JTextField numberCust;
+	private Staff chosenStaff;
 	
 	/**
 	 * Launch the application.
@@ -87,10 +89,6 @@ public class BookFacility extends JFrame {
 		checkbox.setBounds(10, 89, 193, 22);
 		contentPane.add(checkbox);
 		
-		JLabel lblAvailability = new JLabel("Availability");
-		lblAvailability.setBounds(117, 169, 57, 14);
-		contentPane.add(lblAvailability);
-		
 		
 		chooseType = new Choice();
 		chooseType.addItemListener(new ItemListener() {
@@ -124,7 +122,7 @@ public class BookFacility extends JFrame {
 			}
 		});
 		
-		add.setBounds(292, 161, 86, 22);
+		add.setBounds(319, 173, 86, 22);
 		contentPane.add(add);
 		
 		Button exit = new Button("Exit");
@@ -148,11 +146,6 @@ public class BookFacility extends JFrame {
 		book.setBounds(252, 212, 50, 22);
 		contentPane.add(book);
 		
-		JLabel check= new JLabel("...");
-		
-		check.setBounds(40, 169, 46, 14);
-		contentPane.add(check);
-		
 		JLabel note = new JLabel("Note: Instructor can be booked for the next day");
 		note.setBounds(56, 117, 290, 14);
 		contentPane.add(note);
@@ -171,6 +164,16 @@ public class BookFacility extends JFrame {
 		dateTime.setBounds(204, 21, 116, 22);
 		contentPane.add(dateTime);
 		dateTime.setColumns(10);
+		
+		JLabel lblNumberOfCustomers = new JLabel("Number of Customers that reserved this:");
+		lblNumberOfCustomers.setBounds(30, 153, 256, 16);
+		contentPane.add(lblNumberOfCustomers);
+		
+		numberCust = new JTextField();
+		numberCust.setEditable(false);
+		numberCust.setBounds(204, 173, 116, 22);
+		contentPane.add(numberCust);
+		numberCust.setColumns(10);
 	}
 	
 	
@@ -204,6 +207,8 @@ public class BookFacility extends JFrame {
 
 	private void addBooking() {
 		
+		ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer);
+		
 	}
 
 	private void addWish() {
@@ -219,6 +224,7 @@ public class BookFacility extends JFrame {
 		this.chosenDateTime = newDateTime;
 		dateTime.setText(chosenDateTime);
 		checkBoth();
+		checkTime();
 	}
 	
 	private void checkBoth(){
@@ -233,7 +239,7 @@ public class BookFacility extends JFrame {
 		if(customers.size() == 0){
 			facilityFree();
 		}else{
-			
+			numberCust.setText(""+customers.size());
 			facilityTaken();
 		}
 	}
@@ -255,5 +261,17 @@ public class BookFacility extends JFrame {
 				break;
 			}
 		}
+	}
+	
+	private void facilityFree(){
+		
+	}
+	
+	private void facilityTaken(){
+		
+	}
+	
+	private void checkTime(){
+		
 	}
 }

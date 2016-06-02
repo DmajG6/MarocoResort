@@ -7,19 +7,26 @@ public class ActivityBooking {
 	
 	private int activityID;
 	private Facility facility;
-	private String staff;
-	private Date startTime;
-	private double activityLength;
+	private Staff staff;
+	private String startTime;
 	private Customer customer;
 	
-	public ActivityBooking(int activityID, Facility facility, String staff, Date startTime, double activityLength, Customer customer) {
+	public ActivityBooking(int activityID, Facility facility, Staff staff, String startTime, Customer customer) {
 		super();
 		this.activityID = activityID;
 		this.facility = facility;
 		this.staff = staff;
 		this.startTime = startTime;
-		this.activityLength = activityLength;
 		this.customer = customer;
+	}
+	
+	public ActivityBooking(Facility facility, Staff staff, String startTime, Customer customer) {
+		super();
+		this.facility = facility;
+		this.staff = staff;
+		this.startTime = startTime;
+		this.customer = customer;
+		
 	}
 	
 	public ActivityBooking(){
@@ -47,34 +54,25 @@ public class ActivityBooking {
 	}
 
 
-	public String getStaff() {
+	public Staff getStaff() {
 		return staff;
 	}
 
 
-	public void setStaff(String staff) {
+	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
 
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-
-	public double getActivityLength() {
-		return activityLength;
-	}
-
-
-	public void setActivityLength(double activityLength) {
-		this.activityLength = activityLength;
-	}
 
 
 	public Customer getCustomer() {

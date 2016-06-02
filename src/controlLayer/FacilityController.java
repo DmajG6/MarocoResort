@@ -25,11 +25,10 @@ public class FacilityController {
 	}
 	
 		
-	public Facility createFacility(int facilityID, String type, double price, double instructorPrice){
+	public Facility createFacility(int facilityID, String type, double instructorPrice){
 		Facility facility = new Facility();
 		facility.setFacilityID(0);
 		facility.setType(type);
-		facility.setPrice(price);
 		facility.setInstructorPrice(instructorPrice);
 		
 		try {
