@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 public class DbActivityBooking {
 private Connection con;
+private ActivityBooking activity= new ActivityBooking();
 
 public DbActivityBooking() {
  con = DbConnection.getInstance().getDBcon();
@@ -81,11 +82,11 @@ public int updateActivity(int activityID , ActivityBooking activityBooking) {
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
 			s.setInt(1, activityBooking.getActivityID());
-			s.setFacility(2, activityBooking.getFacilities());
-			s.setString(3, activityBooking.getStaff());
+			s.setInt(2, activityBooking.getFacility().getFacilityID());
+			s.setInt(3, activityBooking.getStaff().getStaffID());
 			s.setDate(4, activityBooking.getStartTime());
 			s.setDouble(5, activityBooking.getActivityLength());
-			s.setString(6, activityBooking.getCustomer());
+			s.setInt(6, activityBooking.getCustomer().getCustomerID());
 				
 			
 			res = s.executeUpdate();
@@ -156,11 +157,11 @@ private ActivityBooking buildActivity(ResultSet results) {
 			ActivityBooking activityBookingObj = new ActivityBooking();
 			try {
 				activityBookingObj.setActivityID(results.getInt("activityID"));
-				activityBookingObj.setFacility(results.getFacility("facilities"));
+				activityBookingObj.setFacility(results.getInt("facilityID"));
 				activityBookingObj.setStaff(results.getString("staff"));
 				activityBookingObj.setStartTime(results.getDate("startTime"));
 				activityBookingObj.setActivityLength(results.getDouble("activityLength"));
-				activityBookingObj.setCustomer(results.getString("customer"));
+				activityBookingObj.setCustomer(new Customer(results.getInt("customerID")));
 				
 
 			} catch (Exception e) {
