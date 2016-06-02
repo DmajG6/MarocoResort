@@ -4,7 +4,6 @@ import modelLayer.*;
 import dbLayer.*;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ActivityBookingController {
@@ -19,12 +18,15 @@ public class ActivityBookingController {
 		
 	}
 
-	public void createActivityBooking( int activityID, Facility facility, Staff staff, Date startTime, double activityLength, String Customer){
-		//Staff & Agency have to be added also
+	public void createActivityBooking(Facility facility, Staff staff, Date startTime, double activityLength, String customers){
 		
-		ActivityBooking activityBooking = new ActivityBooking();
+		ActivityBooking activityBooking = new ActivityBooking(facility, staff, startTime, activityLength, customers);
 		
+<<<<<<< HEAD
 		activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
+=======
+		activityBooking.setActivityID(DbActivityBooking.getNewID()+1);
+>>>>>>> branch 'master' of https://github.com/DmajG6/MarocoResort.git
 		
 		//Transaction
 		try{
@@ -41,7 +43,7 @@ public class ActivityBookingController {
 				customerIDs[i] = cusCtr.createCustomer(cus.getCustomerID(), cus.getPassword(), cus.getName(), cus.getCountry(), cus.getAddress(), cus.getPhoneNumber(), cus.getEmail(), cus.getIdType(), cus.getIdNumber(), cus.getSpecialService(), cus.getRoomID(), "no").getCustomerID();
 			}
 		
-			dbActivityBooking.updateReservationConnection(activityBooking.getReservationID(), customerIDs);
+			dbActivityBooking.updateActivity(activityBooking.getActivityID(), customerIDs);
 		
 			DbConnection.commitTransaction();
 			
@@ -51,27 +53,24 @@ public class ActivityBookingController {
 			DbConnection.rollbackTransaction();
 		}
 		
-		//reservation connection table
+
 		
 	}
 	
 	//Get All Reservations
-	public LinkedList<ActivityBooking> getAllReservaions(){
+	public LinkedList<ActivityBooking> getAllActivities(){
 		manyActivities = dbActivityBooking.getAllActivities();
 			return manyActivities;
 	}
 	
-	//Get ActivityBooking by reservationID
 	public ActivityBooking findActivityBooking(int activityID){
-			ActivityBooking reservation = dbActivityBooking.findActivities(activityID);
-			return reservation;
+			ActivityBooking activity = dbActivityBooking.findActivities(activityID);
+			return activity;
 	}
 
-	// DUNNO HOW TO MAKE THIS v
-	public void createActivityBooking(int parseInt, int parseInt2, String text, String text2, double parseDouble,
-			double parseDouble2, String text3) {
+public ActivityBooking getCustomersInBooking(int facilityID, String startTime) {
+	return null; //new method incoming here
+}
 		// TODO Auto-generated method stub
 		
 	}
-
-}

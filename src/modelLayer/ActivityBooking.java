@@ -85,7 +85,10 @@ public class ActivityBooking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+		public void add(ActivityBooking activity) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
