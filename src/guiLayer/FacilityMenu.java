@@ -24,7 +24,6 @@ public class FacilityMenu extends JFrame {
 	private JPanel contentPane;
 	private JTextField textF_FacilityID;
 	private JTextField textF_Type;
-	private JTextField textF_Price;
 	private JTextField textF_InstructorPrice;
 	
 	private Staff staff;
@@ -101,15 +100,6 @@ public class FacilityMenu extends JFrame {
 		contentPane.add(textF_Type);
 		textF_Type.setColumns(10);
 		
-		textF_Price = new JTextField();
-		textF_Price.setBounds(66, 144, 86, 20);
-		contentPane.add(textF_Price);
-		textF_Price.setColumns(10);
-		
-		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(10, 147, 46, 14);
-		contentPane.add(lblPrice);
-		
 		textF_InstructorPrice = new JTextField();
 		textF_InstructorPrice.setBounds(66, 175, 86, 20);
 		contentPane.add(textF_InstructorPrice);
@@ -136,7 +126,6 @@ public class FacilityMenu extends JFrame {
 		private void createFacility(){
 			fac.createFacility(Integer.parseInt(textF_FacilityID.getText()), 
 				textF_Type.getText(),
-				Double.parseDouble(textF_Price.getText()),
 				Double.parseDouble(textF_InstructorPrice.getText())
 				);
 		}
@@ -147,7 +136,6 @@ public class FacilityMenu extends JFrame {
 			if(facility!= null){
 				textF_FacilityID.setText("" + facility.getFacilityID());
 				textF_Type.setText("" + facility.getType());
-				textF_Price.setText("" + facility.getPrice());
 				textF_InstructorPrice.setText("" + facility.getInstructorPrice());
 			}
 		}

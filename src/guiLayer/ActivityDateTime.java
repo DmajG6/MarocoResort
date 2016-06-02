@@ -10,7 +10,6 @@ import modelLayer.Customer;
 
 class ActivityDateTime  extends JFrame {
 	
-	private TourMenu tourMenu;
 	private GroupSportsMenu groupMenu;
 	private BookFacility facilityMenu;
 	private int menuType;
@@ -19,11 +18,6 @@ class ActivityDateTime  extends JFrame {
 		new ActivityDateTime(new BookFacility(new Customer(), 1), 1);
 	}
 
-	public ActivityDateTime(TourMenu menu, int menuType) {
-		this.tourMenu = menu;
-		this.menuType = menuType;
-        buildFrame();
-	}
 
 	public ActivityDateTime(BookFacility menu, int menuType){
 		this.facilityMenu = menu;
@@ -75,16 +69,12 @@ class ActivityDateTime  extends JFrame {
 			if (c != null) {
 				System.out.println(c.getTime());
 				if(menuType == 1){
-					tourMenu.setEnabled(true);
-					tourMenu.setTime(getDate(c.getTime().toString()));
+					facilityMenu.setEnabled(true);
+					facilityMenu.setTime(getDate(c.getTime().toString()));
 					ActivityDateTime.this.dispose();
 				}else if(menuType == 2){
 					groupMenu.setEnabled(true);
 					groupMenu.setTime(getDate(c.getTime().toString()));
-					ActivityDateTime.this.dispose();
-				}else if(menuType == 3){
-					facilityMenu.setEnabled(true);
-					facilityMenu.setTime(getDate(c.getTime().toString()));
 					ActivityDateTime.this.dispose();
 				}
 			} else {

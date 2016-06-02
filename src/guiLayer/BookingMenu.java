@@ -87,15 +87,6 @@ public class BookingMenu extends JFrame {
 		btnGroupSports.setBounds(74, 121, 141, 25);
 		contentPane.add(btnGroupSports);
 		
-		JButton btnTours = new JButton("Tours");
-		btnTours.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toursPressed();
-			}
-		});
-		btnTours.setBounds(74, 159, 141, 25);
-		contentPane.add(btnTours);
-		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,10 +108,6 @@ public class BookingMenu extends JFrame {
 		this.dispose();
 	}
 	
-	private void toursPressed(){
-		new TourMenu(customer, type).setVisible(true);
-		this.dispose();
-	}
 	
 	private void exitPressed(){
 		new LogInMenu().setVisible(true);

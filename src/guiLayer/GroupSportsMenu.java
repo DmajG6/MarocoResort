@@ -59,6 +59,7 @@ public class GroupSportsMenu extends JFrame {
 	private JButton btnCancelReservation;
 	private JButton btnJoin;
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -241,7 +242,8 @@ public class GroupSportsMenu extends JFrame {
 	}
 	
 	private void joinPressed(){
-		actCtr.createActivityBooking(chosenFacility, null, time, customer);
+		
+		actCtr.createActivityBooking(new ActivityBooking(chosenFacility, null, time, customer));
 		
 		model.addRow(new Object[]{customer.getName(), customer.getCountry()});
 		btnCancelReservation.setEnabled(true);
