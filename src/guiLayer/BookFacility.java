@@ -20,6 +20,8 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 
 public class BookFacility extends JFrame {
@@ -27,7 +29,11 @@ public class BookFacility extends JFrame {
 	private JPanel contentPane;
 	private Customer customer;
 	private Button book;
-	private FacilityController facilityController;
+	private FacilityController facilityController = new FacilityController();
+	private JTextField dateTime;
+	private String chosenDateTime = null;
+	private Facility chosenFacility = null;
+	private int type;
 	/**
 	 * Launch the application.
 	 */
@@ -50,6 +56,7 @@ public class BookFacility extends JFrame {
 	 */
 	public BookFacility(Customer customer, int type) {
 		this.customer = customer;
+		this.type = type;
 		
 		facilityController = new FacilityController();
 		
@@ -69,7 +76,7 @@ public class BookFacility extends JFrame {
 		contentPane.add(lblChooseFacility);
 		
 		Checkbox checkbox = new Checkbox("Would you like an instructor?");
-		checkbox.setBounds(10, 89, 176, 22);
+		checkbox.setBounds(10, 89, 193, 22);
 		contentPane.add(checkbox);
 		
 		JLabel lblAvailability = new JLabel("Availability");
@@ -117,28 +124,6 @@ public class BookFacility extends JFrame {
 		chooseFacility.setBounds(111, 50, 75, 20);
 		contentPane.add(chooseFacility);
 		
-		Choice choice = new Choice();
-		/*Object bool;
-		
-		for(Facility facility: bool){
-			
-			if (bool = true){
-			System.out.println("Yes") && add.setEbabled(true);
-		}
-			else if(bool = false){
-			System.out.println("No") && add.setEnabled(true);
-		
-		}
-	
-	}
-		*/
-		choice.setBounds(285, 19, 67, 31);
-		contentPane.add(choice);
-		
-		JLabel lblTime = new JLabel("Time");
-		lblTime.setBounds(358, 25, 33, 14);
-		contentPane.add(lblTime);
-		
 		Button add = new Button("Add to wishlist");
 		add.setEnabled(false);
 		add.addActionListener(new ActionListener() {
@@ -165,7 +150,7 @@ public class BookFacility extends JFrame {
 		book.setEnabled(false);
 		book.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			  addBooking();
+			  exitPressed();
 			
 			}
 		});
@@ -179,15 +164,56 @@ public class BookFacility extends JFrame {
 		contentPane.add(check);
 		
 		JLabel note = new JLabel("Note:  Instructor will be booked for the next day");
-		note.setBounds(56, 117, 246, 14);
+		note.setBounds(56, 117, 290, 14);
 		contentPane.add(note);
+		
+		JButton btnTime = new JButton("Time");
+		btnTime.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getTime();
+			}
+		});
+		btnTime.setBounds(323, 20, 97, 25);
+		contentPane.add(btnTime);
+		
+		dateTime = new JTextField();
+		dateTime.setEditable(false);
+		dateTime.setBounds(204, 21, 116, 22);
+		contentPane.add(dateTime);
+		dateTime.setColumns(10);
 	}
 
-	protected void addBooking() {
+	private void addBooking() {
 		
 	}
 
-	protected void addWish() {
+	private void addWish() {
 		
+	}
+	
+	private void getTime(){
+		new ActivityDateTime(this, 1);
+		this.setEnabled(false);
+	}
+	
+	public void setTime(String newDateTime){
+		this.chosenDateTime = newDateTime;
+		dateTime.setText(chosenDateTime);
+		checkBoth();
+	}
+	
+	private void checkBoth(){
+		if((chosenDateTime!=null)&&(chosenFacility!=null)){
+			bothSelected();
+		}
+	}
+	
+	private void bothSelected(){
+		
+	}
+	
+	private void exitPressed(){
+		new LogInMenu();
+		this.dispose();
 	}
 }

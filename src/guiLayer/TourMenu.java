@@ -35,9 +35,8 @@ import java.awt.event.ItemEvent;
 
 public class TourMenu extends JFrame {
 	
-	private ActivityController actCtr = new ActivityController();
+	private ActivityBookingController actCtr = new ActivityBookingController();
 	
-	private Staff loggedInStaff;
 	private JPanel contentPane;
 	private JTextField dateTXT;
 	private String date = null;
@@ -45,6 +44,8 @@ public class TourMenu extends JFrame {
 	private DefaultTableModel model;
 	private JTextField durationTXT;
 	private JTextField priceTxt;
+	private Customer customer;
+	private int type;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +53,7 @@ public class TourMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TourMenu frame = new TourMenu(new Staff());
+					TourMenu frame = new TourMenu(new Customer(), 2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,10 +65,10 @@ public class TourMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TourMenu(Staff staff) {
-		this.loggedInStaff = staff;
-		setTitle("Tour");
-		loggedInStaff = staff;
+	public TourMenu(Customer customer, int type) {
+		this.customer = customer;
+		this.type = type;
+		setTitle("Tour Booking Menu");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1017, 643);
@@ -157,6 +158,29 @@ public class TourMenu extends JFrame {
 		priceTxt.setColumns(10);
 		
 		model = (DefaultTableModel) table.getModel();
+	}
+	
+	private void bookPressed(){
+		
+	}
+	
+	private void exitPressed(){
+		
+	}
+	
+	private void getDate(){
+		new ActivityDateTime(this, 3);
+		this.setEnabled(false);
+	}
+	
+	public void setTime(String dateTime){
+		this.date = dateTime;
+		dateTXT.setText(date);
+		updateScreen();
+	}
+	
+	private void updateScreen(){
+		
 	}
 	
 }

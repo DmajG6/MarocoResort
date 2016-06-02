@@ -18,6 +18,10 @@ public class Facility {
          public Facility() {
 		// TODO Auto-generated constructor stub
 	}
+         
+         public Facility(int facilityID) {
+     		this.facilityID = facilityID;
+     	}
 	
 	public int getFacilityID() {
 		return facilityID;

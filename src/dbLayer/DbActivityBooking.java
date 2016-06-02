@@ -156,7 +156,7 @@ private ActivityBooking buildActivity(ResultSet results) {
 			ActivityBooking activityBookingObj = new ActivityBooking();
 			try {
 				activityBookingObj.setActivityID(results.getInt("activityID"));
-				activityBookingObj.setFacility(results.getFacility("facilities"));
+				activityBookingObj.setFacility(new Facility(results.getInt("facilityID")));
 				activityBookingObj.setStaff(results.getString("staff"));
 				activityBookingObj.setStartTime(results.getDate("startTime"));
 				activityBookingObj.setActivityLength(results.getDouble("activityLength"));
@@ -190,7 +190,7 @@ private ActivityBooking buildActivity(ResultSet results) {
 				if (results.next()) {
 					ActivityBooking activityBooking = new ActivityBooking();
 					activityBooking.setActivityID(results.getInt("activityID"));
-					activityBooking.setFacility(results.getFacility("facilities"));
+					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
 					activityBooking.setStaff(results.getString("staff"));
 					activityBooking.setStartTime(results.getDate("startTime"));
 					activityBooking.setActivityLength(results.getDouble("activityLength"));

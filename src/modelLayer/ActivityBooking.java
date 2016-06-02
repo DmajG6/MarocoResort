@@ -6,20 +6,24 @@ import java.sql.Date;
 public class ActivityBooking {
 	
 	private int activityID;
-	private Facility facilities;
+	private Facility facility;
 	private String staff;
 	private Date startTime;
 	private double activityLength;
 	private String customer;
 	
-	public ActivityBooking(int activityID, Facility facilities, String staff, Date startTime, double activityLength, String customer) {
+	public ActivityBooking(int activityID, Facility facility, String staff, Date startTime, double activityLength, String customer) {
 		super();
 		this.activityID = activityID;
-		this.facilities = facilities;
+		this.facility = facility;
 		this.staff = staff;
 		this.startTime = startTime;
 		this.activityLength = activityLength;
-		this customer = customer;
+		this.customer = customer;
+	}
+	
+	public ActivityBooking(){
+		
 	}
 
 
@@ -34,12 +38,12 @@ public class ActivityBooking {
 
 
 	public Facility getFacilities() {
-		return facilities;
+		return facility;
 	}
 
 
-	public void setFacilities(Facility facilities) {
-		this.facilities = facilities;
+	public void setFacility(Facility facilities) {
+		this.facility = facilities;
 	}
 
 
