@@ -43,6 +43,7 @@ public class BookFacility extends JFrame {
 	private FacilityController facCtr = new FacilityController();
 	private JTextField numberCust;
 	private Staff chosenStaff;
+	private Button add;
 	
 	/**
 	 * Launch the application.
@@ -114,7 +115,7 @@ public class BookFacility extends JFrame {
 		
 		fillChoiceType();
 		
-		Button add = new Button("Add to wishlist");
+		add = new Button("Add to wishlist");
 		add.setEnabled(false);
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +140,7 @@ public class BookFacility extends JFrame {
 		book.setEnabled(false);
 		book.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			  bookPressed();
+			  addBooking();
 			}
 		});
 		
@@ -213,6 +214,8 @@ public class BookFacility extends JFrame {
 
 	private void addWish() {
 		
+		
+		
 	}
 	
 	private void getTime(){
@@ -235,7 +238,6 @@ public class BookFacility extends JFrame {
 	
 	private void bothSelected(){
 		LinkedList<Customer> customers = actCtr.getCustomersInBooking(chosenFacility.getFacilityID(), chosenDateTime);
-		
 		if(customers.size() == 0){
 			facilityFree();
 		}else{
@@ -249,10 +251,6 @@ public class BookFacility extends JFrame {
 		this.dispose();
 	}
 
-	private void bookPressed(){
-		
-	}
-
 	private void facilityChosen(){
 		for(Facility fac: facilities){
 			if(chooseFacility.getSelectedItem().equals(fac.getType()+" "+fac.getFacilityID())){
@@ -264,11 +262,11 @@ public class BookFacility extends JFrame {
 	}
 	
 	private void facilityFree(){
-		
+		book.setEnabled(true);
 	}
 	
 	private void facilityTaken(){
-		
+		add.setEnabled(true);
 	}
 	
 	private void checkTime(){
