@@ -10,9 +10,9 @@ public class ActivityBooking {
 	private String staff;
 	private Date startTime;
 	private double activityLength;
-	private String customer;
+	private Customer customer;
 	
-	public ActivityBooking(int activityID, Facility facility, String staff, Date startTime, double activityLength, String customer) {
+	public ActivityBooking(int activityID, Facility facility, String staff, Date startTime, double activityLength, Customer customer) {
 		super();
 		this.activityID = activityID;
 		this.facility = facility;
@@ -77,12 +77,12 @@ public class ActivityBooking {
 	}
 
 
-	public String getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
 
-	public void setCustomer(String customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 	
