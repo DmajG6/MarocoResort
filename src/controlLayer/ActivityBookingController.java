@@ -24,7 +24,7 @@ public class ActivityBookingController {
 		
 		ActivityBooking activityBooking = new ActivityBooking();
 		
-		activityBooking.setReservationID(DbActivityBooking.getNewID()+1);
+		activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
 		
 		//Transaction
 		try{

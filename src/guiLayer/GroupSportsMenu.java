@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelLayer.ActivityBooking;
 import modelLayer.Customer;
 import modelLayer.Facility;
 
@@ -240,11 +241,37 @@ public class GroupSportsMenu extends JFrame {
 	}
 	
 	private void joinPressed(){
+		actCtr.createActivityBooking(chosenFacility, null, time, customer);
 		
+		model.addRow(new Object[]{customer.getName(), customer.getCountry()});
+		btnCancelReservation.setEnabled(true);
+		btnJoin.setEnabled(false);
 	}
 	
 	private void cancelPressed(){
+		customersInBooking.remove(customer);
 		
+		LinkedList<ActivityBooking> activities = new LinkedList<ActivityBooking>();
+		activities = actCtr.getAllActivities();
+		
+		int removeActivityID = -1;
+		
+		for(ActivityBooking act: activities){
+			if((act.getCustomer().getCustomerID() == customer.getCustomerID())&&(act.getFacility().getFacilityID() == chosenFacility.getFacilityID())&&(act.getStartTime().equals(time))){
+				removeActivityID = act.getActivityID();
+			}
+		}
+		
+		actCtr.removeBooking(removeActivityID);
+		
+		for(int i = 0; i < model.getRowCount(); i++){
+			if(model.getValueAt(i, 1).equals(customer.getName())&&model.getValueAt(i, 2).equals(customer.getCountry())){
+				model.removeRow(i);
+			}
+		}
+		
+		btnJoin.setEnabled(true);
+		btnCancelReservation.setEnabled(false);
 	}
 	
 }

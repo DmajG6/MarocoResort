@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 public class BookFacility extends JFrame {
@@ -34,6 +36,12 @@ public class BookFacility extends JFrame {
 	private String chosenDateTime = null;
 	private Facility chosenFacility = null;
 	private int type;
+	private Choice chooseType;
+	private LinkedList<Facility> facilities = new LinkedList<Facility>();
+	private Choice chooseFacility;
+	private ActivityBookingController actCtr = new ActivityBookingController();
+	private FacilityController facCtr = new FacilityController();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -58,7 +66,7 @@ public class BookFacility extends JFrame {
 		this.customer = customer;
 		this.type = type;
 		
-		facilityController = new FacilityController();
+		facilities = facCtr.getAllFacilities();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -84,45 +92,29 @@ public class BookFacility extends JFrame {
 		contentPane.add(lblAvailability);
 		
 		
-		Choice chooseType = new Choice();
-		LinkedList<Facility> tempValues = facilityController.getAllFacilities();
+		chooseType = new Choice();
+		chooseType.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				fillChoiceFacility();
+			}
+		});
+		facilities = facilityController.getAllFacilities();
 		LinkedList<String> temp = new LinkedList<>();
-		
-		for (Facility facility : tempValues) {			
-			boolean found = false;
-			for (String chType: temp ){
-				if(chType.equals(facility.getType())){
-					found=true;
-				}
-			}
-			if(!found){				
-				temp.add(facility.getType());
-				chooseType.add(facility.getType());
-			}
-		}
-				
+			
 		chooseType.setBounds(111, 19, 75, 20);
 		contentPane.add(chooseType);
 		
-		Choice chooseFacility = new Choice();
-		LinkedList<Facility> values = facilityController.getAllFacilities();
-		LinkedList<Integer> val = new LinkedList<>();
-		
-		for (Facility facility : tempValues) {			
-			boolean found = false;
-			for (Integer chID: val ){
-				if(chID.equals(facility.getFacilityID())){
-					found=true;
-				}
+		chooseFacility = new Choice();
+		chooseFacility.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				facilityChosen();
 			}
-			if(!found){				
-				val.add(facility.getFacilityID());
-				chooseFacility.add(""+facility.getFacilityID());
-			}
-		}
-	
+		});
 		chooseFacility.setBounds(111, 50, 75, 20);
 		contentPane.add(chooseFacility);
+		chooseFacility.setEnabled(false);
+		
+		fillChoiceType();
 		
 		Button add = new Button("Add to wishlist");
 		add.setEnabled(false);
@@ -138,8 +130,7 @@ public class BookFacility extends JFrame {
 		Button exit = new Button("Exit");
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-			
+				exitPressed();
 			}
 		});
 		
@@ -150,8 +141,7 @@ public class BookFacility extends JFrame {
 		book.setEnabled(false);
 		book.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			  exitPressed();
-			
+			  bookPressed();
 			}
 		});
 		
@@ -163,7 +153,7 @@ public class BookFacility extends JFrame {
 		check.setBounds(40, 169, 46, 14);
 		contentPane.add(check);
 		
-		JLabel note = new JLabel("Note:  Instructor will be booked for the next day");
+		JLabel note = new JLabel("Note: Instructor can be booked for the next day");
 		note.setBounds(56, 117, 290, 14);
 		contentPane.add(note);
 		
@@ -181,6 +171,35 @@ public class BookFacility extends JFrame {
 		dateTime.setBounds(204, 21, 116, 22);
 		contentPane.add(dateTime);
 		dateTime.setColumns(10);
+	}
+	
+	
+	private void fillChoiceType(){
+		
+		LinkedList<String> types = new LinkedList<String>();
+		
+		for (Facility facility : facilities) {
+			if(!types.contains(facility.getType())){
+				types.add(facility.getType());
+				chooseType.add(facility.getType());
+			}
+		}
+	}
+	
+	private void fillChoiceFacility(){
+		
+		chooseFacility.setEnabled(true);
+		
+		if(chooseFacility.getItemCount() != 0){
+			chooseFacility.removeAll();
+		}
+		
+		for (Facility facility : facilities) {
+			if(facility.getType().equals(chooseType.getSelectedItem())){
+				chooseFacility.add(facility.getType()+" "+facility.getFacilityID());
+			}
+		}
+		
 	}
 
 	private void addBooking() {
@@ -209,11 +228,32 @@ public class BookFacility extends JFrame {
 	}
 	
 	private void bothSelected(){
+		LinkedList<Customer> customers = actCtr.getCustomersInBooking(chosenFacility.getFacilityID(), chosenDateTime);
 		
+		if(customers.size() == 0){
+			facilityFree();
+		}else{
+			
+			facilityTaken();
+		}
 	}
 	
 	private void exitPressed(){
 		new LogInMenu();
 		this.dispose();
+	}
+
+	private void bookPressed(){
+		
+	}
+
+	private void facilityChosen(){
+		for(Facility fac: facilities){
+			if(chooseFacility.getSelectedItem().equals(fac.getType()+" "+fac.getFacilityID())){
+				chosenFacility = fac;
+				checkBoth();
+				break;
+			}
+		}
 	}
 }

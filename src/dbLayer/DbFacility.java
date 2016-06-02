@@ -56,10 +56,9 @@ public class DbFacility {
 		this.facility.setFacilityID(getNewID());
 		int rc = -1;
 		String query = "";
-		query = "INSERT INTO Facility (facilityID, type, price, instructorPrice) VALUES (" 
+		query = "INSERT INTO Facility (facilityID, type, instructorPrice) VALUES (" 
 		+ this.facility.getFacilityID() + ",'"
 		+ facility.getType() + "',"
-		+ facility.getPrice() + ","
 		+ facility.getInstructorPrice() + ")";
 		
 			
@@ -90,14 +89,13 @@ public class DbFacility {
 	
 	
 	public int updateFacility(int facilityID, Facility facility) {
-		String q = "update Facility set facilityID = ?, type = ?, price = ?, instructorPrice = ? where facilityID=" + facilityID;
+		String q = "update Facility set facilityID = ?, type = ?, instructorPrice = ? where facilityID=" + facilityID;
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
 			s.setInt(1, facility.getFacilityID());
 			s.setString(2, facility.getType());
-			s.setDouble(3, facility.getPrice());
-			s.setDouble(4, facility.getInstructorPrice());
+			s.setDouble(3, facility.getInstructorPrice());
 				
 			
 			res = s.executeUpdate();
@@ -171,12 +169,11 @@ public class DbFacility {
 			try {
 				facilityObj.setFacilityID(results.getInt("facilityID"));
 				facilityObj.setType(results.getString("type"));
-				facilityObj.setPrice(results.getDouble("price"));
 				facilityObj.setInstructorPrice(results.getDouble("instructorPrice"));
 				
 
 			} catch (Exception e) {
-				System.out.println("Error in building the facility object");
+				System.out.println("Error in building the facility object: "+e.getMessage());
 			}
 			return facilityObj;
 		}
@@ -203,7 +200,6 @@ public class DbFacility {
 					Facility facility = new Facility();
 					facility.setFacilityID(results.getInt("facilityID"));
 					facility.setType(results.getString("type"));
-					facility.setPrice(results.getDouble("price"));
 					facility.setInstructorPrice(results.getDouble("instructorPrice"));
 					
 					facilities.add(facility);

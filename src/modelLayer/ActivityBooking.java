@@ -37,7 +37,7 @@ public class ActivityBooking {
 	}
 
 
-	public Facility getFacilities() {
+	public Facility getFacility() {
 		return facility;
 	}
 
