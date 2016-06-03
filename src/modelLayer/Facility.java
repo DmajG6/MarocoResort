@@ -1,103 +1,57 @@
 package modelLayer;
 
-import java.sql.Date;
-
-
-public class ActivityBooking {
+public class Facility {
 	
-	private int activityID;
-	private Facility facility;
-	private Staff staff;
-	private String startTime;
-	private Customer customer;
-	private Double activityLength;
+	private int facilityID;
+	private String type;
+	private double instructorPrice;
 	
-	public ActivityBooking(int activityID, Facility facility, Staff staff, String startTime, Customer customer, Double activityLength) {
+	
+	public Facility(int facilityID, String type, double instructorPrice) {
 		super();
-		this.activityID = activityID;
-		this.facility = facility;
-		this.staff = staff;
-		this.startTime = startTime;
-		this.customer = customer;
-		this.activityLength= activityLength;
+		this.facilityID = facilityID;
+		this.type = type;
+		this.instructorPrice = instructorPrice;
+	}
+         public Facility() {
+		// TODO Auto-generated constructor stub
+	}
+         
+         public Facility(int facilityID) {
+     		this.facilityID = facilityID;
+     	}
+	
+	public int getFacilityID() {
+		return facilityID;
+	}
+
+
+	public void setFacilityID(int facilityID) {
+		this.facilityID = facilityID;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double getInstructorPrice() {
+		return instructorPrice;
+	}
+
+
+	public void setInstructorPrice(double instructorPrice) {
+		this.instructorPrice = instructorPrice;
 	}
 	
-	public ActivityBooking(Facility facility, Staff staff, String startTime, Customer customer, Double activityLength) {
-		super();
-		this.facility = facility;
-		this.staff = staff;
-		this.startTime = startTime;
-		this.customer = customer;
-		this.activityLength= activityLength;
-		
-	}
 	
-	public ActivityBooking(){
-		
-	}
-
-
-	public int getActivityID() {
-		return activityID;
-	}
-
-
-	public void setActivityID(int activityID) {
-		this.activityID = activityID;
-	}
-
-
-	public Facility getFacility() {
-		return facility;
-	}
-
-
-	public void setFacility(Facility facilities) {
-		this.facility = facilities;
-	}
-
-
-	public Staff getStaff() {
-		return staff;
-	}
-
-
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
-
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-    
-public Double getActivityLength() {
-	return activityLength;
-}
-
-public void setActivityLength(Double activityLength) {
-	this.activityLength = activityLength;
-}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-		public void add(ActivityBooking activity) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 	
 
 }
-
