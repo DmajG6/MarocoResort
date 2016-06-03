@@ -10,22 +10,25 @@ public class ActivityBooking {
 	private Staff staff;
 	private String startTime;
 	private Customer customer;
+	private Double activityLength;
 	
-	public ActivityBooking(int activityID, Facility facility, Staff staff, String startTime, Customer customer) {
+	public ActivityBooking(int activityID, Facility facility, Staff staff, String startTime, Customer customer, Double activityLength) {
 		super();
 		this.activityID = activityID;
 		this.facility = facility;
 		this.staff = staff;
 		this.startTime = startTime;
 		this.customer = customer;
+		this.activityLength= activityLength;
 	}
 	
-	public ActivityBooking(Facility facility, Staff staff, String startTime, Customer customer) {
+	public ActivityBooking(Facility facility, Staff staff, String startTime, Customer customer, Double activityLength) {
 		super();
 		this.facility = facility;
 		this.staff = staff;
 		this.startTime = startTime;
 		this.customer = customer;
+		this.activityLength= activityLength;
 		
 	}
 	
@@ -73,7 +76,14 @@ public class ActivityBooking {
 		this.startTime = startTime;
 	}
 
+    
+public Double getActivityLength() {
+	return activityLength;
+}
 
+public void setActivityLength(Double activityLength) {
+	this.activityLength = activityLength;
+}
 
 	public Customer getCustomer() {
 		return customer;
