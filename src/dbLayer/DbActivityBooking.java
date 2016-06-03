@@ -43,13 +43,12 @@ public int getNewID(){
    public int insertActivity(ActivityBooking activityBooking){
 	   	int rc = -1;
 	   	String query= "";
-	   	query = "INSERT INTO ActivityBooking(activityID, facilities, staff, startTime, activityLength, customer) VALUES ("
+	   	query = "INSERT INTO ActivityBooking(activityID, facilities, staff, startTime, customer) VALUES ("
 		+ getNewID() + ",'"
 		+ activityBooking.getActivityID() + "','"
 		+ activityBooking.getFacility().getFacilityID() + "',"
 		+ activityBooking.getStaff().getStaffID() + ","
 		+ activityBooking.getStartTime() + ",'"
-		+ activityBooking.getActivityLength() + "','"
 		+ activityBooking.getCustomer().getCustomerID() + "','";
 
 
@@ -77,7 +76,7 @@ public int getNewID(){
 	}
 
 public int updateActivity(int activityID , ActivityBooking activityBooking) {
-		String q = "update Activity set activityID = ?, facilities = ?, staff = ?, startTime = ?, activityLength = ?, customer = ?,  where name='" + activityBooking.getActivityID()+"'";
+		String q = "update Activity set activityID = ?, facilities = ?, staff = ?, startTime = ?, customer = ?,  where name='" + activityBooking.getActivityID()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -85,8 +84,7 @@ public int updateActivity(int activityID , ActivityBooking activityBooking) {
 			s.setInt(2, activityBooking.getFacility().getFacilityID());
 			s.setInt(3, activityBooking.getStaff().getStaffID());
 			s.setString(4, activityBooking.getStartTime());
-			s.setDouble(5, activityBooking.getActivityLength());
-			s.setInt(6, activityBooking.getCustomer().getCustomerID());
+			s.setInt(5, activityBooking.getCustomer().getCustomerID());
 				
 			
 			res = s.executeUpdate();
@@ -160,7 +158,6 @@ private ActivityBooking buildActivity(ResultSet results) {
 				activityBookingObj.setFacility(new Facility(results.getInt("facilityID")));
 				activityBookingObj.setStaff(new Staff(results.getInt("staffID")));
 				activityBookingObj.setStartTime(results.getString("startTime"));
-				activityBookingObj.setActivityLength(results.getDouble("activityLength"));
 				activityBookingObj.setCustomer(new Customer(results.getInt("customerID")));
 				
 
@@ -176,7 +173,7 @@ private ActivityBooking buildActivity(ResultSet results) {
 			
 			String query = "";
 			
-			query = "SELECT o.activityID, o.facilities, o.staffID, o.startTime, o.activityLength, o.customerID"
+			query = "SELECT o.activityID, o.facilities, o.staffID, o.startTime, o.customerID"
 					+ "FROM ActivityBooking o "
 					+ "WHERE activityID = " + activityID;
 			System.out.println("insert : " + query);
@@ -194,7 +191,6 @@ private ActivityBooking buildActivity(ResultSet results) {
 					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
 					activityBooking.setStaff(new Staff(results.getInt("staff")));
 					activityBooking.setStartTime(results.getString("startTime"));
-					activityBooking.setActivityLength(results.getDouble("activityLength"));
 					activityBooking.setCustomer(new Customer(results.getInt("customer")));
 					//activityBooking.setCustomer(DbCustomer.findCustomerByCustomerID (results.getInt("customer")));
 					
