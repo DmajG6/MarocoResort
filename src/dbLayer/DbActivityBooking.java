@@ -206,6 +206,37 @@ private ActivityBooking buildActivity(ResultSet results) {
 			}
 			return activities;
 		}
-
+		public LinkedList<Customer> getCustomersInBooking(int facilityID, String startTime){
+			LinkedList<Customer> activitiesInBooking = new LinkedList<Customer>();
+			int rc= -1;
+			String query = "";
+			
+			query = "" + facilityID +startTime;
+			try {
+				ResultSet results;
+				Statement stmt = con.createStatement();
+				stmt.setQueryTimeout(5);
+				
+				
+				results = stmt.executeQuery(query);
+				
+				if (results.next()) {
+					ActivityBooking activityBooking = new ActivityBooking();
+					activityBooking.setActivityID(results.getInt("activityID"));
+					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
+					activityBooking.setStartTime(results.getString("startTime"));
+					activityBooking.setCustomer(new Customer(results.getInt("customer")));
+					rc = results.getInt("facilityID");
+					activityBooking.add(activity);
+				}
+				
+				
+					stmt.close();
+			} catch (SQLException ex) {
+				System.out.println("not found "+rc+" "+ex.getMessage());
+				
+			}
+			return activitiesInBooking;
+		}
 
 }
