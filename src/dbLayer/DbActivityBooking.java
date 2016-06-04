@@ -2,6 +2,8 @@ package dbLayer;
 
 import java.sql.*;
 import modelLayer.*;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DbActivityBooking {
@@ -169,7 +171,9 @@ private ActivityBooking buildActivity(ResultSet results) {
 			}
 			return activityBookingObj;
 		}
-		
+//!
+
+
 		public LinkedList<ActivityBooking> getActivity(int activityID){
 			int rc = -1;
 			LinkedList<ActivityBooking> activities = new LinkedList<ActivityBooking>();
@@ -194,7 +198,6 @@ private ActivityBooking buildActivity(ResultSet results) {
 					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
 					activityBooking.setStaff(new Staff(results.getInt("staff")));
 					activityBooking.setStartTime(results.getString("startTime"));
-					activityBooking.setActivityLength(results.getDouble("activityLength"));
 					activityBooking.setCustomer(new Customer(results.getInt("customer")));
 					//activityBooking.setCustomer(DbCustomer.findCustomerByCustomerID (results.getInt("customer")));
 					
