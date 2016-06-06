@@ -1,6 +1,5 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -97,7 +96,7 @@ public class LogInMenu extends JFrame {
 	}
 	
 	private void buttonPressed(){
-		password = Password.getText();
+		password = String.valueOf(Password.getPassword());
 		idCode = ID_Field.getText();
 		
 		switch(control.checkLogIn(idCode, password)){
