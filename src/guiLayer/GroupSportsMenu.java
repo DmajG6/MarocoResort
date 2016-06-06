@@ -313,7 +313,11 @@ public class GroupSportsMenu extends JFrame {
 		
 		if(time.substring(0, 8).equals(currentDate.substring(0, 8))){
 			if(Integer.parseInt(time.substring(9, 11)) >= Integer.parseInt(currentDate.substring(9, 11))-1){
-				valueToReturn = false;
+				if(type == 2){
+					valueToReturn = false;
+				} else if(Integer.parseInt(time.substring(9, 11)) >= Integer.parseInt(currentDate.substring(9, 11))){
+					valueToReturn = false;
+				}
 			}
 		}
 		
