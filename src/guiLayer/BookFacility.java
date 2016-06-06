@@ -208,7 +208,7 @@ public class BookFacility extends JFrame {
 
 	private void addBooking() {
 		
-		ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer);
+		ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer, 0);
 		
 	}
 

@@ -103,7 +103,7 @@ public class LogInMenu extends JFrame {
 			case 1:
 				StaffController staffCtr = new StaffController();
 				Staff staff = staffCtr.findStaffByID(Integer.parseInt(idCode));
-				new MainMenu(staff);
+				new MainMenu(staff).setEnabled(true);
 				dispose();
 				return;
 			case 2:

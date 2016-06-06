@@ -12,10 +12,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 
 import modelLayer.Customer;
 import controlLayer.CustomerController;
+
 
 /**
 	@author TomKuric<tomkuric@gmail.com>
@@ -31,7 +33,9 @@ public class CheckInOut extends JFrame {
 	private Customer customer = null;
 	private CustomerController cusctr = new CustomerController();
 	private JButton btnCheckInout;
-
+	private JTextField NewPass;
+	private JLabel lblNewPassword;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,12 +52,12 @@ public class CheckInOut extends JFrame {
 		});
 	}
 
-	/**
+	/** 
 	 * Create the frame.
 	 */
 	public CheckInOut() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 767, 483);
+		setBounds(100, 100, 533, 361);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,7 +66,7 @@ public class CheckInOut extends JFrame {
 		JLabel lblCheckInout = new JLabel("Check In/Out");
 		lblCheckInout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCheckInout.setFont(new Font("Tahoma", Font.ITALIC, 44));
-		lblCheckInout.setBounds(165, 13, 404, 84);
+		lblCheckInout.setBounds(63, 13, 404, 84);
 		contentPane.add(lblCheckInout);
 		
 		customerID = new JTextField();
@@ -120,16 +124,30 @@ public class CheckInOut extends JFrame {
 		btnCheckInout.setEnabled(false);
 		btnCheckInout.setBounds(263, 207, 127, 39);
 		contentPane.add(btnCheckInout);
+		
+		lblNewPassword = new JLabel("New Password:");
+		lblNewPassword.setEnabled(false);
+		lblNewPassword.setBounds(52, 266, 95, 16);
+		contentPane.add(lblNewPassword);
+		
+		NewPass = new JTextField();
+		NewPass.setEnabled(false);
+		NewPass.setEditable(false);
+		NewPass.setBounds(147, 263, 116, 22);
+		contentPane.add(NewPass);
+		NewPass.setColumns(10);
 	}
 	
 	private void findCustomerByID(){
 		customer = cusctr.findCustomerByID(Integer.parseInt(customerID.getText()));
 		activateButton();
+		name.setText(customer.getName());
 	}
 	
 	private void findCustomerByName(){
 		customer = cusctr.findCustomerByName(name.getText());
 		activateButton();
+		customerID.setText(""+customer.getCustomerID());
 	}
 	
 	private void activateButton(){
@@ -139,6 +157,17 @@ public class CheckInOut extends JFrame {
 	}
 	
 	private void checkInOut(){
+		if(customer.getPassword().equals(null)){
+			String newPassword = "";
+			Random rand = new Random();
+			for(int i = 0; i < 6; i++){
+				newPassword += ""+rand.nextInt(10);
+			}
+			cusctr.setNewPassword(newPassword, customer);
+			lblNewPassword.setEnabled(true);
+			NewPass.setEnabled(true);
+			NewPass.setText(newPassword);
+		}
 		cusctr.checkInOut(customer.getCustomerID(), !customer.getActive().equals("yes"));
 	}
 }

@@ -113,9 +113,12 @@ public class Customer {
 	public void setActive(String active) {
 		this.active = active;
 	}
-	
-	
-	
-	
 
+	public String toString() {
+		return "Customer [customerID=" + customerID + ", password=" + password + ", name=" + name + ", country="
+				+ country + ", address=" + address + ", phoneNumber=" + phoneNumber + ", email=" + email + ", idType="
+				+ idType + ", idNumber=" + idNumber + ", specialService=" + specialService + ", roomID=" + roomID
+				+ ", active=" + active + "]";
+	}
+	
 }

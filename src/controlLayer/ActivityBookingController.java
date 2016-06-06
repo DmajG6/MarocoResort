@@ -4,6 +4,7 @@ import modelLayer.*;
 import dbLayer.*;
 
 import java.sql.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ActivityBookingController {
@@ -25,41 +26,64 @@ public class ActivityBookingController {
 		activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
 
 		//Transaction
-		try{
-			DbConnection.startTransaction();
+		//try{
+		//	DbConnection.startTransaction();
 			
 			dbActivityBooking.insertActivity(activityBooking);
 			
-			DbConnection.commitTransaction();
+		//	DbConnection.commitTransaction();
 			
-		}catch(Exception ex){
-			System.out.println("Transaction: "+ex.getMessage());
+		//}catch(Exception ex){
+		//	System.out.println("Transaction: "+ex.toString());
 
-			DbConnection.rollbackTransaction();
-		}
+		//	DbConnection.rollbackTransaction();
+		//}
 		
 
 		
 	}
 	
-	//Get All Reservations
+	//Get All Activities
 	public LinkedList<ActivityBooking> getAllActivities(){
 		manyActivities = dbActivityBooking.getAllActivities();
-			return manyActivities;
+		return manyActivities;
 	}
 	
 	public ActivityBooking findActivityBooking(int activityID){
-			ActivityBooking activity = dbActivityBooking.findActivities(activityID);
+			ActivityBooking activity = dbActivityBooking.findActivityByID(activityID);
 			return activity;
 	}
 
 	public LinkedList<Customer> getCustomersInBooking(int facilityID, String startTime) {
 		
-		return null; //new method incoming here
+		cusCtr = new CustomerController();
+		
+		LinkedList<ActivityBooking> activities = new LinkedList<ActivityBooking>();
+		activities = getAllActivities();
+		
+		LinkedList<Customer> customers = new LinkedList<Customer>();
 		
 		
+		Iterator<ActivityBooking> iter = activities.iterator();
+
+		while (iter.hasNext()) {
+		    ActivityBooking act = iter.next();
+
+		    if((act.getFacility().getFacilityID() == facilityID)&&(act.getStartTime().equals(startTime))){
+				customers.add(cusCtr.findCustomerByID(act.getCustomer().getCustomerID()));
+			}else{
+				iter.remove();
+				//activities.remove(act);
+			}
+		}
 		
+		
+		return customers;
 	}
-		// TODO Auto-generated method stub
-		
+	
+	public int removeBooking(int activityID, int customerID){
+		return dbActivityBooking.deleteActivity(activityID, customerID);
 	}
+	
+		
+}

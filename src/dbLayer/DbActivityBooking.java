@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DbActivityBooking {
-private Connection con;
-private ActivityBooking activity= new ActivityBooking();
+	private Connection con;
+	private ActivityBooking activity= new ActivityBooking();
 
-public DbActivityBooking() {
- con = DbConnection.getInstance().getDBcon();
- }
+	public DbActivityBooking() {
+		con = DbConnection.getInstance().getDBcon();
+	}
 
-public int getNewID(){
+	public int getNewID(){
 		int rc = -1;
 		String query = "";
 		query = "SELECT MAX(activityID) as activityID "
@@ -31,7 +31,6 @@ public int getNewID(){
 				rc = results.getInt("activityID");
 			}
 				stmt.close();
-			rc++;
 		} catch (SQLException ex) {
 			System.out.println("ID not found: "+ex.getSQLState());
 			
@@ -41,17 +40,14 @@ public int getNewID(){
 		
 	}
 
-
-   public int insertActivity(ActivityBooking activityBooking){
+	public int insertActivity(ActivityBooking activityBooking){
 	   	int rc = -1;
 	   	String query= "";
-	   	query = "INSERT INTO ActivityBooking(activityID, facilities, staff, startTime, customer) VALUES ("
-		+ getNewID() + ",'"
-		+ activityBooking.getActivityID() + "','"
-		+ activityBooking.getFacility().getFacilityID() + "',"
-		+ activityBooking.getStaff().getStaffID() + ","
-		+ activityBooking.getStartTime() + ",'"
-		+ activityBooking.getCustomer().getCustomerID() + "','";
+	   	query = "INSERT INTO ActivityBooking(activityID, facilityID, staffID, startTime) VALUES ("
+		+ activityBooking.getActivityID() + ","
+		+ activityBooking.getFacility().getFacilityID() + ","
+		+ activityBooking.getStaff().getStaffID() + ",'"
+		+ activityBooking.getStartTime() + "')";
 
 
 		System.out.println("insert : " + query);
@@ -61,24 +57,41 @@ public int getNewID(){
 			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.close();
 		} catch (SQLException ex) {
-			System.out.println("Activity not inserted");
+			System.out.println("Activity not inserted: "+ex.getMessage());
+		}
+		
+		query = "";
+	   	query = "INSERT INTO ActivityConnectionTable(activityID, customerID, waitingOrder) VALUES ("
+		+ activityBooking.getActivityID() + ","
+		+ activityBooking.getCustomer().getCustomerID() + ","
+		+ activityBooking.getWaitingListOrder() + ")";
+
+
+		System.out.println("insert : " + query);
+		try {
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("Activity not inserted: "+ex.getMessage());
 		}
 		
 		return rc;
 		
 	}
 
-		public LinkedList<ActivityBooking> getAllActivities() {
+	public LinkedList<ActivityBooking> getAllActivities() {
 		return miscWhere(""); 
 	}
 	
-	public ActivityBooking findActivities(int activityID) {
-		String wClause = "  activityID = '" + activityID + "'";
+	public ActivityBooking findActivityByID(int activityID) {
+		String wClause = " activityID = " + activityID;
 		return singleWhere(wClause);
 	}
 
-public int updateActivity(int activityID , ActivityBooking activityBooking) {
-		String q = "update Activity set activityID = ?, facilities = ?, staff = ?, startTime = ?, customer = ?,  where name='" + activityBooking.getActivityID()+"'";
+	public int updateActivity(ActivityBooking activityBooking) {
+		String q = "update ActivityBooking set activityID = ?, facilityID = ?, staff = ?, startTime = ? where activityID= " + activityBooking.getActivityID();
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {
@@ -98,10 +111,11 @@ public int updateActivity(int activityID , ActivityBooking activityBooking) {
 		return res;
 	}
 
-private LinkedList<ActivityBooking> miscWhere(String wClause) {
+	private LinkedList<ActivityBooking> miscWhere(String wClause) {
 		ResultSet results;
 		LinkedList<ActivityBooking> list = new LinkedList<ActivityBooking>();
 		String query = buildQuery(wClause);
+		System.out.println("INSERT: "+query);
 		try {
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
@@ -118,11 +132,12 @@ private LinkedList<ActivityBooking> miscWhere(String wClause) {
 			System.out.println("Query exception - select: " + e);
 			e.printStackTrace();
 		}
+		System.out.println("Number of activities: "+list.size());
 		return list;
 	}
 	
 
-		private ActivityBooking singleWhere(String wClause) {
+	private ActivityBooking singleWhere(String wClause) {
 			ResultSet results;
 			ActivityBooking activityBookingObj = new ActivityBooking();
 			String query = buildQuery(wClause);
@@ -142,18 +157,18 @@ private LinkedList<ActivityBooking> miscWhere(String wClause) {
 				System.out.println("Query exception: " + e);
 			}
 			return activityBookingObj;
-		}
+	}
 		
-		private String buildQuery(String wClause) {
-			String query = "SELECT *  FROM ActivityBooking";
+	private String buildQuery(String wClause) {
+			String query = "SELECT * FROM ActivityBooking ac, ActivityConnectionTable ct WHERE ac.ActivityID = ct.ActivityID ";
 
 			if (wClause.length() > 0)
-				query = query + " WHERE " + wClause;
+				query = query + " AND "+wClause;
 
 			return query;
-		}
+	}
 
-private ActivityBooking buildActivity(ResultSet results) {
+	private ActivityBooking buildActivity(ResultSet results) {
 			ActivityBooking activityBookingObj = new ActivityBooking();
 			try {
 				activityBookingObj.setActivityID(results.getInt("activityID"));
@@ -167,11 +182,11 @@ private ActivityBooking buildActivity(ResultSet results) {
 				System.out.println("Error in building the activity: "+e.getMessage());
 			}
 			return activityBookingObj;
-		}
-//!
+	}
 
 
-		public LinkedList<ActivityBooking> getActivity(int activityID){
+
+	public LinkedList<ActivityBooking> getActivity(int activityID){
 			int rc = -1;
 			LinkedList<ActivityBooking> activities = new LinkedList<ActivityBooking>();
 			
@@ -209,38 +224,53 @@ private ActivityBooking buildActivity(ResultSet results) {
 				
 			}
 			return activities;
-		}
-		public LinkedList<Customer> getCustomersInBooking(int facilityID, String startTime){
-			LinkedList<Customer> activitiesInBooking = new LinkedList<Customer>();
-			int rc= -1;
-			String query = "";
+	}
+		
+	public int deleteActivity(int activityID, int customerID){
+		int rc = -1;
+		
+		String query = "";
+		
+		query = "DELETE FROM ActivityConnectionTable "
+				+ "WHERE activityID = " + activity.getActivityID()
+				+ "AND customerID = " + activity.getCustomer().getCustomerID();
+		
+		
+		System.out.println("insert : " + query);
+		try {
 			
-			query = "" + facilityID +startTime;
-			try {
-				ResultSet results;
-				Statement stmt = con.createStatement();
-				stmt.setQueryTimeout(5);
-				
-				
-				results = stmt.executeQuery(query);
-				
-				if (results.next()) {
-					ActivityBooking activityBooking = new ActivityBooking();
-					activityBooking.setActivityID(results.getInt("activityID"));
-					activityBooking.setFacility(new Facility(results.getInt("facilityID")));
-					activityBooking.setStartTime(results.getString("startTime"));
-					activityBooking.setCustomer(new Customer(results.getInt("customer")));
-					rc = results.getInt("facilityID");
-					activityBooking.add(activity);
-				}
-				
-				
-					stmt.close();
-			} catch (SQLException ex) {
-				System.out.println("not found "+rc+" "+ex.getMessage());
-				
-			}
-			return activitiesInBooking;
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			
+			rc = stmt.executeUpdate(query);
+			
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("Activity not deleted "+rc+" "+ex.getMessage());
+			
 		}
-
+		
+		query = "";
+		
+		
+		
+		query = "DELETE FROM ActivityBooking "
+				+ "WHERE activityID = " + activity.getActivityID();
+		System.out.println("insert : " + query);
+		try {
+			
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			
+			rc = stmt.executeUpdate(query);
+			
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("Activity not deleted "+rc+" "+ex.getMessage());
+			
+		}
+		
+		return rc;
+	}
+	
 }

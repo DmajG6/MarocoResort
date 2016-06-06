@@ -53,10 +53,8 @@ public class BookingMenu extends JFrame {
 	public BookingMenu(Customer customer, int type){
 		this.customer = customer;
 		this.type = type;
-		buildWindow();
-	}
-	
-	private void buildWindow(){
+		this.setEnabled(true);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 306, 324);
 		contentPane = new JPanel();
@@ -97,7 +95,7 @@ public class BookingMenu extends JFrame {
 		contentPane.add(btnExit);
 		
 	}
-
+	
 	private void bookFacilityPressed(){
 		new BookFacility(customer, type).setVisible(true);
 		this.dispose();

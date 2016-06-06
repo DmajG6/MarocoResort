@@ -75,51 +75,7 @@ public class DbCustomer {
 		
 	}
 	
-/*
-	private int getCustomerID(Customer customer) {
-		
-		int rc = -1;
-		
-		String query = "";
-		
-		query = "SELECT CustomerID"
-				+ "FROM Customer"
-				+ "WHERE Name = '" + customer.getName()+"'"
-				+ " CustomerID = " + customer.getCustomerID()
-				+ " Password = " + customer.getPassword()
-				+ " Country = " + customer.getCountry()
-				+ " PhoneNumber = " + customer.getPhoneNumber()
-				+ " Email = " + customer.getEmail()
-				+ " IdType = " + customer.getIdType()
-				+ " IdNumber = " + customer.getIdNumber()
-				+ " SpecialService = " + customer.getSpecialService()
-				+ " RoomID = " + customer.getRoomID()
-				+ " Active = " + customer.getActive()
-				+ " Address = '" + customer.getAddress()+"'";
-		
-		System.out.println("insert : " + query);
-		try {
-			ResultSet results;
-			Statement stmt = con.createStatement();
-			stmt.setQueryTimeout(5);
-			rc = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.close();
-			
-			results = stmt.executeQuery(query);
-			
-			if (results.next()) {
-				rc = results.getInt("CustomerID");
-			}
-				stmt.close();
-		} catch (SQLException ex) {
-			System.out.println("ID not found "+ex.getSQLState());
-			
-		}
-		
-		return rc;
-	}
-*/
+
 	public LinkedList<Customer> getAllCustomers() {
 		return miscWhere(""); 
 	}
@@ -130,12 +86,12 @@ public class DbCustomer {
 	}
 	
 	public Customer findCustomerByCustomerID(int customerID) {
-		String wClause = "  customerID = '" + customerID + "'";
+		String wClause = " customerID = " + customerID;
 		return singleWhere(wClause);
 	}
 	
-	public int updateCustomer(String name, Customer customer) {
-		String q = "update Customer set customerID = ?, password = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, idType = ?, idNumber = ?, specialService = ?, roomID = ?, active = ? where name='" + customer.getName()+"'";
+	public int updateCustomer(Customer customer) {
+		String q = "update Customer set customerID = ?, password = ?, name = ?, country = ?, address = ?, phoneNumber = ?, email = ?, idType = ?, idNumber = ?, specialService = ?, roomID = ?, active = ? where customerID='" + customer.getCustomerID()+"'";
 		int res = 0;
 		try (PreparedStatement s = DbConnection.getInstance().getDBcon()
 				.prepareStatement(q)) {

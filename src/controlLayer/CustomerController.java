@@ -62,8 +62,8 @@ public class CustomerController {
 		return customer;
 	}
 	
-	public int updateCustomer(String name, Customer customer){
-		return dbCustomer.updateCustomer(name, customer);		
+	public int updateCustomer(Customer customer){
+		return dbCustomer.updateCustomer(customer);		
 	}
 
 
@@ -82,4 +82,10 @@ public class CustomerController {
 			dbCustomer.checkInOut(customerID, "no");
 		}
 	}
+	
+	public void setNewPassword(String newPassword, Customer customer){
+		customer.setPassword(newPassword);
+		dbCustomer.updateCustomer(customer);
+	}
+	
 }

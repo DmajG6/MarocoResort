@@ -126,7 +126,7 @@ class ActivityDateTime  extends JFrame {
 		}
 		
 		export = export + "-" + date.substring(25);
-		export = export + " " + date.substring(12, 14) + ":00";
+		export = export + " " + date.substring(11, 13) + ":00";
 		
 		return export;
 	}

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import modelLayer.ActivityBooking;
 import modelLayer.Customer;
 import modelLayer.Facility;
+import modelLayer.Staff;
 
 import javax.swing.JPopupMenu;
 import java.awt.Component;
@@ -157,11 +158,21 @@ public class GroupSportsMenu extends JFrame {
 		txtNum.setColumns(10);
 		
 		btnJoin = new JButton("Join");
+		btnJoin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				joinPressed();
+			}
+		});
 		btnJoin.setEnabled(false);
 		btnJoin.setBounds(402, 194, 183, 43);
 		contentPane.add(btnJoin);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cancelPressed();
+			}
+		});
 		btnExit.setBounds(402, 302, 183, 43);
 		contentPane.add(btnExit);
 		
@@ -170,6 +181,11 @@ public class GroupSportsMenu extends JFrame {
 		btnCancelReservation.setBounds(402, 250, 183, 43);
 		contentPane.add(btnCancelReservation);
 		getFacilities();
+		
+		customer.toString();
+		
+		model = (DefaultTableModel) table.getModel();
+		
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -243,11 +259,16 @@ public class GroupSportsMenu extends JFrame {
 	
 	private void joinPressed(){
 		
-		actCtr.createActivityBooking(new ActivityBooking(chosenFacility, null, time, customer));
+		actCtr.createActivityBooking(new ActivityBooking(chosenFacility, new Staff(-1), time, customer, (customersInBooking.size()+1)));
 		
-		model.addRow(new Object[]{customer.getName(), customer.getCountry()});
+		System.out.println("toString: "+customer.toString());
+		
+		model.addRow(new String[]{customer.getName(), customer.getCountry()});
+		
+		
 		btnCancelReservation.setEnabled(true);
 		btnJoin.setEnabled(false);
+		
 	}
 	
 	private void cancelPressed(){
@@ -264,7 +285,7 @@ public class GroupSportsMenu extends JFrame {
 			}
 		}
 		
-		actCtr.removeBooking(removeActivityID);
+		actCtr.removeBooking(removeActivityID, customer.getCustomerID());
 		
 		for(int i = 0; i < model.getRowCount(); i++){
 			if(model.getValueAt(i, 1).equals(customer.getName())&&model.getValueAt(i, 2).equals(customer.getCountry())){
