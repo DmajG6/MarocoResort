@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import controlLayer.*;
 import modelLayer.*;
 import java.awt.Button;
+import java.awt.Color;
 
 public class StaffMenu extends JFrame {
 	
@@ -58,73 +59,74 @@ public class StaffMenu extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBounds(100, 100, 500, 300);
+		setBounds(100, 100, 551, 366);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		txtf_Name = new JTextField();
-		txtf_Name.setBounds(176, 8, 127, 20);
+		txtf_Name.setBounds(176, 32, 127, 20);
 		contentPane.add(txtf_Name);
 		txtf_Name.setColumns(10);
 		
 		txtf_StaffId = new JTextField();
-		txtf_StaffId.setBounds(176, 39, 127, 20);
+		txtf_StaffId.setBounds(176, 56, 127, 20);
 		contentPane.add(txtf_StaffId);
 		txtf_StaffId.setColumns(10);
 		
 		txtf_Type = new JTextField();
-		txtf_Type.setBounds(176, 70, 127, 20);
+		txtf_Type.setBounds(176, 88, 127, 20);
 		contentPane.add(txtf_Type);
 		txtf_Type.setColumns(10);
 		
 		txtf_Password = new JTextField();
-		txtf_Password.setBounds(176, 101, 127, 20);
+		txtf_Password.setBounds(176, 125, 127, 20);
 		contentPane.add(txtf_Password);
 		txtf_Password.setColumns(10);
 		
 		txtf_Email = new JTextField();
-		txtf_Email.setBounds(176, 132, 127, 20);
+		txtf_Email.setBounds(176, 162, 127, 20);
 		contentPane.add(txtf_Email);
 		txtf_Email.setColumns(10);
 		
 		txtf_WorkPhoneNumber = new JTextField();
-		txtf_WorkPhoneNumber.setBounds(176, 172, 127, 20);
+		txtf_WorkPhoneNumber.setBounds(176, 199, 127, 20);
 		contentPane.add(txtf_WorkPhoneNumber);
 		txtf_WorkPhoneNumber.setColumns(10);
 		
 		txtf_PersonalPhoneNumber = new JTextField();
-		txtf_PersonalPhoneNumber.setBounds(176, 221, 127, 20);
+		txtf_PersonalPhoneNumber.setBounds(176, 247, 127, 20);
 		contentPane.add(txtf_PersonalPhoneNumber);
 		txtf_PersonalPhoneNumber.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(22, 17, 77, 14);
+		lblNewLabel.setBounds(22, 35, 77, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(22, 42, 77, 14);
+		lblId.setBounds(22, 59, 77, 14);
 		contentPane.add(lblId);
 		
 		JLabel lblType = new JLabel("Type");
-		lblType.setBounds(22, 73, 77, 14);
+		lblType.setBounds(22, 88, 77, 23);
 		contentPane.add(lblType);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(22, 104, 77, 17);
+		lblPassword.setBounds(22, 128, 77, 17);
 		contentPane.add(lblPassword);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(22, 135, 77, 14);
+		lblEmail.setBounds(22, 162, 77, 14);
 		contentPane.add(lblEmail);
 		
 		JLabel lblWorkPhoneNumber = new JLabel("Work phone number");
-		lblWorkPhoneNumber.setBounds(22, 166, 121, 33);
+		lblWorkPhoneNumber.setBounds(22, 193, 140, 33);
 		contentPane.add(lblWorkPhoneNumber);
 		
 		JLabel lblPersonalPhoneNumber = new JLabel("Personal phone number");
-		lblPersonalPhoneNumber.setBounds(22, 212, 121, 38);
+		lblPersonalPhoneNumber.setBounds(14, 238, 148, 38);
 		contentPane.add(lblPersonalPhoneNumber);
 		
 		JButton btnFindStaffByName = new JButton("Find Staff By Name");
@@ -134,7 +136,7 @@ public class StaffMenu extends JFrame {
 				
 			}
 		});
-		btnFindStaffByName.setBounds(327, 17, 147, 51);
+		btnFindStaffByName.setBounds(317, 32, 164, 51);
 		contentPane.add(btnFindStaffByName);
 		
 		JButton btnFindStaffByID = new JButton("Find Staff By ID");
@@ -143,7 +145,7 @@ public class StaffMenu extends JFrame {
 				findStaffByID();
 			}
 		});
-		btnFindStaffByID.setBounds(327, 101, 147, 51);
+		btnFindStaffByID.setBounds(317, 147, 164, 51);
 		contentPane.add(btnFindStaffByID);
 		
 		JButton btnCreateStaff = new JButton("Create Staff");
@@ -152,7 +154,7 @@ public class StaffMenu extends JFrame {
 				createStaff();
 			}
 		});
-		btnCreateStaff.setBounds(327, 192, 147, 49);
+		btnCreateStaff.setBounds(317, 218, 164, 49);
 		contentPane.add(btnCreateStaff);
 	
 		JButton btnMainMenu = new JButton("Main Menu");
@@ -162,7 +164,7 @@ public class StaffMenu extends JFrame {
 				StaffMenu.this.dispose();
 			    }
 			});
-		btnMainMenu.setBounds(10, 0, 89, 23);
+		btnMainMenu.setBounds(22, 0, 109, 33);
 		contentPane.add(btnMainMenu);
 	}
 

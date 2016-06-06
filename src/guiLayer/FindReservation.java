@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import modelLayer.ReservationOfStay;
 import modelLayer.Staff;
 import controlLayer.ReservationOfStayController;
+import java.awt.Color;
 
 /**
 	Jun 6, 2016 - 4:59:38 PM
@@ -58,6 +59,7 @@ public class FindReservation extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 353);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

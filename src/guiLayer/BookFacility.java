@@ -27,6 +27,7 @@ import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ItemEvent;
+import java.awt.Color;
 
 
 public class BookFacility extends JFrame {
@@ -78,20 +79,21 @@ public class BookFacility extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblChooseType = new JLabel("Choose Type");
-		lblChooseType.setBounds(10, 25, 76, 14);
+		lblChooseType.setBounds(10, 25, 95, 21);
 		contentPane.add(lblChooseType);
 		
 		JLabel lblChooseFacility = new JLabel("Choose Facility");
-		lblChooseFacility.setBounds(10, 50, 76, 14);
+		lblChooseFacility.setBounds(10, 58, 104, 27);
 		contentPane.add(lblChooseFacility);
 		
-		Checkbox checkbox = new Checkbox("Would you like an instructor?");
-		checkbox.setBounds(10, 89, 193, 22);
+		Checkbox checkbox = new Checkbox("Would you like to have an instructor?");
+		checkbox.setBounds(10, 89, 256, 22);
 		contentPane.add(checkbox);
 		
 		
@@ -104,7 +106,7 @@ public class BookFacility extends JFrame {
 		facilities = facilityController.getAllFacilities();
 		LinkedList<String> temp = new LinkedList<>();
 			
-		chooseType.setBounds(111, 19, 75, 20);
+		chooseType.setBounds(112, 25, 86, 27);
 		contentPane.add(chooseType);
 		
 		chooseFacility = new Choice();
@@ -113,7 +115,7 @@ public class BookFacility extends JFrame {
 				facilityChosen();
 			}
 		});
-		chooseFacility.setBounds(111, 50, 75, 20);
+		chooseFacility.setBounds(120, 56, 76, 27);
 		contentPane.add(chooseFacility);
 		chooseFacility.setEnabled(false);
 		
@@ -127,7 +129,7 @@ public class BookFacility extends JFrame {
 			}
 		});
 		
-		add.setBounds(319, 173, 86, 22);
+		add.setBounds(332, 173, 86, 22);
 		contentPane.add(add);
 		
 		Button exit = new Button("Exit");
@@ -152,7 +154,7 @@ public class BookFacility extends JFrame {
 		contentPane.add(book);
 		
 		JLabel note = new JLabel("Note: Instructor can be booked for the next day");
-		note.setBounds(56, 117, 290, 14);
+		note.setBounds(30, 117, 316, 14);
 		contentPane.add(note);
 		
 		JButton btnTime = new JButton("Time");
@@ -161,17 +163,17 @@ public class BookFacility extends JFrame {
 				getTime();
 			}
 		});
-		btnTime.setBounds(323, 20, 97, 25);
+		btnTime.setBounds(321, 29, 97, 25);
 		contentPane.add(btnTime);
 		
 		dateTime = new JTextField();
 		dateTime.setEditable(false);
-		dateTime.setBounds(204, 21, 116, 22);
+		dateTime.setBounds(204, 30, 116, 22);
 		contentPane.add(dateTime);
 		dateTime.setColumns(10);
 		
 		JLabel lblNumberOfCustomers = new JLabel("Number of Customers that reserved this:");
-		lblNumberOfCustomers.setBounds(30, 153, 256, 16);
+		lblNumberOfCustomers.setBounds(30, 151, 316, 16);
 		contentPane.add(lblNumberOfCustomers);
 		
 		numberCust = new JTextField();

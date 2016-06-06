@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import controlLayer.CustomerController;
 import modelLayer.Customer;
 import modelLayer.Staff;
+import java.awt.Color;
 
 /**
 	May 30, 2016 - 1:00:43 PM
@@ -51,6 +52,7 @@ public class GetCustomerAtReception extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 554, 151);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

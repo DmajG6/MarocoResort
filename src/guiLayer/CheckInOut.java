@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import modelLayer.Customer;
 import modelLayer.Staff;
 import controlLayer.CustomerController;
+import java.awt.Color;
 
 
 /**
@@ -62,11 +63,13 @@ public class CheckInOut extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 533, 361);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCheckInout = new JLabel("Check In/Out");
+		lblCheckInout.setForeground(new Color(255, 255, 255));
 		lblCheckInout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCheckInout.setFont(new Font("Tahoma", Font.ITALIC, 44));
 		lblCheckInout.setBounds(63, 13, 404, 84);
@@ -83,11 +86,11 @@ public class CheckInOut extends JFrame {
 				findCustomerByID();
 			}
 		});
-		btnFindCustomer.setBounds(263, 146, 116, 25);
+		btnFindCustomer.setBounds(284, 146, 116, 25);
 		contentPane.add(btnFindCustomer);
 		
 		JLabel lblCustomerId = new JLabel("Customer ID:");
-		lblCustomerId.setBounds(63, 150, 82, 16);
+		lblCustomerId.setBounds(49, 150, 96, 16);
 		contentPane.add(lblCustomerId);
 		
 		JLabel lblName = new JLabel("Name:");
@@ -95,7 +98,7 @@ public class CheckInOut extends JFrame {
 		contentPane.add(lblName);
 		
 		JLabel lblCheckedIn = new JLabel("Checked In:");
-		lblCheckedIn.setBounds(69, 211, 76, 16);
+		lblCheckedIn.setBounds(63, 222, 76, 16);
 		contentPane.add(lblCheckedIn);
 		
 		name = new JTextField();
@@ -105,7 +108,7 @@ public class CheckInOut extends JFrame {
 		
 		status = new JTextField();
 		status.setEditable(false);
-		status.setBounds(147, 208, 116, 22);
+		status.setBounds(147, 219, 116, 22);
 		contentPane.add(status);
 		status.setColumns(10);
 		
@@ -115,7 +118,7 @@ public class CheckInOut extends JFrame {
 				findCustomerByName();
 			}
 		});
-		btnFindCustomerName.setBounds(263, 178, 116, 25);
+		btnFindCustomerName.setBounds(284, 178, 116, 25);
 		contentPane.add(btnFindCustomerName);
 		
 		btnCheckInout = new JButton("Check In/Out");
@@ -125,12 +128,12 @@ public class CheckInOut extends JFrame {
 			}
 		});
 		btnCheckInout.setEnabled(false);
-		btnCheckInout.setBounds(263, 207, 127, 39);
+		btnCheckInout.setBounds(288, 211, 116, 39);
 		contentPane.add(btnCheckInout);
 		
 		lblNewPassword = new JLabel("New Password:");
 		lblNewPassword.setEnabled(false);
-		lblNewPassword.setBounds(52, 266, 95, 16);
+		lblNewPassword.setBounds(30, 266, 116, 16);
 		contentPane.add(lblNewPassword);
 		
 		NewPass = new JTextField();
@@ -146,7 +149,7 @@ public class CheckInOut extends JFrame {
 				exitPressed();
 			}
 		});
-		btnExit.setBounds(282, 259, 97, 25);
+		btnExit.setBounds(303, 262, 97, 25);
 		contentPane.add(btnExit);
 	}
 	

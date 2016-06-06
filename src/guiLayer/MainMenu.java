@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import modelLayer.Staff;
+import java.awt.Color;
 
 public class MainMenu extends JFrame {
 
@@ -48,17 +49,19 @@ public class MainMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 387);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblMainMenu = new JLabel("Main Menu");
+		lblMainMenu.setForeground(new Color(255, 255, 255));
 		lblMainMenu.setBounds(136, 11, 171, 37);
 		lblMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		contentPane.add(lblMainMenu);
 		
 		JButton btnReservationMenu = new JButton("Reservation Menu");
-		btnReservationMenu.setBounds(309, 147, 125, 23);
+		btnReservationMenu.setBounds(263, 136, 171, 35);
 		btnReservationMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
@@ -70,7 +73,7 @@ public class MainMenu extends JFrame {
 		
 		
 		JButton btnCustomerMenu = new JButton("Customer Menu");
-		btnCustomerMenu.setBounds(10, 147, 125, 23);
+		btnCustomerMenu.setBounds(10, 81, 146, 37);
 		btnCustomerMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
@@ -80,7 +83,7 @@ public class MainMenu extends JFrame {
 		contentPane.add(btnCustomerMenu);
 		
 		JButton btnStaffMenu = new JButton("Staff Menu");
-		btnStaffMenu.setBounds(10, 181, 125, 23);
+		btnStaffMenu.setBounds(10, 135, 146, 37);
 		btnStaffMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainMenu.this.dispose();
@@ -89,13 +92,8 @@ public class MainMenu extends JFrame {
 		});
 		contentPane.add(btnStaffMenu);
 		
-		JLabel lblNewLabel = new JLabel("( \u0361\u00B0 \u035C\u0296 \u0361\u00B0)");
-		lblNewLabel.setBounds(171, 52, 74, 37);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		contentPane.add(lblNewLabel);
-		
 		JButton FacilityMenu = new JButton("Facility Menu");
-		FacilityMenu.setBounds(10, 215, 125, 23);
+		FacilityMenu.setBounds(10, 189, 146, 37);
 		FacilityMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				faciltyMenuPressed();
@@ -104,7 +102,7 @@ public class MainMenu extends JFrame {
 		contentPane.add(FacilityMenu);
 		
 		JButton FacilityBooking = new JButton("Facility Booking");
-		FacilityBooking.setBounds(10, 249, 125, 23);
+		FacilityBooking.setBounds(10, 237, 146, 37);
 		FacilityBooking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				facilityBookingPressed();
@@ -113,7 +111,7 @@ public class MainMenu extends JFrame {
 		contentPane.add(FacilityBooking);
 		
 		JButton LogOut = new JButton("Log Out");
-		LogOut.setBounds(309, 249, 125, 23);
+		LogOut.setBounds(301, 303, 113, 23);
 		LogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logOutPressed();
@@ -122,7 +120,7 @@ public class MainMenu extends JFrame {
 		contentPane.add(LogOut);
 		
 		JButton btnAgencyMenu = new JButton("Agency Menu");
-		btnAgencyMenu.setBounds(309, 181, 125, 23);
+		btnAgencyMenu.setBounds(263, 190, 171, 35);
 		btnAgencyMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				MainMenu.this.dispose();
@@ -137,7 +135,7 @@ public class MainMenu extends JFrame {
 				checkInOutPressed();
 			}
 		});
-		btnCheckInout.setBounds(309, 214, 121, 25);
+		btnCheckInout.setBounds(263, 237, 171, 37);
 		contentPane.add(btnCheckInout);
 		
 		JButton FindButton = new JButton("Find Reservation");
@@ -146,7 +144,7 @@ public class MainMenu extends JFrame {
 				findPressed();
 			}
 		});
-		FindButton.setBounds(309, 114, 119, 25);
+		FindButton.setBounds(263, 80, 171, 38);
 		contentPane.add(FindButton);
 		
 	}

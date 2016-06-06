@@ -16,6 +16,7 @@ import javax.swing.JButton;
 
 import controlLayer.*;
 import modelLayer.*;
+import java.awt.Color;
 
 public class FacilityMenu extends JFrame {
 	
@@ -54,22 +55,24 @@ public class FacilityMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblFacility = new JLabel("Facility");
+		lblFacility.setForeground(new Color(255, 255, 255));
 		lblFacility.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblFacility.setBounds(195, 0, 53, 49);
 		contentPane.add(lblFacility);
 		
 		textF_FacilityID = new JTextField();
-		textF_FacilityID.setBounds(66, 82, 86, 20);
+		textF_FacilityID.setBounds(126, 82, 86, 20);
 		contentPane.add(textF_FacilityID);
 		textF_FacilityID.setColumns(10);
 		
 		JLabel lblFacilityid = new JLabel("FacilityID");
-		lblFacilityid.setBounds(10, 85, 46, 14);
+		lblFacilityid.setBounds(10, 85, 61, 17);
 		contentPane.add(lblFacilityid);
 		
 		JButton btn_Create_Facility = new JButton("Create");
@@ -88,25 +91,25 @@ public class FacilityMenu extends JFrame {
 				FacilityMenu.this.dispose();
 			    }
 			});
-		btn_MainMenu.setBounds(321, 40, 89, 23);
+		btn_MainMenu.setBounds(321, 40, 111, 23);
 		contentPane.add(btn_MainMenu);
 		
 		JLabel lblType = new JLabel("Type");
-		lblType.setBounds(10, 116, 46, 14);
+		lblType.setBounds(10, 116, 46, 17);
 		contentPane.add(lblType);
 		
 		textF_Type = new JTextField();
-		textF_Type.setBounds(66, 113, 86, 20);
+		textF_Type.setBounds(126, 113, 86, 20);
 		contentPane.add(textF_Type);
 		textF_Type.setColumns(10);
 		
 		textF_InstructorPrice = new JTextField();
-		textF_InstructorPrice.setBounds(66, 175, 86, 20);
+		textF_InstructorPrice.setBounds(126, 178, 86, 20);
 		contentPane.add(textF_InstructorPrice);
 		textF_InstructorPrice.setColumns(10);
 		
 		JLabel lblInstPrice = new JLabel("In. Price");
-		lblInstPrice.setBounds(10, 181, 46, 14);
+		lblInstPrice.setBounds(10, 181, 76, 14);
 		contentPane.add(lblInstPrice);
 		
 		JButton btnFind = new JButton("Find");

@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Button;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Color;
 
 public class ReservationMenu extends JFrame {
 	
@@ -88,6 +89,7 @@ public class ReservationMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1017, 643);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -199,6 +201,7 @@ public class ReservationMenu extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.setBackground(new Color(51, 153, 153));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},

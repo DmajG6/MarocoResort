@@ -1,6 +1,7 @@
 package guiLayer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -61,15 +62,17 @@ public class AgencyManu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 377);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.setBounds(10, 11, 89, 23);
+		btnMainMenu.setBounds(34, 8, 133, 32);
 		contentPane.add(btnMainMenu);
 		
 		JLabel lblAgencyid = new JLabel("AgencyID");
+		lblAgencyid.setForeground(new Color(255, 255, 255));
 		lblAgencyid.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAgencyid.setBounds(10, 60, 60, 14);
 		contentPane.add(lblAgencyid);
@@ -80,6 +83,7 @@ public class AgencyManu extends JFrame {
 		textF_AgencyID.setColumns(10);
 		
 		JLabel lblName = new JLabel("Name");
+		lblName.setForeground(new Color(255, 255, 255));
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblName.setBounds(10, 88, 60, 14);
 		contentPane.add(lblName);
@@ -90,6 +94,7 @@ public class AgencyManu extends JFrame {
 		contentPane.add(textF_Name);
 		
 		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setForeground(new Color(255, 255, 255));
 		lblAddress.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAddress.setBounds(10, 113, 60, 14);
 		contentPane.add(lblAddress);
@@ -100,6 +105,7 @@ public class AgencyManu extends JFrame {
 		contentPane.add(textF_Address);
 		
 		JLabel lblCvr = new JLabel("CVR \u2116");
+		lblCvr.setForeground(new Color(255, 255, 255));
 		lblCvr.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCvr.setBounds(10, 141, 60, 14);
 		contentPane.add(lblCvr);
@@ -110,6 +116,7 @@ public class AgencyManu extends JFrame {
 		contentPane.add(textF_CVR);
 		
 		JLabel lblCountry = new JLabel("Country");
+		lblCountry.setForeground(new Color(255, 255, 255));
 		lblCountry.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCountry.setBounds(10, 169, 60, 14);
 		contentPane.add(lblCountry);
@@ -119,7 +126,8 @@ public class AgencyManu extends JFrame {
 		textF_Country.setBounds(69, 166, 86, 20);
 		contentPane.add(textF_Country);
 		
-		JLabel lblEMail = new JLabel("e - mail");
+		JLabel lblEMail = new JLabel("E - mail");
+		lblEMail.setForeground(new Color(255, 255, 255));
 		lblEMail.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEMail.setBounds(10, 200, 60, 14);
 		contentPane.add(lblEMail);
@@ -130,6 +138,7 @@ public class AgencyManu extends JFrame {
 		contentPane.add(textF_Email);
 		
 		JLabel lblPhone = new JLabel("Phone \u2116");
+		lblPhone.setForeground(new Color(255, 255, 255));
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPhone.setBounds(10, 231, 60, 14);
 		contentPane.add(lblPhone);
@@ -140,6 +149,7 @@ public class AgencyManu extends JFrame {
 		textF_Phone.setColumns(10);
 		
 		JLabel lblExtraInfo = new JLabel("Extra Info");
+		lblExtraInfo.setForeground(new Color(255, 255, 255));
 		lblExtraInfo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblExtraInfo.setBounds(10, 256, 60, 14);
 		contentPane.add(lblExtraInfo);
@@ -150,6 +160,7 @@ public class AgencyManu extends JFrame {
 		textF_ExtraInfo.setColumns(10);
 		
 		JLabel lblDiscount = new JLabel("Discount");
+		lblDiscount.setForeground(new Color(255, 255, 255));
 		lblDiscount.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDiscount.setBounds(10, 284, 60, 14);
 		contentPane.add(lblDiscount);

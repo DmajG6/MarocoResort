@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class BookingMenu extends JFrame {
 
@@ -48,11 +49,14 @@ public class BookingMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 306, 324);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblBookingMenu = new JLabel("Booking Menu");
+		lblBookingMenu.setForeground(new Color(255, 255, 255));
+		lblBookingMenu.setBackground(new Color(255, 255, 255));
 		lblBookingMenu.setFont(new Font("Tahoma", Font.ITALIC, 41));
 		lblBookingMenu.setBounds(12, 13, 278, 57);
 		contentPane.add(lblBookingMenu);

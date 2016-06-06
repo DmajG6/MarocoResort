@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 
 import controlLayer.*;
 import modelLayer.*;
+import java.awt.Color;
 
 public class CustomerMenu extends JFrame {
 
@@ -58,12 +59,13 @@ public class CustomerMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 471, 444);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCustomerId = new JLabel("Customer ID");
-		lblCustomerId.setBounds(32, 79, 76, 14);
+		lblCustomerId.setBounds(14, 79, 94, 14);
 		contentPane.add(lblCustomerId);
 		
 		txtf_ID = new JTextField();
@@ -99,7 +101,7 @@ public class CustomerMenu extends JFrame {
 		txtf_address.setColumns(10);
 		
 		JLabel lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setBounds(32, 207, 76, 16);
+		lblPhoneNumber.setBounds(14, 207, 115, 16);
 		contentPane.add(lblPhoneNumber);
 		
 		txtf_phoneNumber = new JTextField();
@@ -148,7 +150,7 @@ public class CustomerMenu extends JFrame {
 		contentPane.add(lblIdType);
 		
 		JLabel lblIdNumber = new JLabel("ID Number");
-		lblIdNumber.setBounds(32, 286, 76, 14);
+		lblIdNumber.setBounds(22, 286, 76, 14);
 		contentPane.add(lblIdNumber);
 		
 		txtf_idType = new JTextField();
@@ -162,7 +164,7 @@ public class CustomerMenu extends JFrame {
 		txtf_idNumber.setColumns(10);
 		
 		JLabel lblSpecialService = new JLabel("Special Service");
-		lblSpecialService.setBounds(32, 311, 76, 14);
+		lblSpecialService.setBounds(14, 311, 115, 14);
 		contentPane.add(lblSpecialService);
 		
 		txtf_specialService = new JTextField();
@@ -171,7 +173,7 @@ public class CustomerMenu extends JFrame {
 		txtf_specialService.setColumns(10);
 					
 		JLabel lblRoomId = new JLabel("Room ID");
-		lblRoomId.setBounds(32, 337, 46, 14);
+		lblRoomId.setBounds(32, 337, 76, 14);
 		contentPane.add(lblRoomId);
 		
 		txtf_roomID = new JTextField();
@@ -204,7 +206,7 @@ public class CustomerMenu extends JFrame {
 				CustomerMenu.this.dispose();
 			    }
 			});
-		btnMainMenu.setBounds(10, 0, 89, 23);
+		btnMainMenu.setBounds(19, 17, 110, 29);
 		contentPane.add(btnMainMenu);
 	}
 	
