@@ -6,7 +6,7 @@ import modelLayer.*;
 
 public class StaffController {
 
-DbStaff dbStaff = new DbStaff();
+	DbStaff dbStaff = new DbStaff();
 	
 	public ArrayList<Staff> getAllStaffs(){
 		return dbStaff.getAllStaffs();

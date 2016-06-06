@@ -16,6 +16,9 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.awt.Choice;
 import javax.swing.JLabel;
@@ -259,16 +262,19 @@ public class GroupSportsMenu extends JFrame {
 	
 	private void joinPressed(){
 		
-		actCtr.createActivityBooking(new ActivityBooking(chosenFacility, new Staff(-1), time, customer, (customersInBooking.size()+1)));
+		if(checkTimeBounds()){
 		
-		System.out.println("toString: "+customer.toString());
+			actCtr.createActivityBooking(new ActivityBooking(chosenFacility, new Staff(-1), time, customer, (customersInBooking.size()+1)));
 		
-		model.addRow(new String[]{customer.getName(), customer.getCountry()});
+			System.out.println("toString: "+customer.toString());
+		
+			model.addRow(new String[]{customer.getName(), customer.getCountry()});
 		
 		
-		btnCancelReservation.setEnabled(true);
-		btnJoin.setEnabled(false);
+			btnCancelReservation.setEnabled(true);
+			btnJoin.setEnabled(false);
 		
+		}
 	}
 	
 	private void cancelPressed(){
@@ -296,5 +302,30 @@ public class GroupSportsMenu extends JFrame {
 		btnJoin.setEnabled(true);
 		btnCancelReservation.setEnabled(false);
 	}
+	
+	private boolean checkTimeBounds(){
+		boolean valueToReturn = true;
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		Calendar cal = Calendar.getInstance();
+	
+		String currentDate = df.format(cal.getTime());
+		
+		if(time.substring(0, 8).equals(currentDate.substring(0, 8))){
+			if(Integer.parseInt(time.substring(9, 11)) >= Integer.parseInt(currentDate.substring(9, 11))-1){
+				valueToReturn = false;
+			}
+		}
+		
+		if(time.substring(0, 2).equals(currentDate.substring(0, 2))&&currentDate.substring(6, 8).equals(currentDate.substring(6, 8))){
+			if(Integer.parseInt(time.substring(3, 5)) <= Integer.parseInt(currentDate.substring(3, 5)) - 7 ){
+				valueToReturn = false;
+			}
+		}
+		
+		
+		return valueToReturn;
+	}
+	
 	
 }

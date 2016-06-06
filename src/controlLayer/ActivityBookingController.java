@@ -21,25 +21,27 @@ public class ActivityBookingController {
 
 	public void createActivityBooking(ActivityBooking activityBooking){
 		
+		if(!checkNumberOfBookingsForCustomer(activityBooking.getCustomer(), activityBooking.getStartTime())){
+			
+		}else{
+
+			activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
+
+			//Transaction
+			//try{
+			//	DbConnection.startTransaction();
+			
+				dbActivityBooking.insertActivity(activityBooking);
+			
+				//	DbConnection.commitTransaction();
+			
+				//}catch(Exception ex){
+				//	System.out.println("Transaction: "+ex.toString());
+
+				//	DbConnection.rollbackTransaction();
+				//}
 		
-
-		activityBooking.setActivityID(dbActivityBooking.getNewID()+1);
-
-		//Transaction
-		//try{
-		//	DbConnection.startTransaction();
-			
-			dbActivityBooking.insertActivity(activityBooking);
-			
-		//	DbConnection.commitTransaction();
-			
-		//}catch(Exception ex){
-		//	System.out.println("Transaction: "+ex.toString());
-
-		//	DbConnection.rollbackTransaction();
-		//}
-		
-
+		}
 		
 	}
 	
@@ -85,5 +87,22 @@ public class ActivityBookingController {
 		return dbActivityBooking.deleteActivity(activityID, customerID);
 	}
 	
+	private boolean checkNumberOfBookingsForCustomer(Customer customer, String date){
+		
+		LinkedList<ActivityBooking> activities = getAllActivities();
+		
+		int counter = 0;
+		
+		for(ActivityBooking act: activities){
+			if((act.getCustomer().getCustomerID() == customer.getCustomerID())){
+				if(act.getStartTime().substring(0, 11).equals(date.substring(0, 11))){
+					counter++;
+				}
+			}
+		}
+		
+		return (counter < 4);
+		
+	}
 		
 }

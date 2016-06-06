@@ -19,10 +19,13 @@ import java.awt.Button;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ItemListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.event.ItemEvent;
 
 
@@ -44,6 +47,7 @@ public class BookFacility extends JFrame {
 	private JTextField numberCust;
 	private Staff chosenStaff;
 	private Button add;
+	private LinkedList<Customer> customersInBooking = new LinkedList<Customer>();
 	
 	/**
 	 * Launch the application.
@@ -208,12 +212,20 @@ public class BookFacility extends JFrame {
 
 	private void addBooking() {
 		
-		ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer, 0);
+		if(checkTimeBounds()){
 		
+			ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer, 0);
+		
+			actCtr.createActivityBooking(activityBooking);
+		
+		}
 	}
 
 	private void addWish() {
 		
+		ActivityBooking activityBooking = new ActivityBooking(chosenFacility, chosenStaff, chosenDateTime, customer, (customersInBooking.size()+1));
+		
+		actCtr.createActivityBooking(activityBooking);
 		
 		
 	}
@@ -237,11 +249,11 @@ public class BookFacility extends JFrame {
 	}
 	
 	private void bothSelected(){
-		LinkedList<Customer> customers = actCtr.getCustomersInBooking(chosenFacility.getFacilityID(), chosenDateTime);
-		if(customers.size() == 0){
+		customersInBooking = actCtr.getCustomersInBooking(chosenFacility.getFacilityID(), chosenDateTime);
+		if(customersInBooking.size() == 0){
 			facilityFree();
 		}else{
-			numberCust.setText(""+customers.size());
+			numberCust.setText(""+customersInBooking.size());
 			facilityTaken();
 		}
 	}
@@ -271,5 +283,29 @@ public class BookFacility extends JFrame {
 	
 	private void checkTime(){
 		
+	}
+	
+	private boolean checkTimeBounds(){
+		boolean valueToReturn = true;
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		Calendar cal = Calendar.getInstance();
+	
+		String currentDate = df.format(cal.getTime());
+		
+		if(chosenDateTime.substring(0, 8).equals(currentDate.substring(0, 8))){
+			if(Integer.parseInt(chosenDateTime.substring(9, 11)) >= Integer.parseInt(currentDate.substring(9, 11))-1){
+				valueToReturn = false;
+			}
+		}
+		
+		if(chosenDateTime.substring(0, 2).equals(currentDate.substring(0, 2))&&currentDate.substring(6, 8).equals(currentDate.substring(6, 8))){
+			if(Integer.parseInt(chosenDateTime.substring(3, 5)) <= Integer.parseInt(currentDate.substring(3, 5)) - 7 ){
+				valueToReturn = false;
+			}
+		}
+		
+		
+		return valueToReturn;
 	}
 }
