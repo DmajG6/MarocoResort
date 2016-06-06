@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import controlLayer.CustomerController;
 import controlLayer.LogInControl;
 import controlLayer.StaffController;
+import modelLayer.Customer;
 import modelLayer.Staff;
 
 import java.awt.event.ActionListener;
@@ -104,12 +105,13 @@ public class LogInMenu extends JFrame {
 				StaffController staffCtr = new StaffController();
 				Staff staff = staffCtr.findStaffByID(Integer.parseInt(idCode));
 				new MainMenu(staff).setEnabled(true);
-				dispose();
+				this.dispose();
 				return;
 			case 2:
 				CustomerController cusCtr = new CustomerController();
-				new BookingMenu(cusCtr.findCustomerByID(Integer.parseInt(idCode)), 2);
-				dispose();
+				Customer cust = cusCtr.findCustomerByID(Integer.parseInt(idCode));
+				new BookingMenu(cust, 2).setEnabled(true);
+				this.dispose();
 				return;
 			case -1:
 				

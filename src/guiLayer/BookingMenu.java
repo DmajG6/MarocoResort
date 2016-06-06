@@ -53,6 +53,7 @@ public class BookingMenu extends JFrame {
 	public BookingMenu(Customer customer, int type){
 		this.customer = customer;
 		this.type = type;
+		
 		this.setEnabled(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

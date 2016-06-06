@@ -81,7 +81,7 @@ public class GetCustomerAtReception extends JFrame {
 		int checkID = Integer.parseInt(txtId.getText());
 		Customer customer = cusCtr.findCustomerByID(checkID);
 		if(customer != null){
-			new BookingMenu(customer, 2).setVisible(true);
+			new BookingMenu(customer, 1).setVisible(true);
 			this.dispose();
 		}else{
 			lblStatus.setText("Customer not found");
