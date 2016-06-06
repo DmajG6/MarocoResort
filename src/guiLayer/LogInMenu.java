@@ -19,6 +19,7 @@ import modelLayer.Staff;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Color;
 
 /**
 	May 18, 2016 - 12:43:59 PM
@@ -57,12 +58,14 @@ public class LogInMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 588, 420);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Log In");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 50));
+		lblLogin.setForeground(new Color(255, 255, 255));
+		lblLogin.setFont(new Font("Tahoma", Font.ITALIC, 50));
 		lblLogin.setBounds(199, 13, 205, 111);
 		contentPane.add(lblLogin);
 		
@@ -72,16 +75,20 @@ public class LogInMenu extends JFrame {
 		ID_Field.setColumns(10);
 		
 		JLabel lblId = new JLabel("ID:");
+		lblId.setForeground(new Color(255, 255, 255));
+		lblId.setBackground(new Color(255, 255, 255));
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblId.setBounds(159, 142, 28, 28);
 		contentPane.add(lblId);
 		
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(new Color(255, 255, 255));
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPassword.setBounds(96, 194, 91, 28);
 		contentPane.add(lblPassword);
 		
 		JButton btnLogIn = new JButton("Log In");
+		btnLogIn.setBackground(new Color(204, 255, 204));
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				buttonPressed();
