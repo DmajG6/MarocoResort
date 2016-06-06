@@ -140,6 +140,15 @@ public class MainMenu extends JFrame {
 		btnCheckInout.setBounds(309, 214, 121, 25);
 		contentPane.add(btnCheckInout);
 		
+		JButton FindButton = new JButton("Find Reservation");
+		FindButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findPressed();
+			}
+		});
+		FindButton.setBounds(309, 114, 119, 25);
+		contentPane.add(FindButton);
+		
 	}
 	
 	private void facilityBookingPressed(){
@@ -158,6 +167,11 @@ public class MainMenu extends JFrame {
 	
 	private void checkInOutPressed(){
 		new CheckInOut(staff);
+		this.dispose();
+	}
+	
+	private void findPressed(){
+		new FindReservation(staff).setVisible(true);;
 		this.dispose();
 	}
 }

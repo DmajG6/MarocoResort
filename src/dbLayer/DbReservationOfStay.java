@@ -71,7 +71,7 @@ public class DbReservationOfStay {
 		ReservationOfStay reservationOfStay = new ReservationOfStay(reservationID);
 		
 		String query = "";
-		query = "SELECT * "+ "FROM ReservationOfStay"
+		query = "SELECT * "+ "FROM ReservationOfStay "
 				+ "WHERE reservationID = " + reservationID;
 		System.out.println("insert : " + query);
 		
@@ -86,6 +86,7 @@ public class DbReservationOfStay {
 			results = stmt.executeQuery(query);
 
 			if (results.next()) {
+				reservationOfStay.setReservationID(reservationID);
 				reservationOfStay.setDurationOfStay(results.getInt("durationOfStay"));
 				reservationOfStay.setArrivalDate(results.getString("arrivalDate"));
 				reservationOfStay.setDepartureDate(results.getString("departureDate"));
@@ -103,6 +104,33 @@ public class DbReservationOfStay {
 		} catch (SQLException ex) {
 			System.out.println("Order not found "+ex.getMessage());
 			
+		}
+		
+		query = "";
+		query = "SELECT * "+ "FROM ReservationConnectionTable "
+				+ "WHERE reservationID = " + reservationID;
+		System.out.println("insert : " + query);
+		try{
+			
+			ResultSet results;
+		
+			Statement stmt = con.createStatement();
+		
+			stmt.setQueryTimeout(5);						
+		
+			results = stmt.executeQuery(query);
+
+			LinkedList<Customer> customersInReservation = new LinkedList<Customer>();
+			if (results.next()) {
+				customersInReservation.add(new Customer(results.getInt("customerID")));
+				}
+			reservationOfStay.setCustomers(customersInReservation);
+			stmt.close();
+			
+		
+		} catch (SQLException ex) {
+		System.out.println("Order not found "+ex.getMessage());
+		
 		}
 		
 		return reservationOfStay;
@@ -185,6 +213,40 @@ public class DbReservationOfStay {
 
 			}								
 		}
+	}
+	
+	public void deleteReservation(int reservationID){
+		
+		int rc = -1;
+		String query = "";
+		query = "DELETE FROM ReservationConnectionTable WHERE reservationID ="
+				+ reservationID;
+	
+		System.out.println("insert : " + query);
+		try {
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query);
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("ReservationConnection not inserted: "+ex.getMessage());
+		}	
+		
+		query = "";
+		query = "DELETE FROM ReservationOfStay WHERE reservationID = "
+				+ reservationID;
+	
+		System.out.println("insert : " + query);
+		try {
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query);
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("ReservationConnection not inserted: "+ex.getMessage());
+		}			
+		
+		
 	}
 		
 }

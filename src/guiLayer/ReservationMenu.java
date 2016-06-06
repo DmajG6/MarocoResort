@@ -190,6 +190,8 @@ public class ReservationMenu extends JFrame {
 		choiceAgency.setBounds(27, 170, 119, 23);
 		contentPane.add(choiceAgency);
 		
+		choiceAgency.add("----");
+		
 		agencySelected();
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -324,11 +326,15 @@ public class ReservationMenu extends JFrame {
 	}
 	
 	private void agencySelected(){
-		for(Agency age: agencies){
-			if((age.getName()+" : "+age.getCountry()).equals(choiceAgency.getSelectedItem())){
-				System.out.println(age.getName()+" : "+age.getCountry()+" // "+choiceAgency.getSelectedItem());
-				selectedAgency = age;
+		if(!choiceAgency.getSelectedItem().equals("----")){
+			for(Agency age: agencies){
+				if((age.getName()+" : "+age.getCountry()).equals(choiceAgency.getSelectedItem())){
+					System.out.println(age.getName()+" : "+age.getCountry()+" // "+choiceAgency.getSelectedItem());
+					selectedAgency = age;
+				}
 			}
+		}else{
+			selectedAgency = new Agency(-1);
 		}
 	}
 	

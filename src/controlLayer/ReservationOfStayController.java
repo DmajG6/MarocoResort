@@ -72,5 +72,9 @@ public class ReservationOfStayController {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void deleteReservationOfStay(int reservationID){
+		dbReservationOfStay.deleteReservation(reservationID);
+	}
 
 }
