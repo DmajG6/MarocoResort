@@ -131,6 +131,15 @@ public class MainMenu extends JFrame {
 		});
 		contentPane.add(btnAgencyMenu);
 		
+		JButton btnCheckInout = new JButton("Check In/Out");
+		btnCheckInout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				checkInOutPressed();
+			}
+		});
+		btnCheckInout.setBounds(309, 214, 121, 25);
+		contentPane.add(btnCheckInout);
+		
 	}
 	
 	private void facilityBookingPressed(){
@@ -144,6 +153,11 @@ public class MainMenu extends JFrame {
 	
 	private void logOutPressed(){
 		new LogInMenu();
+		this.dispose();
+	}
+	
+	private void checkInOutPressed(){
+		new CheckInOut(staff);
 		this.dispose();
 	}
 }

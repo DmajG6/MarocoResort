@@ -16,11 +16,11 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 
 import modelLayer.Customer;
+import modelLayer.Staff;
 import controlLayer.CustomerController;
 
 
 /**
-	@author TomKuric<tomkuric@gmail.com>
 	May 20, 2016 - 11:18:41 AM
 */
 
@@ -35,6 +35,8 @@ public class CheckInOut extends JFrame {
 	private JButton btnCheckInout;
 	private JTextField NewPass;
 	private JLabel lblNewPassword;
+	private Staff staff = null;
+	private JButton btnExit;
 	
 	/**
 	 * Launch the application.
@@ -43,7 +45,7 @@ public class CheckInOut extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CheckInOut frame = new CheckInOut();
+					CheckInOut frame = new CheckInOut(new Staff());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +57,8 @@ public class CheckInOut extends JFrame {
 	/** 
 	 * Create the frame.
 	 */
-	public CheckInOut() {
+	public CheckInOut(Staff staff) {
+		this.staff = staff;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 533, 361);
 		contentPane = new JPanel();
@@ -136,6 +139,15 @@ public class CheckInOut extends JFrame {
 		NewPass.setBounds(147, 263, 116, 22);
 		contentPane.add(NewPass);
 		NewPass.setColumns(10);
+		
+		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				exitPressed();
+			}
+		});
+		btnExit.setBounds(282, 259, 97, 25);
+		contentPane.add(btnExit);
 	}
 	
 	private void findCustomerByID(){
@@ -163,11 +175,17 @@ public class CheckInOut extends JFrame {
 			for(int i = 0; i < 6; i++){
 				newPassword += ""+rand.nextInt(10);
 			}
+			System.out.println("Password: "+newPassword);
 			cusctr.setNewPassword(newPassword, customer);
 			lblNewPassword.setEnabled(true);
 			NewPass.setEnabled(true);
 			NewPass.setText(newPassword);
 		}
 		cusctr.checkInOut(customer.getCustomerID(), !customer.getActive().equals("yes"));
+	}
+	
+	private void exitPressed(){
+		new MainMenu(staff);
+		this.dispose();
 	}
 }
