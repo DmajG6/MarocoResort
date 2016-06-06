@@ -56,6 +56,7 @@ public class BookingMenu extends JFrame {
 		
 		this.setEnabled(true);
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 306, 324);
 		contentPane = new JPanel();
@@ -95,6 +96,7 @@ public class BookingMenu extends JFrame {
 		btnExit.setBounds(74, 226, 141, 25);
 		contentPane.add(btnExit);
 		
+		System.out.println("toString: "+customer.toString());
 	}
 	
 	private void bookFacilityPressed(){
