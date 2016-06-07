@@ -173,13 +173,18 @@ public class GroupSportsMenu extends JFrame {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cancelPressed();
+				exitPressed();
 			}
 		});
 		btnExit.setBounds(402, 302, 183, 43);
 		contentPane.add(btnExit);
 		
 		btnCancelReservation = new JButton("Cancel Reservation");
+		btnCancelReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cancelPressed();
+			}
+		});
 		btnCancelReservation.setEnabled(false);
 		btnCancelReservation.setBounds(402, 250, 183, 43);
 		contentPane.add(btnCancelReservation);
@@ -207,6 +212,11 @@ public class GroupSportsMenu extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	
+	private void exitPressed(){
+		this.dispose();
+		new BookingMenu(customer, type);
 	}
 	
 	public void setTime(String time){

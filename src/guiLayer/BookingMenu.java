@@ -88,6 +88,7 @@ public class BookingMenu extends JFrame {
 		});
 		btnExit.setBounds(74, 226, 141, 25);
 		contentPane.add(btnExit);
+		
 		System.out.println("toString: "+customer.toString());
 	}
 	

@@ -117,7 +117,7 @@ public class LogInMenu extends JFrame {
 			case 2:
 				CustomerController cusCtr = new CustomerController();
 				Customer cust = cusCtr.findCustomerByID(Integer.parseInt(idCode));
-				new BookingMenu(cust, 2).setEnabled(true);
+				new BookingMenu(cust, 2).setVisible(true);
 				this.dispose();
 				return;
 			case -1:
