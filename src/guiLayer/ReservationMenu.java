@@ -83,7 +83,7 @@ public class ReservationMenu extends JFrame {
 	 */
 	public ReservationMenu(Staff staff) {
 		this.loggedInStaff = staff;
-		setTitle("Reservation");
+		setTitle("Program - Reservation of Stay");
 		loggedInStaff = staff;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

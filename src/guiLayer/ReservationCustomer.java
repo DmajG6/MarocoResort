@@ -58,7 +58,7 @@ public class ReservationCustomer extends JFrame {
 
 	
 	public ReservationCustomer(LinkedList<Apartment> apartments, ReservationMenu menu) {
-		setTitle("Private Reservation");
+		setTitle("Program - Add Customer to Reservation");
 		
 		this.menu = menu;
 		

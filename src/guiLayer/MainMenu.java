@@ -42,6 +42,7 @@ public class MainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public MainMenu(Staff staff) {
+		setTitle("Program - Main Menu");
 		this.setVisible(true);
 		
 		this.staff = staff;

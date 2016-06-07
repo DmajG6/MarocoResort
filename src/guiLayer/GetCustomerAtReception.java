@@ -49,6 +49,7 @@ public class GetCustomerAtReception extends JFrame {
 	 * Create the frame.
 	 */
 	public GetCustomerAtReception(Staff staff) {
+		setTitle("Program - Find Customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 554, 151);
 		contentPane = new JPanel();
@@ -59,7 +60,7 @@ public class GetCustomerAtReception extends JFrame {
 		
 		txtId = new JTextField();
 		txtId.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		txtId.setBounds(12, 13, 312, 45);
+		txtId.setBounds(12, 30, 312, 45);
 		contentPane.add(txtId);
 		txtId.setColumns(10);
 		
@@ -69,14 +70,18 @@ public class GetCustomerAtReception extends JFrame {
 				findCustomerPressed();
 			}
 		});
-		btnFindCustomer.setBounds(325, 12, 197, 46);
+		btnFindCustomer.setBounds(327, 29, 197, 46);
 		contentPane.add(btnFindCustomer);
 		
 		lblStatus = new JLabel("");
-		lblStatus.setBounds(67, 71, 224, 16);
+		lblStatus.setBounds(68, 75, 224, 16);
 
 		lblStatus.setVisible(false);
 		contentPane.add(lblStatus);
+		
+		JLabel lblCustomerId = new JLabel("Customer ID:");
+		lblCustomerId.setBounds(12, 13, 81, 16);
+		contentPane.add(lblCustomerId);
 	}
 	
 	private void findCustomerPressed(){

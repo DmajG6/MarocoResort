@@ -55,6 +55,7 @@ public class LogInMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public LogInMenu() {
+		setTitle("Program - Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 588, 420);
 		contentPane = new JPanel();

@@ -84,7 +84,7 @@ public class GroupSportsMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public GroupSportsMenu(Customer customer, int type) {
-		setTitle("Group Activity Booking");
+		setTitle("Program - Group Activity Booking");
 		this.type = type;
 		this.customer = customer;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

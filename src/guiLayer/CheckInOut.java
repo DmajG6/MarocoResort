@@ -59,6 +59,7 @@ public class CheckInOut extends JFrame {
 	 * Create the frame.
 	 */
 	public CheckInOut(Staff staff) {
+		setTitle("Program - Check In/Out");
 		this.staff = staff;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 533, 361);

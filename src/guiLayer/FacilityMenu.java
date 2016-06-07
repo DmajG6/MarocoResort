@@ -49,6 +49,7 @@ public class FacilityMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public FacilityMenu(Staff staff) {
+		setTitle("Program - Facility");
 		
 		this.staff = staff;
 		

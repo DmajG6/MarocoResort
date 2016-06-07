@@ -71,6 +71,7 @@ public class BookFacility extends JFrame {
 	 * Create the frame.
 	 */
 	public BookFacility(Customer customer, int type) {
+		setTitle("Program - Book Facility");
 		this.customer = customer;
 		this.type = type;
 		

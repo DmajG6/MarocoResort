@@ -40,6 +40,7 @@ public class BookingMenu extends JFrame {
 
 
 	public BookingMenu(Customer customer, int type){
+		setTitle("Program - Booking Menu");
 		this.customer = customer;
 		this.type = type;
 		

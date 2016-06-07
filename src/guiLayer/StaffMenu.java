@@ -51,6 +51,7 @@ public class StaffMenu extends JFrame {
 	 * Create the application.
 	 */
 	public StaffMenu(Staff staff) {
+		setTitle("Program - Staff Menu");
 		this.staff = staff;
 		initialize();
 	}

@@ -55,6 +55,7 @@ public class FindReservation extends JFrame {
 	 * Create the frame.
 	 */
 	public FindReservation(Staff staff) {
+		setTitle("Program - Find Reservation");
 		this.staff = staff;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 353);

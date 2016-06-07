@@ -54,6 +54,7 @@ public class CustomerMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerMenu(Staff staff) {
+		setTitle("Program - Customer");
 		this.staff = staff;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
